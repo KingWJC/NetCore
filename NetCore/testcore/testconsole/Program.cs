@@ -1,4 +1,12 @@
-﻿using System;
+﻿/*
+ * @Author: KingWJC
+ * @Date: 2020-05-25 09:59:33
+ * @LastEditors: KingWJC
+ * @LastEditTime: 2020-05-28 09:44:26
+ * @Descripttion: 测试类
+ * @FilePath: \testcore\testconsole\Program.cs
+ */
+using System;
 
 namespace testconsole
 {
@@ -9,6 +17,9 @@ namespace testconsole
             Console.WriteLine("Hello World!");
             string str = TestTryCatch();
             Console.WriteLine("\nResult:" + str);
+
+            Person person = new Person() { number = 1 };
+            Console.WriteLine(person.locktime.Equals(default(DateTime)));
         }
 
         /**
@@ -55,5 +66,11 @@ namespace testconsole
             //无法访问的代码
             // return stringBuilder.ToString();
         }
+    }
+
+    class Person
+    {
+        public DateTime locktime { get; set; }
+        public int number { get; set; }
     }
 }

@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "AUclp7cK0baC3wR4oRSjpmgK4G4KWleGRA6Ub6fWCHyhvRXbDEIhC4cAmk5iOCHvCeWls+gk9hnx3umo+IG/Sw==",
+  "success": true,
+  "projectFilePath": "E:\\github\\NetCore\\ADFCommon\\ADF.Entity\\ADF.Entity.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\wangjicheng\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Users\\wangjicheng\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}
