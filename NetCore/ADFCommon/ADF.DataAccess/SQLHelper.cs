@@ -4,7 +4,7 @@ using System.Data.SqlClient;
 
 namespace ADF.DataAccess
 {
-    public class SQLHelper 
+    public class SQLHelper
     {
         private DatabaseType dbType;
 
@@ -19,6 +19,17 @@ namespace ADF.DataAccess
                 {
                     connection = new SqlConnection(connectionStr);
                 }
+                else if (connection.State == ConnectionState.Closed)
+                {
+                    connection.Open();
+                }
+                else if (connection.State == ConnectionState.Broken)
+                {
+                    connection.Close();
+                    connection.Open();
+                }
+
+                return connection;
 
             }
         }
@@ -28,6 +39,25 @@ namespace ADF.DataAccess
         public SQLHelper(string connStr)
         {
             this.connectionStr = connStr;
+        }
+
+        public int ExecteNonQuery(string strSQL, SqlParameter[] parameters, CommandType commandType)
+        {
+            int result = -1;
+            using (SqlConnection connect = Connection)
+            {
+                using (SqlCommand sqlCommand = new SqlCommand(strSQL, connect))
+                {
+                    sqlCommand.CommandType = commandType;
+                    if (parameters?.Length > 0)
+                    {
+                        sqlCommand.Parameters.AddRange(parameters);
+                    }
+                    result = sqlCommand.ExecuteNonQuery();
+                }
+            }
+
+            return result;
         }
 
 

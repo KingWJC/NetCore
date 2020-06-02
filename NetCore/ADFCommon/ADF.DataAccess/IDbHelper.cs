@@ -1,11 +1,10 @@
 using System.Data;
-using System.Data.SqlClient;
 
 /*
  * @Author: KingWJC
  * @Date: 2020-06-01 15:24:53
  * @LastEditors: KingWJC
- * @LastEditTime: 2020-06-01 16:57:04
+ * @LastEditTime: 2020-06-02 14:38:08
  * @Descripttion: 数据库操作接口
  * @FilePath: \ADFCommon\ADF.DataAccess\IDbHelper.cs
  */
