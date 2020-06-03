@@ -1,23 +1,23 @@
-﻿using System;
+using System;
 using System.Data;
-using System.Data.SqlClient;
+using System.Data.OracleClient;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace ADF.DataAccess
 {
-    public class SQLHelper
+    public class OracleHelper
     {
         private string connectionStr;
-        private int bulkCopySize = 50000;
 
-        private SqlConnection connection;
-        public SqlConnection Connection
+        private OracleConnection connection;
+        public OracleConnection Connection
         {
             get
             {
                 if (connection == null)
                 {
-                    connection = new SqlConnection(connectionStr);
+                    connection = new OracleConnection(connectionStr);
                 }
                 else if (connection.State == ConnectionState.Closed)
                 {
@@ -34,9 +34,9 @@ namespace ADF.DataAccess
             }
         }
 
-        private SQLHelper() { }
+        private OracleHelper() { }
 
-        public SQLHelper(string connStr)
+        public OracleHelper(string connStr)
         {
             this.connectionStr = connStr;
         }
@@ -303,8 +303,30 @@ namespace ADF.DataAccess
         }
         #endregion
 
+
+        public DataTable ExecuteDataTableParallel<T>(string strSQL, List<T> wheres)
+        {
+            DataTable table = new DataTable();
+            if (null == wheres && 0 == wheres.Count)
+            {
+                throw new Exception();
+            }
+
+            if (100 > wheres.Count)
+            {
+                string bodySql = string.Format("", strSQL, "('" + string.Join("','", wheres) + "')");
+                return ExecuteDataTable(bodySql);
+            }
+            else
+            {
+                var batchValue = where.TryToBatchValue();
+                Parallel.ForEach(batchValue, values =>
+                {
+                    string sqlBody = string.Format("{0} {1}", sql, values);
+                    DataTable table = ExecuteDataTable(sqlBody);
+                    tables.Merge(table, true);
+                });
+            }
+        }
     }
 }
-
-
-//parameter中nvarchar到varchar编码问题

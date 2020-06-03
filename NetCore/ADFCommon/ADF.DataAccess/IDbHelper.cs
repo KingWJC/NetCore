@@ -1,4 +1,5 @@
 using System.Data;
+using System.Data.Common;
 
 /*
  * @Author: KingWJC
@@ -10,35 +11,34 @@ using System.Data;
  */
 namespace ADF.DataAccess
 {
-    //接口的方法和属性都是公共的,(在 C# 7.3 中，修饰符 "public" 对此项无效).
-     interface IDbHelper
+    interface IDbHelper
     {
         /**
          * @description: 执行命令，返回受影响的行数
          * @param {string} strSQL SQL语句
          * @return: 受影响的行数
          */
-         int ExecuteNonQuery(string strSQL);
+        int ExecuteNonQueryUseTrans(string strSQL, DbParameter[] parameters = null);
 
         /**
          * @description: 执行命令，返回首行首列值
          * @param {string} strSQL SQL语句
          * @return: 首行首列值
          */
-         object ExecuteSingel(string strSQL);
+        object ExecuteScalar(string strSQL, DbParameter[] parameters = null);
 
         /**
          * @description: 执行命令，返回数据集
          * @param {string} strSQL SQL语句
          * @return: 数据集
          */
-         DataSet ExecteDataSet(string strSQL);
+        DataSet ExecuteDataSet(string strSQL, DbParameter[] parameters = null);
 
         /**
          * @description: 执行命令，返回数据表
          * @param {string} strSQL SQL语句
          * @return: 数据表
          */
-         DataTable ExecteDataTable(string strSQL);
+        DataTable ExecuteDataTable(string strSQL, DbParameter[] parameters = null);
     }
 }

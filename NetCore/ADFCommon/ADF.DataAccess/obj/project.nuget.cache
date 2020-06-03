@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "YGboBIueSSeHO4+RfL7LHD5VfGS4jzoNSxTZg0SnzcpewNSyTWsqd2VWOQ/2mDra8vs0o+LZ+2miMqO5Z7Lslw==",
+  "dgSpecHash": "Xhnp+WJOcivy4ApxDs77XXrGgprzXzdNO+rFCGNF56OV5ENTIenvP732q9xsxHrQ9cmdhG3pPXoeWuvOlD78Ow==",
   "success": true,
   "projectFilePath": "E:\\github\\NetCore\\ADFCommon\\ADF.DataAccess\\ADF.DataAccess.csproj",
   "expectedPackageFiles": [
@@ -15,6 +15,7 @@
     "C:\\Users\\wangjicheng\\.nuget\\packages\\system.buffers\\4.5.0\\system.buffers.4.5.0.nupkg.sha512",
     "C:\\Users\\wangjicheng\\.nuget\\packages\\system.collections\\4.3.0\\system.collections.4.3.0.nupkg.sha512",
     "C:\\Users\\wangjicheng\\.nuget\\packages\\system.data.common\\4.3.0\\system.data.common.4.3.0.nupkg.sha512",
+    "C:\\Users\\wangjicheng\\.nuget\\packages\\system.data.oracleclient\\1.0.8\\system.data.oracleclient.1.0.8.nupkg.sha512",
     "C:\\Users\\wangjicheng\\.nuget\\packages\\system.data.sqlclient\\4.8.1\\system.data.sqlclient.4.8.1.nupkg.sha512",
     "C:\\Users\\wangjicheng\\.nuget\\packages\\system.diagnostics.diagnosticsource\\4.7.0\\system.diagnostics.diagnosticsource.4.7.0.nupkg.sha512",
     "C:\\Users\\wangjicheng\\.nuget\\packages\\system.globalization\\4.3.0\\system.globalization.4.3.0.nupkg.sha512",

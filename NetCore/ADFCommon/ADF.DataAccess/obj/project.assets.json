@@ -134,6 +134,18 @@
           "lib/netstandard1.2/System.Data.Common.dll": {}
         }
       },
+      "System.Data.OracleClient/1.0.8": {
+        "type": "package",
+        "dependencies": {
+          "System.Data.Common": "4.3.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/System.Data.OracleClient.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/System.Data.OracleClient.dll": {}
+        }
+      },
       "System.Data.SqlClient/4.8.1": {
         "type": "package",
         "dependencies": {
@@ -809,6 +821,18 @@
         "ref/xamarinwatchos10/_._",
         "system.data.common.4.3.0.nupkg.sha512",
         "system.data.common.nuspec"
+      ]
+    },
+    "System.Data.OracleClient/1.0.8": {
+      "sha512": "w8uNKli8E6TpsnYjvRTx+L1nGtRH6pCtEtzg4EzHBD5WTHc3K6uN2f8FDFwa9KvAS/PbVh4aQE5uoo+7hFCrfw==",
+      "type": "package",
+      "path": "system.data.oracleclient/1.0.8",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/netstandard2.0/System.Data.OracleClient.dll",
+        "system.data.oracleclient.1.0.8.nupkg.sha512",
+        "system.data.oracleclient.nuspec"
       ]
     },
     "System.Data.SqlClient/4.8.1": {
@@ -1964,7 +1988,8 @@
     ".NETStandard,Version=v2.0": [
       "NETStandard.Library >= 2.0.3",
       "System.Data.Common >= 4.3.0",
-      "System.Data.SqlClient >= *"
+      "System.Data.OracleClient >= *",
+      "System.Data.SqlClient >= 4.8.1"
     ]
   },
   "packageFolders": {
@@ -2014,9 +2039,13 @@
             "target": "Package",
             "version": "[4.3.0, )"
           },
-          "System.Data.SqlClient": {
+          "System.Data.OracleClient": {
             "target": "Package",
             "version": "[*, )"
+          },
+          "System.Data.SqlClient": {
+            "target": "Package",
+            "version": "[4.8.1, )"
           }
         },
         "imports": [
