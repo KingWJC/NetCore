@@ -32,7 +32,8 @@ namespace ADF.Web
             {
                 endpoints.MapGet("/", async context =>
                 {
-                    await context.Response.WriteAsync("Hello World!");
+                    int index = new ADF.Business.Class1().testconnect();
+                    await context.Response.WriteAsync($"Hello World! + {index}");
                 });
             });
         }

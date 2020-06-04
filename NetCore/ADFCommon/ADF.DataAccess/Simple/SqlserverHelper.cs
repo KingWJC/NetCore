@@ -1,48 +1,48 @@
-using System;
+﻿using System;
 using System.Data;
-using System.Data.OracleClient;
+using System.Data.SqlClient;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace ADF.DataAccess
 {
-    public class OracleHelper
+    public class SqlserverHelper : IDbHelper
     {
-        private string connectionStr;
+        private string _connectionStr;
+        private int _bulkCount = 50000;
 
-        private OracleConnection connection;
-        public OracleConnection Connection
+        private SqlConnection _connection;
+        public SqlConnection Connection
         {
             get
             {
-                if (connection == null)
+                if (_connection == null)
                 {
-                    connection = new OracleConnection(connectionStr);
+                    _connection = new SqlConnection(_connectionStr);
                 }
-                else if (connection.State == ConnectionState.Closed)
+                else if (_connection.State == ConnectionState.Closed)
                 {
-                    connection.Open();
+                    _connection.Open();
                 }
-                else if (connection.State == ConnectionState.Broken)
+                else if (_connection.State == ConnectionState.Broken)
                 {
-                    connection.Close();
-                    connection.Open();
+                    _connection.Close();
+                    _connection.Open();
                 }
 
-                return connection;
+                return _connection;
 
             }
         }
 
-        private OracleHelper() { }
+        private SqlserverHelper() { }
 
-        public OracleHelper(string connStr)
+        public SqlserverHelper(string connStr)
         {
-            this.connectionStr = connStr;
+            this._connectionStr = connStr;
         }
 
         #region 私有方法
-        private SqlCommand CreateCommand(SqlConnection connect, string strSQL, SqlParameter[] parameters = null, CommandType commandType = CommandType.Text, SqlTransaction transaction = null, int timeOut = 600)
+        private SqlCommand CreateCommand(SqlConnection connect, string strSQL, IDataParameter[] parameters = null, CommandType commandType = CommandType.Text, SqlTransaction transaction = null, int timeOut = 600)
         {
             SqlCommand sqlCommand = connect.CreateCommand();
             sqlCommand.CommandText = strSQL;
@@ -61,7 +61,12 @@ namespace ADF.DataAccess
         #endregion
 
         #region 数据更新
-        public int ExecuteNonQuery(string strSQL, SqlParameter[] parameters = null, CommandType commandType = CommandType.Text)
+        /*
+         * @description: 获取影响的行数
+         * @param {type} 
+         * @return: 
+         */
+        public int ExecuteNonQuery(string strSQL, IDataParameter[] parameters = null, CommandType commandType = CommandType.Text)
         {
             using (SqlConnection connect = Connection)
             {
@@ -71,8 +76,12 @@ namespace ADF.DataAccess
                 }
             }
         }
-
-        public int ExecuteNonQueryUseTrans(string strSQL, SqlParameter[] parameters = null, CommandType commandType = CommandType.Text)
+        /*
+         * @description: 使用事务获取影响的行数
+         * @param {type} 
+         * @return: 
+         */
+        public int ExecuteNonQueryUseTrans(string strSQL, IDataParameter[] parameters = null, CommandType commandType = CommandType.Text)
         {
             using (SqlConnection connect = Connection)
             {
@@ -94,7 +103,11 @@ namespace ADF.DataAccess
                 }
             }
         }
-
+        /*
+         * @description: 使用事务获取影响的行数-多条语句
+         * @param {type} 
+         * @return: 
+         */
         public int ExecuteNonQueryUseTrans(Dictionary<string, SqlParameter[]> sqlDict)
         {
             using (SqlConnection connect = Connection)
@@ -134,7 +147,7 @@ namespace ADF.DataAccess
         /// <param name="timeOut">属性的整数值。默认值为 300 秒。值 0 指示没有限制；批量复制将无限期等待。</param>
         public void ExecuteeBulkCopy(string destTableName, DataTable copyData, int timeOut = 5 * 60)
         {
-            using (SqlBulkCopy BulkCopy = new SqlBulkCopy(connectionStr))
+            using (SqlBulkCopy BulkCopy = new SqlBulkCopy(_connectionStr))
             {
                 BulkCopy.BulkCopyTimeout = timeOut;
                 BulkCopy.DestinationTableName = destTableName;
@@ -163,7 +176,7 @@ namespace ADF.DataAccess
                 {
                     bulkCopy.DestinationTableName = destTableName;
                     bulkCopy.BulkCopyTimeout = timeOut;
-                    bulkCopy.BatchSize = copyData.Rows.Count > bulkCopySize ? bulkCopySize : copyData.Rows.Count;
+                    bulkCopy.BatchSize = copyData.Rows.Count > _bulkCount ? _bulkCount : copyData.Rows.Count;
 
                     try
                     {
@@ -190,7 +203,11 @@ namespace ADF.DataAccess
         #endregion
 
         #region 数据获取
-
+        /*
+         * @description: 获取数据量总数
+         * @param {type} 
+         * @return: 
+         */
         public int ExecuteCount(string strSQL, SqlParameter[] parameters = null, CommandType commandType = CommandType.Text)
         {
             using (SqlConnection connect = Connection)
@@ -208,10 +225,14 @@ namespace ADF.DataAccess
                 }
             }
         }
-
+        /*
+         * @description: 获取首行首列
+         * @param {type} 
+         * @return: 
+         */
         public object ExecuteScalar(string strSQL, SqlParameter[] parameters = null, CommandType commandType = CommandType.Text)
         {
-            using (SqlConnection connect = connection)
+            using (SqlConnection connect = Connection)
             {
                 using (SqlCommand command = CreateCommand(connect, strSQL, parameters, commandType))
                 {
@@ -219,10 +240,14 @@ namespace ADF.DataAccess
                 }
             }
         }
-
+        /*
+         * @description: 获取数据集
+         * @param {type} 
+         * @return: 
+         */
         public DataSet ExecuteDataSet(string strSQL, SqlParameter[] parameters = null, CommandType commandType = CommandType.Text)
         {
-            using (SqlConnection connect = connection)
+            using (SqlConnection connect = Connection)
             {
                 using (SqlCommand command = CreateCommand(connect, strSQL, parameters, commandType))
                 {
@@ -233,10 +258,14 @@ namespace ADF.DataAccess
                 }
             }
         }
-
+        /*
+         * @description: 获取数据表
+         * @param {type} 
+         * @return: 
+         */
         public DataTable ExecuteDataTable(string strSQL, SqlParameter[] parameters = null, CommandType commandType = CommandType.Text)
         {
-            using (SqlConnection connect = connection)
+            using (SqlConnection connect = Connection)
             {
                 using (SqlCommand command = CreateCommand(connect, strSQL, parameters))
                 {
@@ -247,7 +276,11 @@ namespace ADF.DataAccess
                 }
             }
         }
-
+        /*
+         * @description: 获取数据表-分页
+         * @param {type} 
+         * @return: 
+         */
         public DataTable ExecuteDataTable(string strSQL, int CurrentPage, int PageSize, SqlParameter[] parameters = null, CommandType commandType = CommandType.Text)
         {
             using (SqlConnection connect = Connection)
@@ -302,31 +335,8 @@ namespace ADF.DataAccess
             return dt;
         }
         #endregion
-
-
-        public DataTable ExecuteDataTableParallel<T>(string strSQL, List<T> wheres)
-        {
-            DataTable table = new DataTable();
-            if (null == wheres && 0 == wheres.Count)
-            {
-                throw new Exception();
-            }
-
-            if (100 > wheres.Count)
-            {
-                string bodySql = string.Format("", strSQL, "('" + string.Join("','", wheres) + "')");
-                return ExecuteDataTable(bodySql);
-            }
-            else
-            {
-                var batchValue = where.TryToBatchValue();
-                Parallel.ForEach(batchValue, values =>
-                {
-                    string sqlBody = string.Format("{0} {1}", sql, values);
-                    DataTable table = ExecuteDataTable(sqlBody);
-                    tables.Merge(table, true);
-                });
-            }
-        }
     }
 }
+
+
+//parameter中nvarchar到varchar编码问题

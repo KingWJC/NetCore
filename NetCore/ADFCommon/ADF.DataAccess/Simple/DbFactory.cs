@@ -2,9 +2,9 @@ namespace ADF.DataAccess
 {
     public class DbFactory
     {
-        public static SQLHelper SQLServer(string connectionStr)
+        public static SqlserverHelper SQLServer(string connectionStr)
         {
-            return new SQLHelper(connectionStr);
+            return new SqlserverHelper(connectionStr);
         }
 
         public static OracleHelper Oracle(string connectionStr)
