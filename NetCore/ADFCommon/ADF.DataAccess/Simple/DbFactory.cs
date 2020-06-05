@@ -1,4 +1,4 @@
-namespace ADF.DataAccess
+namespace ADF.DataAccess.Simple
 {
     public class DbFactory
     {

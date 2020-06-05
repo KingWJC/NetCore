@@ -3,14 +3,19 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Collections.Generic;
 
-namespace ADF.DataAccess
+namespace ADF.DataAccess.Simple
 {
-    public class SqlserverHelper : IDbHelper
+    public class SqlserverHelper
     {
         private string _connectionStr;
         private int _bulkCount = 50000;
 
         private SqlConnection _connection;
+        /*
+         * @description: 获取数据库链接
+         * @param {type} 
+         * @return: 
+         */
         public SqlConnection Connection
         {
             get
@@ -69,11 +74,9 @@ namespace ADF.DataAccess
         public int ExecuteNonQuery(string strSQL, IDataParameter[] parameters = null, CommandType commandType = CommandType.Text)
         {
             using (SqlConnection connect = Connection)
+            using (SqlCommand sqlCommand = CreateCommand(connect, strSQL, parameters, commandType))
             {
-                using (SqlCommand sqlCommand = CreateCommand(connect, strSQL, parameters, commandType))
-                {
-                    return sqlCommand.ExecuteNonQuery();
-                }
+                return sqlCommand.ExecuteNonQuery();
             }
         }
         /*
@@ -211,18 +214,16 @@ namespace ADF.DataAccess
         public int ExecuteCount(string strSQL, SqlParameter[] parameters = null, CommandType commandType = CommandType.Text)
         {
             using (SqlConnection connect = Connection)
+            using (SqlCommand command = CreateCommand(connect, strSQL, parameters, commandType))
             {
-                using (SqlCommand command = CreateCommand(connect, strSQL, parameters, commandType))
+                int result = 0;
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
                 {
-                    int result = 0;
-                    SqlDataReader reader = command.ExecuteReader();
-                    while (reader.Read())
-                    {
-                        result = reader.GetInt32(0);
-                    }
-                    reader.Close();
-                    return result;
+                    result = reader.GetInt32(0);
                 }
+                reader.Close();
+                return result;
             }
         }
         /*
@@ -233,10 +234,16 @@ namespace ADF.DataAccess
         public object ExecuteScalar(string strSQL, SqlParameter[] parameters = null, CommandType commandType = CommandType.Text)
         {
             using (SqlConnection connect = Connection)
+            using (SqlCommand command = CreateCommand(connect, strSQL, parameters, commandType))
             {
-                using (SqlCommand command = CreateCommand(connect, strSQL, parameters, commandType))
+                object result = command.ExecuteScalar();
+                if (object.Equals(null, result) || object.Equals(DBNull.Value, result))
                 {
-                    return command.ExecuteScalar();
+                    return null;
+                }
+                else
+                {
+                    return result;
                 }
             }
         }
@@ -248,14 +255,12 @@ namespace ADF.DataAccess
         public DataSet ExecuteDataSet(string strSQL, SqlParameter[] parameters = null, CommandType commandType = CommandType.Text)
         {
             using (SqlConnection connect = Connection)
+            using (SqlCommand command = CreateCommand(connect, strSQL, parameters, commandType))
             {
-                using (SqlCommand command = CreateCommand(connect, strSQL, parameters, commandType))
-                {
-                    SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(command);
-                    DataSet dataSet = new DataSet();
-                    sqlDataAdapter.Fill(dataSet);
-                    return dataSet;
-                }
+                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(command);
+                DataSet dataSet = new DataSet();
+                sqlDataAdapter.Fill(dataSet);
+                return dataSet;
             }
         }
         /*
@@ -266,14 +271,12 @@ namespace ADF.DataAccess
         public DataTable ExecuteDataTable(string strSQL, SqlParameter[] parameters = null, CommandType commandType = CommandType.Text)
         {
             using (SqlConnection connect = Connection)
+            using (SqlCommand command = CreateCommand(connect, strSQL, parameters))
             {
-                using (SqlCommand command = CreateCommand(connect, strSQL, parameters))
-                {
-                    SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(command);
-                    DataTable dataTable = new DataTable();
-                    sqlDataAdapter.Fill(dataTable);
-                    return dataTable;
-                }
+                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(command);
+                DataTable dataTable = new DataTable();
+                sqlDataAdapter.Fill(dataTable);
+                return dataTable;
             }
         }
         /*
@@ -337,6 +340,3 @@ namespace ADF.DataAccess
         #endregion
     }
 }
-
-
-//parameter中nvarchar到varchar编码问题

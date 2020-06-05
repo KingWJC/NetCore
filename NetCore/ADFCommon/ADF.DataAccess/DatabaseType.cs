@@ -1,8 +1,8 @@
 namespace ADF.DataAccess
 {
-    public enum DatabaseType
+    public enum DatabaseTypeEnum
     {
-        Orical,
+        Oracle,
         SqlServer
     }
 }

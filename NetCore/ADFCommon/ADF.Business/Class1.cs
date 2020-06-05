@@ -6,7 +6,7 @@ namespace ADF.Business
     {
         public int testconnect()
         {
-            return  new ADF.DataAccess.BaseService().GetCount();
+            return  new ADF.DataAccess.Simple.BaseService().GetCount();
         }
     }
 }

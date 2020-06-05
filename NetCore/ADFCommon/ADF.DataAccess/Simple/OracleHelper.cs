@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using ADF.Utility;
 
-namespace ADF.DataAccess
+namespace ADF.DataAccess.Simple
 {
     public class OracleHelper
     {
@@ -81,11 +81,9 @@ namespace ADF.DataAccess
         public int ExecuteNonQuery(string strSQL, OracleParameter[] parameters = null, CommandType commandType = CommandType.Text)
         {
             using (OracleConnection connect = Connection)
+            using (OracleCommand sqlCommand = CreateCommand(connect, strSQL, parameters, commandType))
             {
-                using (OracleCommand sqlCommand = CreateCommand(connect, strSQL, parameters, commandType))
-                {
-                    return sqlCommand.ExecuteNonQuery();
-                }
+                return sqlCommand.ExecuteNonQuery();
             }
         }
         /*
@@ -161,25 +159,23 @@ namespace ADF.DataAccess
         public int ExecuteCount(string strSQL, OracleParameter[] parameters = null, CommandType commandType = CommandType.Text)
         {
             using (OracleConnection connect = Connection)
+            using (OracleCommand command = CreateCommand(connect, strSQL, parameters, commandType))
             {
-                using (OracleCommand command = CreateCommand(connect, strSQL, parameters, commandType))
+                int result = 0;
+                try
                 {
-                    int result = 0;
-                    try
+                    OracleDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
                     {
-                        OracleDataReader reader = command.ExecuteReader();
-                        while (reader.Read())
-                        {
-                            result = reader.GetInt32(0);
-                        }
-                        reader.Close();
+                        result = reader.GetInt32(0);
                     }
-                    catch (Exception ex)
-                    {
-                        throw (ex);
-                    }
-                    return result;
+                    reader.Close();
                 }
+                catch (Exception ex)
+                {
+                    throw (ex);
+                }
+                return result;
             }
         }
         /*
@@ -190,10 +186,16 @@ namespace ADF.DataAccess
         public object ExecuteScalar(string strSQL, OracleParameter[] parameters = null, CommandType commandType = CommandType.Text)
         {
             using (OracleConnection connect = Connection)
+            using (OracleCommand command = CreateCommand(connect, strSQL, parameters, commandType))
             {
-                using (OracleCommand command = CreateCommand(connect, strSQL, parameters, commandType))
+                object result = command.ExecuteScalar();
+                if (object.Equals(null, result) || object.Equals(DBNull.Value, result))
                 {
-                    return command.ExecuteScalar();
+                    return null;
+                }
+                else
+                {
+                    return result;
                 }
             }
         }
@@ -205,15 +207,14 @@ namespace ADF.DataAccess
         public DataSet ExecuteDataSet(string strSQL, OracleParameter[] parameters = null, CommandType commandType = CommandType.Text)
         {
             using (OracleConnection connect = Connection)
+            using (OracleCommand command = CreateCommand(connect, strSQL, parameters, commandType))
             {
-                using (OracleCommand command = CreateCommand(connect, strSQL, parameters, commandType))
-                {
-                    OracleDataAdapter sqlDataAdapter = new OracleDataAdapter(command);
-                    DataSet dataSet = new DataSet();
-                    sqlDataAdapter.Fill(dataSet);
-                    return dataSet;
-                }
+                OracleDataAdapter sqlDataAdapter = new OracleDataAdapter(command);
+                DataSet dataSet = new DataSet();
+                sqlDataAdapter.Fill(dataSet);
+                return dataSet;
             }
+
         }
         /*
          * @description: 获取数据表
@@ -223,14 +224,13 @@ namespace ADF.DataAccess
         public DataTable ExecuteDataTable(string strSQL, OracleParameter[] parameters = null, CommandType commandType = CommandType.Text)
         {
             using (OracleConnection connect = Connection)
+
+            using (OracleCommand command = CreateCommand(connect, strSQL, parameters))
             {
-                using (OracleCommand command = CreateCommand(connect, strSQL, parameters))
-                {
-                    OracleDataAdapter sqlDataAdapter = new OracleDataAdapter(command);
-                    DataTable dataTable = new DataTable();
-                    sqlDataAdapter.Fill(dataTable);
-                    return dataTable;
-                }
+                OracleDataAdapter sqlDataAdapter = new OracleDataAdapter(command);
+                DataTable dataTable = new DataTable();
+                sqlDataAdapter.Fill(dataTable);
+                return dataTable;
             }
         }
         /*
@@ -241,14 +241,12 @@ namespace ADF.DataAccess
         public DataTable ExecuteDataTable(string strSQL, int CurrentPage, int PageSize, OracleParameter[] parameters = null, CommandType commandType = CommandType.Text)
         {
             using (OracleConnection connect = Connection)
+            using (OracleCommand Command = CreateCommand(connect, strSQL, parameters, commandType))
             {
-                using (OracleCommand Command = CreateCommand(connect, strSQL, parameters, commandType))
-                {
-                    DataTable DataTable = new DataTable();
-                    OracleDataAdapter Adapter = new OracleDataAdapter(Command);
-                    Adapter.Fill((CurrentPage - 1) * PageSize, PageSize, DataTable);
-                    return DataTable;
-                }
+                DataTable DataTable = new DataTable();
+                OracleDataAdapter Adapter = new OracleDataAdapter(Command);
+                Adapter.Fill((CurrentPage - 1) * PageSize, PageSize, DataTable);
+                return DataTable;
             }
         }
         /*
