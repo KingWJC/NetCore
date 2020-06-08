@@ -1,3 +1,5 @@
+using ADF.Utility;
+
 namespace ADF.DataAccess.Simple
 {
     public class DbFactory

@@ -2,6 +2,8 @@
 using System.Data;
 using System.Data.SqlClient;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using ADF.Utility;
 
 namespace ADF.DataAccess.Simple
 {
@@ -47,7 +49,27 @@ namespace ADF.DataAccess.Simple
         }
 
         #region 私有方法
-        private SqlCommand CreateCommand(SqlConnection connect, string strSQL, IDataParameter[] parameters = null, CommandType commandType = CommandType.Text, SqlTransaction transaction = null, int timeOut = 600)
+        private SqlParameter[] GetSqlParamArr(CusDbParameter[] commParamArr)
+        {
+            SqlParameter[] paramArr = new SqlParameter[commParamArr.Length];
+            int nRow = 0;
+            foreach (CusDbParameter commParam in commParamArr)
+            {
+                SqlParameter param = new SqlParameter();
+                param.ParameterName = commParam.ParameterName;
+                param.Value = commParam.Value;
+                //zgx 修改nvarchar到varchar编码问题，底层在进行默认NVarchar  造成没法设置varchar
+                if (!commParam.DbType.Equals(DbType.AnsiString) || commParam.Value is string)
+                    param.DbType = commParam.DbType;
+                if (commParam.Size > 0)
+                    param.Size = commParam.Size;
+                paramArr[nRow] = param;
+                nRow++;
+            }
+            return paramArr;
+        }
+
+        private SqlCommand CreateCommand(SqlConnection connect, string strSQL, CusDbParameter[] parameters = null, CommandType commandType = CommandType.Text, SqlTransaction transaction = null, int timeOut = 600)
         {
             SqlCommand sqlCommand = connect.CreateCommand();
             sqlCommand.CommandText = strSQL;
@@ -71,7 +93,7 @@ namespace ADF.DataAccess.Simple
          * @param {type} 
          * @return: 
          */
-        public int ExecuteNonQuery(string strSQL, IDataParameter[] parameters = null, CommandType commandType = CommandType.Text)
+        public int ExecuteNonQuery(string strSQL, CusDbParameter[] parameters = null, CommandType commandType = CommandType.Text)
         {
             using (SqlConnection connect = Connection)
             using (SqlCommand sqlCommand = CreateCommand(connect, strSQL, parameters, commandType))
@@ -79,12 +101,31 @@ namespace ADF.DataAccess.Simple
                 return sqlCommand.ExecuteNonQuery();
             }
         }
+        public int ExecuteNonQuery(Dictionary<string, CusDbParameter[]> sqlDict)
+        {
+            using (SqlConnection connect = Connection)
+            {
+                using (SqlCommand sqlCommand = CreateCommand(connect, string.Empty))
+                {
+                    int result = 0;
+                    foreach (var item in sqlDict)
+                    {
+                        sqlCommand.Parameters.Clear();
+                        sqlCommand.CommandText = item.Key;
+                        if (item.Value != null && item.Value.Length > 0)
+                            sqlCommand.Parameters.AddRange(GetSqlParamArr(item.Value));
+                        result += sqlCommand.ExecuteNonQuery();
+                    }
+                    return result;
+                }
+            }
+        }
         /*
          * @description: 使用事务获取影响的行数
          * @param {type} 
          * @return: 
          */
-        public int ExecuteNonQueryUseTrans(string strSQL, IDataParameter[] parameters = null, CommandType commandType = CommandType.Text)
+        public int ExecuteNonQueryUseTrans(string strSQL, CusDbParameter[] parameters = null, CommandType commandType = CommandType.Text)
         {
             using (SqlConnection connect = Connection)
             {
@@ -111,7 +152,7 @@ namespace ADF.DataAccess.Simple
          * @param {type} 
          * @return: 
          */
-        public int ExecuteNonQueryUseTrans(Dictionary<string, SqlParameter[]> sqlDict)
+        public int ExecuteNonQueryUseTrans(Dictionary<string, CusDbParameter[]> sqlDict)
         {
             using (SqlConnection connect = Connection)
             {
@@ -126,7 +167,8 @@ namespace ADF.DataAccess.Simple
                         {
                             sqlCommand.Parameters.Clear();
                             sqlCommand.CommandText = item.Key;
-                            sqlCommand.Parameters.AddRange(item.Value);
+                            if (item.Value != null && item.Value.Length > 0)
+                                sqlCommand.Parameters.AddRange(GetSqlParamArr(item.Value));
                             result += sqlCommand.ExecuteNonQuery();
                         }
 
@@ -148,7 +190,7 @@ namespace ADF.DataAccess.Simple
         /// <param name="destTableName">服务器上目标表的名称</param>
         /// <param name="copyData">DataTable</param>
         /// <param name="timeOut">属性的整数值。默认值为 300 秒。值 0 指示没有限制；批量复制将无限期等待。</param>
-        public void ExecuteeBulkCopy(string destTableName, DataTable copyData, int timeOut = 5 * 60)
+        public void ExecuteBulkCopy(string destTableName, DataTable copyData, int timeOut = 5 * 60)
         {
             using (SqlBulkCopy BulkCopy = new SqlBulkCopy(_connectionStr))
             {
@@ -169,7 +211,7 @@ namespace ADF.DataAccess.Simple
         /// <param name="copyData">DataTable</param>
         /// <param name="columns">列的对映关系</param>       
         /// <param name="timeOut">属性的整数值。默认值为 300 秒。值 0 指示没有限制；批量复制将无限期等待。</param>
-        public void ExecuteeBulkCopy(string destTableName, DataTable copyData, string[][] columns, int timeOut = 5 * 60)
+        public void ExecuteBulkCopy(string destTableName, DataTable copyData, string[][] columns, int timeOut = 5 * 60)
         {
             using (SqlConnection connect = Connection)
             {
@@ -211,7 +253,7 @@ namespace ADF.DataAccess.Simple
          * @param {type} 
          * @return: 
          */
-        public int ExecuteCount(string strSQL, SqlParameter[] parameters = null, CommandType commandType = CommandType.Text)
+        public int ExecuteCount(string strSQL, CusDbParameter[] parameters = null, CommandType commandType = CommandType.Text)
         {
             using (SqlConnection connect = Connection)
             using (SqlCommand command = CreateCommand(connect, strSQL, parameters, commandType))
@@ -231,7 +273,7 @@ namespace ADF.DataAccess.Simple
          * @param {type} 
          * @return: 
          */
-        public object ExecuteScalar(string strSQL, SqlParameter[] parameters = null, CommandType commandType = CommandType.Text)
+        public object ExecuteScalar(string strSQL, CusDbParameter[] parameters = null, CommandType commandType = CommandType.Text)
         {
             using (SqlConnection connect = Connection)
             using (SqlCommand command = CreateCommand(connect, strSQL, parameters, commandType))
@@ -252,7 +294,7 @@ namespace ADF.DataAccess.Simple
          * @param {type} 
          * @return: 
          */
-        public DataSet ExecuteDataSet(string strSQL, SqlParameter[] parameters = null, CommandType commandType = CommandType.Text)
+        public DataSet ExecuteDataSet(string strSQL, CusDbParameter[] parameters = null, CommandType commandType = CommandType.Text)
         {
             using (SqlConnection connect = Connection)
             using (SqlCommand command = CreateCommand(connect, strSQL, parameters, commandType))
@@ -268,7 +310,7 @@ namespace ADF.DataAccess.Simple
          * @param {type} 
          * @return: 
          */
-        public DataTable ExecuteDataTable(string strSQL, SqlParameter[] parameters = null, CommandType commandType = CommandType.Text)
+        public DataTable ExecuteDataTable(string strSQL, CusDbParameter[] parameters = null, CommandType commandType = CommandType.Text)
         {
             using (SqlConnection connect = Connection)
             using (SqlCommand command = CreateCommand(connect, strSQL, parameters))
@@ -280,11 +322,41 @@ namespace ADF.DataAccess.Simple
             }
         }
         /*
+         * @description: 获取数据表-并行-In条件
+         * @param {type} 
+         * @return: 
+         */
+        public DataTable ExecuteDataTableParallel<T>(string strSQL, List<T> wheres)
+        {
+            DataTable tables = new DataTable();
+            if (null == wheres && 0 == wheres.Count)
+            {
+                throw new Exception();
+            }
+
+            if (100 > wheres.Count)
+            {
+                string bodySql = string.Format("", strSQL, "('" + string.Join("','", wheres) + "')");
+                return ExecuteDataTable(bodySql);
+            }
+            else
+            {
+                var batchValue = wheres.TryToBatchValue();
+                Parallel.ForEach(batchValue, values =>
+                {
+                    string sqlBody = string.Format("{0} {1}", strSQL, values);
+                    DataTable table = ExecuteDataTable(sqlBody);
+                    tables.Merge(table, true);
+                });
+            }
+            return tables;
+        }
+        /*
          * @description: 获取数据表-分页
          * @param {type} 
          * @return: 
          */
-        public DataTable ExecuteDataTable(string strSQL, int CurrentPage, int PageSize, SqlParameter[] parameters = null, CommandType commandType = CommandType.Text)
+        public DataTable ExecuteDataTable(string strSQL, int CurrentPage, int PageSize, CusDbParameter[] parameters = null, CommandType commandType = CommandType.Text)
         {
             using (SqlConnection connect = Connection)
             {
@@ -322,12 +394,20 @@ namespace ADF.DataAccess.Simple
                     new SqlParameter("@FdOrder", fdOrder),
                     new SqlParameter("@Rows", SqlDbType.Int, 20) };
                 parameters[5].Direction = ParameterDirection.Output;
-                using (SqlCommand cmd = CreateCommand(connect, "[dbo].[PagerShow]", parameters, CommandType.StoredProcedure))
+
+                using (SqlCommand sqlCommand = connect.CreateCommand())
                 {
-                    using (SqlDataAdapter sda = new SqlDataAdapter(cmd))
+                    sqlCommand.CommandText = "[dbo].[PagerShow]";
+                    sqlCommand.CommandType = CommandType.StoredProcedure;
+                    sqlCommand.CommandTimeout = 5 * 60;
+                    if (parameters?.Length > 0)
+                    {
+                        sqlCommand.Parameters.AddRange(parameters);
+                    }
+                    using (SqlDataAdapter sda = new SqlDataAdapter(sqlCommand))
                     {
                         int result = sda.Fill(dt);
-                        object val = cmd.Parameters["@Rows"].Value;
+                        object val = sqlCommand.Parameters["@Rows"].Value;
                         if (val != null)
                         {
                             totalCount = Convert.ToInt32(val);

@@ -2,7 +2,7 @@ namespace ADF.DataAccess
 {
     public enum DatabaseTypeEnum
     {
-        Oracle,
-        SqlServer
+        Oracle = 0,
+        SqlServer = 1
     }
 }
