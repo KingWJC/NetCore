@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ADF.Web", "ADF.Web\ADF.Web.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ADF.Utility", "ADF.Utility\ADF.Utility.csproj", "{7AAC949A-1567-4CB6-91A2-D28DD98AD4DC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ADF.Test", "ADF.Test\ADF.Test.csproj", "{AE27125C-08E1-4701-9C75-3CA833079D11}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -86,5 +88,17 @@ Global
 		{7AAC949A-1567-4CB6-91A2-D28DD98AD4DC}.Release|x64.Build.0 = Release|Any CPU
 		{7AAC949A-1567-4CB6-91A2-D28DD98AD4DC}.Release|x86.ActiveCfg = Release|Any CPU
 		{7AAC949A-1567-4CB6-91A2-D28DD98AD4DC}.Release|x86.Build.0 = Release|Any CPU
+		{AE27125C-08E1-4701-9C75-3CA833079D11}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE27125C-08E1-4701-9C75-3CA833079D11}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE27125C-08E1-4701-9C75-3CA833079D11}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{AE27125C-08E1-4701-9C75-3CA833079D11}.Debug|x64.Build.0 = Debug|Any CPU
+		{AE27125C-08E1-4701-9C75-3CA833079D11}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{AE27125C-08E1-4701-9C75-3CA833079D11}.Debug|x86.Build.0 = Debug|Any CPU
+		{AE27125C-08E1-4701-9C75-3CA833079D11}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE27125C-08E1-4701-9C75-3CA833079D11}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AE27125C-08E1-4701-9C75-3CA833079D11}.Release|x64.ActiveCfg = Release|Any CPU
+		{AE27125C-08E1-4701-9C75-3CA833079D11}.Release|x64.Build.0 = Release|Any CPU
+		{AE27125C-08E1-4701-9C75-3CA833079D11}.Release|x86.ActiveCfg = Release|Any CPU
+		{AE27125C-08E1-4701-9C75-3CA833079D11}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

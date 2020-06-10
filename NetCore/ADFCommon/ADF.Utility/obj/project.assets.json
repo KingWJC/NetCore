@@ -736,7 +736,7 @@
     ".NETStandard,Version=v2.0": [
       "Microsoft.Extensions.Configuration >= 3.1.4",
       "Microsoft.Extensions.Configuration.FileExtensions >= 3.1.4",
-      "Microsoft.Extensions.Configuration.Json >= *",
+      "Microsoft.Extensions.Configuration.Json >= 3.1.4",
       "NETStandard.Library >= 2.0.3"
     ]
   },
@@ -746,11 +746,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\github\\NetCore\\ADFCommon\\adf.utility\\ADF.Utility.csproj",
+      "projectUniqueName": "E:\\github\\NetCore\\ADFCommon\\ADF.Utility\\ADF.Utility.csproj",
       "projectName": "ADF.Utility",
-      "projectPath": "E:\\github\\NetCore\\ADFCommon\\adf.utility\\ADF.Utility.csproj",
+      "projectPath": "E:\\github\\NetCore\\ADFCommon\\ADF.Utility\\ADF.Utility.csproj",
       "packagesPath": "C:\\Users\\wangjicheng\\.nuget\\packages\\",
-      "outputPath": "E:\\github\\NetCore\\ADFCommon\\adf.utility\\obj\\",
+      "outputPath": "E:\\github\\NetCore\\ADFCommon\\ADF.Utility\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\wangjicheng\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -787,7 +787,7 @@
           },
           "Microsoft.Extensions.Configuration.Json": {
             "target": "Package",
-            "version": "[*, )"
+            "version": "[3.1.4, )"
           },
           "NETStandard.Library": {
             "suppressParent": "All",

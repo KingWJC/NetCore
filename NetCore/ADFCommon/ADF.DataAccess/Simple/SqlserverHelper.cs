@@ -58,7 +58,7 @@ namespace ADF.DataAccess.Simple
                 SqlParameter param = new SqlParameter();
                 param.ParameterName = commParam.ParameterName;
                 param.Value = commParam.Value;
-                //zgx 修改nvarchar到varchar编码问题，底层在进行默认NVarchar  造成没法设置varchar
+                // 修改nvarchar到varchar编码问题，底层在进行默认NVarchar  造成没法设置varchar
                 if (!commParam.DbType.Equals(DbType.AnsiString) || commParam.Value is string)
                     param.DbType = commParam.DbType;
                 if (commParam.Size > 0)
@@ -77,7 +77,7 @@ namespace ADF.DataAccess.Simple
             sqlCommand.CommandTimeout = timeOut;
             if (parameters?.Length > 0)
             {
-                sqlCommand.Parameters.AddRange(parameters);
+                sqlCommand.Parameters.AddRange(GetSqlParamArr(parameters));
             }
             if (transaction != null)
             {
@@ -158,7 +158,7 @@ namespace ADF.DataAccess.Simple
             {
                 SqlTransaction sqlTransaction = connect.BeginTransaction();
 
-                using (SqlCommand sqlCommand = CreateCommand(connect, string.Empty))
+                using (SqlCommand sqlCommand = CreateCommand(connect, string.Empty, null, CommandType.Text, sqlTransaction))
                 {
                     int result = 0;
                     try

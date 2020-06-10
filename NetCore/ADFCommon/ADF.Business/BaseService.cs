@@ -66,8 +66,7 @@ namespace ADF.Business.Simple
         }
         #endregion
 
-        #region sql执行相关方法
-        
+        #region 外部接口
         /// <summary>
         /// 从特定sequence中获取值
         /// </summary>
@@ -75,52 +74,9 @@ namespace ADF.Business.Simple
         /// <returns>获取到的sequence值</returns>
         public int GetNextId(string seqName)
         {
-            int maxId = 0;
-            string sql = "SELECT {0}.NEXTVAL MAXID  FROM DUAL";
-            sql = string.Format(sql, seqName);
-            DataTable dt = GetData(sql);
-            if (dt != null && dt.Rows.Count > 0)
-            {
-                if (!string.IsNullOrEmpty(dt.Rows[0]["MAXID"].ToString()))
-                {
-                    int.TryParse(dt.Rows[0]["MAXID"].ToString(), out maxId);
-                }
-            }
-            return maxId;
-        }
-        /// <summary>
-        /// 获取服务器当前时间
-        /// </summary>
-        /// <returns></returns>
-        public DateTime GetServiceDateTime()
-        {
-            DateTime currentDatetime = DateTime.Now;
-            string sql = "select sysdate from dual";
-            DataTable dt = GetData(sql);
-            if (dt != null && dt.Rows.Count > 0)
-            {
-                currentDatetime = DateTime.Parse(dt.Rows[0]["SYSDATE"].ToString());
-            }
-            return currentDatetime;
-        }
-
-        /// <summary>
-        /// 获取下一个显示的数字
-        /// </summary>
-        /// <param name="tableName"></param>
-        /// <param name="columnName"></param>
-        /// <returns></returns>
-        public int GetNextNumber(string tableName, string columnName)
-        {
-            int nextNumber = 1;
-            string sql = "SELECT MAX({0}) MaxNumber FROM {1}";
-            sql = string.Format(sql, columnName, tableName);
-            DataTable dt = GetData(sql);
-            if (dt != null && dt.Rows.Count > 0)
-            {
-                nextNumber = int.Parse(dt.Rows[0]["MaxNumber"].ToString()) + 1;
-            }
-            return nextNumber;
+            string strSQL = $"SELECT {seqName}.NEXTVAL MAXID  FROM DUAL";
+            object obj = DbHelper.GetSingle(strSQL);
+            return obj.ToString().ToInt();
         }
 
         /// <summary>
@@ -129,7 +85,7 @@ namespace ADF.Business.Simple
         /// <typeparam name="T"></typeparam>
         /// <param name="where"></param>
         /// <returns></returns>
-        public List<T> GetEntitys<T>(Dictionary<string, object> queryDict)
+        public List<T> GetEntitys<T>(Dictionary<string, object> queryDict = null)
         {
             Type type = typeof(T);
 
@@ -159,9 +115,10 @@ namespace ADF.Business.Simple
         public (string, CusDbParameter[]) GetWhereSql(Dictionary<string, object> queryDict)
         {
             string where = string.Empty;
-            CusDbParameter[] parameters = new CusDbParameter[queryDict.Count];
+            CusDbParameter[] parameters = null;
             if (queryDict != null && queryDict.Count > 0)
             {
+                parameters = new CusDbParameter[queryDict.Count];
                 StringBuilder sb = new StringBuilder(" WHERE 1=1 ");
                 sb.Append(" AND (");
                 var enumerator = queryDict.GetEnumerator();
@@ -177,9 +134,10 @@ namespace ADF.Business.Simple
                     }
                     else
                     {
-                        sb.Append($" T.{query.Key} = @'{query.Key}' AND");
+                        sb.Append($" T.{query.Key} = @{query.Key} AND");
                     }
                     parameters[index] = new CusDbParameter(query.Key, query.Value);
+                    index++;
                 }
 
                 where = sb.Remove(sb.Length - 3, 3).Append(")").ToString();
@@ -197,18 +155,21 @@ namespace ADF.Business.Simple
         /// <param name="index"></param>
         public int UpdateEntity<T>(int keyID, Dictionary<string, object> changeValues) where T : new()
         {
+            if (changeValues.IsEmpty())
+                return 0;
+
             var obj = new T();
             var key = GetKeyProperty(typeof(T));
 
-            var propertys = typeof(T).GetProperties().Where(p =>
+            Func<PropertyInfo, bool> where = (p =>
             {
                 bool flag = changeValues.ContainsKey(p.Name);
                 if (flag)
                     p.SetValue(obj, changeValues[p.Name], null);
                 return flag;
-            }).ToArray();
+            });
 
-            var updateSql = UpdateSql<T>(obj, propertys) + $" WHERE {key.Name} = '{keyID}'";
+            var updateSql = UpdateSql<T>(obj, key.Name, where) + $" WHERE {key.Name} = '{keyID}'";
             return DbHelper.Modify(updateSql);
         }
 
@@ -217,8 +178,11 @@ namespace ADF.Business.Simple
         /// </summary>
         /// <param name="entityList">方案执行人对象</param>
         /// <returns></returns>
-        public int UpdateEntytyList<T>(List<T> entityList)
+        public int UpdateEntityList<T>(List<T> entityList)
         {
+            if (entityList == null || entityList.Count == 0)
+                return 0;
+
             var sqlList = new List<string>();
             var key = GetKeyProperty(typeof(T));
             entityList.ForEach(p =>
@@ -290,13 +254,13 @@ namespace ADF.Business.Simple
         /// </summary>
         /// <param name="t"></param>
         /// <returns></returns>
-        protected string UpdateSql<T>(T t, string keyName)
+        protected string UpdateSql<T>(T t, string keyName, Func<PropertyInfo, bool> where = null)
         {
             StringBuilder sb = new StringBuilder(string.Format("Update {0} SET", t.GetType().Name));
             var properties = typeof(T).GetProperties();
             foreach (PropertyInfo subItem in properties)
             {
-                if (subItem.Name == "CREATE_DATE" || subItem.Name == keyName)
+                if (subItem.Name == "CREATE_DATE" || subItem.Name == keyName || (where != null && !where(subItem)))
                     continue;
 
                 var subValue = subItem.GetValue(t, null);
@@ -332,7 +296,7 @@ namespace ADF.Business.Simple
         /// <param name="ids">删除的ID</param>
         /// <param name="isLogic">是否逻辑删除</param>
         /// <returns></returns>
-        public int DeleteEntityByIDs<T>(string ids, bool isLogic = true, int stateValue = 1)
+        public int DeleteEntityByIDs<T>(List<string> ids, bool isLogic = true, int stateValue = 1)
         {
             Type type = typeof(T);
 
@@ -341,10 +305,10 @@ namespace ADF.Business.Simple
             var property = GetKeyProperty(typeof(T));
             if (property != null)
             {
-                string sql = $"DELETE FROM {type.Name} WHERE {property.Name} IN ({ids})";
+                string sql = $"DELETE FROM {type.Name} WHERE {property.Name} IN {ids.TryToWhere()}";
                 if (isLogic)
                 {
-                    sql = $"UPDATE {type.Name} SET STATE={stateValue} WHERE {property.Name} IN ({ids})";
+                    sql = $"UPDATE {type.Name} SET STATE={stateValue} WHERE {property.Name} IN {ids.TryToWhere()}";
                 }
 
                 index = DbHelper.Modify(sql);

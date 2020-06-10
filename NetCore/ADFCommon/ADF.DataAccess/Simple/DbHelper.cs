@@ -127,16 +127,16 @@ namespace ADF.DataAccess.Simple
             return 0;
         }
 
-        public static DataTable GetDataTable(string strSQL,CusDbParameter[] paremer)
+        public static DataTable GetDataTable(string strSQL,CusDbParameter[] parameters)
         {
             try
             {
                 switch (DbTypeStrToDbType(DatabaseType))
                 {
                     case DatabaseTypeEnum.SqlServer:
-                        return DbFactory.SQLServer(ConnectionString).ExecuteDataTable(strSQL);
+                        return DbFactory.SQLServer(ConnectionString).ExecuteDataTable(strSQL,parameters);
                     case DatabaseTypeEnum.Oracle:
-                        return DbFactory.Oracle(ConnectionString).ExecuteDataTable(strSQL);
+                        return DbFactory.Oracle(ConnectionString).ExecuteDataTable(strSQL,parameters);
                 }
             }
             catch (Exception ex)

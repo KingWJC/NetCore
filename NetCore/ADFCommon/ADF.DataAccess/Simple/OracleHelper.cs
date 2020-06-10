@@ -86,7 +86,7 @@ namespace ADF.DataAccess.Simple
             sqlCommand.CommandTimeout = timeOut;
             if (parameters?.Length > 0)
             {
-                sqlCommand.Parameters.AddRange(parameters);
+                sqlCommand.Parameters.AddRange(GetOracleParamArr(parameters));
             }
             if (transaction != null)
             {
@@ -167,7 +167,7 @@ namespace ADF.DataAccess.Simple
             {
                 OracleTransaction sqlTransaction = connect.BeginTransaction();
 
-                using (OracleCommand sqlCommand = CreateCommand(connect, string.Empty))
+                using (OracleCommand sqlCommand = CreateCommand(connect, string.Empty, null, CommandType.Text, sqlTransaction))
                 {
                     int result = 0;
                     try

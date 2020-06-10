@@ -2526,7 +2526,7 @@
     ".NETStandard,Version=v2.0": [
       "ADF.DataAccess >= 1.0.0",
       "NETStandard.Library >= 2.0.3",
-      "System.ComponentModel.Annotations >= *"
+      "System.ComponentModel.Annotations >= 4.7.0"
     ]
   },
   "packageFolders": {
@@ -2535,11 +2535,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\github\\NetCore\\ADFCommon\\adf.business\\ADF.Business.csproj",
+      "projectUniqueName": "E:\\github\\NetCore\\ADFCommon\\ADF.business\\ADF.Business.csproj",
       "projectName": "ADF.Business",
-      "projectPath": "E:\\github\\NetCore\\ADFCommon\\adf.business\\ADF.Business.csproj",
+      "projectPath": "E:\\github\\NetCore\\ADFCommon\\ADF.business\\ADF.Business.csproj",
       "packagesPath": "C:\\Users\\wangjicheng\\.nuget\\packages\\",
-      "outputPath": "E:\\github\\NetCore\\ADFCommon\\adf.business\\obj\\",
+      "outputPath": "E:\\github\\NetCore\\ADFCommon\\ADF.business\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\wangjicheng\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -2578,7 +2578,7 @@
           },
           "System.ComponentModel.Annotations": {
             "target": "Package",
-            "version": "[*, )"
+            "version": "[4.7.0, )"
           }
         },
         "imports": [

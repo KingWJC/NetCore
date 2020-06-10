@@ -71,5 +71,14 @@ namespace ADF.Utility
             }
             return temps;
         }
+        /*
+         * @description: 判断集合是否为空
+         * @param {type} 
+         * @return: 
+         */
+        public static Boolean IsEmpty<T>(this IEnumerable<T> list)
+        {
+            return list == null || list.Count() == 0;
+        }
     }
 }

@@ -2,6 +2,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ADF.business\ADF.Business.csproj" />
+    <ProjectReference Include="..\ADF.Entity\ADF.Entity.csproj" />
   </ItemGroup>
 
   <PropertyGroup>
