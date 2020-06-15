@@ -26,3 +26,6 @@
 	批量插入
 	执行存储过程
 	并行执行查询
+
+异常：An open Connection object is required to continue.
+原因：建立连接后，未打开。
