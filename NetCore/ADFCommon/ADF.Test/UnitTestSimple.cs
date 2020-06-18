@@ -26,6 +26,7 @@ namespace ADF.Test
         {
             int count = service.GetCount<JHZM_PAT_MAIN>();
         }
+        
         [Fact]
         public void TestGetList()
         {
@@ -39,7 +40,7 @@ namespace ADF.Test
                 {"SEX", "男"},
                 {"AGE", 38}
             };
-            var list = service.GetEntitys<JHZM_PAT_MAIN>(dicts);
+            var list = service.GetEntitys<JHZM_PAT_MAIN>(null);
             Assert.True(list.Count > 0);
         }
         [Fact]
@@ -71,7 +72,7 @@ namespace ADF.Test
             };
             Assert.Equal(1, service.UpdateEntityList(new List<JHZM_PAT_MAIN>() { user }));
         }
-        [Fact]
+        [Fact] 
         public void TestUpdateFields()
         {
             //Given

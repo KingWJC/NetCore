@@ -1,14 +1,15 @@
-﻿using System;
+using System;
 using System.Data;
 using System.Data.SqlClient;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using ADF.Utility;
+using System.Threading.Tasks;
 
-namespace ADF.DataAccess.Simple
+namespace ADF.DataAccess.SimpleFactory
 {
-    public class SqlserverHelper
+    public class SqlserverHelper : IDbHelper
     {
+
         private string _connectionStr;
         private int _bulkCount = 50000;
 
@@ -48,7 +49,7 @@ namespace ADF.DataAccess.Simple
             this._connectionStr = connStr;
         }
 
-        #region 私有方法
+         #region 私有方法
         private SqlParameter[] GetSqlParamArr(CusDbParameter[] commParamArr)
         {
             SqlParameter[] paramArr = new SqlParameter[commParamArr.Length];
@@ -336,7 +337,7 @@ namespace ADF.DataAccess.Simple
 
             if (100 > wheres.Count)
             {
-                string bodySql = string.Format("", strSQL, "('" + string.Join("','", wheres) + "')");
+                string bodySql = string.Format("{0} {1}", strSQL, wheres.TryToWhere());
                 return ExecuteDataTable(bodySql);
             }
             else

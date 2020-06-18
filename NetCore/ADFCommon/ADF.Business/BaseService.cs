@@ -12,12 +12,17 @@ namespace ADF.Business.Simple
 {
     public class BaseService
     {
+        public BaseService()
+        {
+
+        }
+
         #region 私有方法
-        protected static PropertyInfo GetKeyProperty(Type type)
+        protected PropertyInfo GetKeyProperty(Type type)
         {
             return GetKeyPropertys(type).FirstOrDefault();
         }
-        protected static List<PropertyInfo> GetKeyPropertys(Type type)
+        protected List<PropertyInfo> GetKeyPropertys(Type type)
         {
             var properties = type
                 .GetProperties()
@@ -103,7 +108,14 @@ namespace ADF.Business.Simple
                 sql += where;
             }
 
-            DataTable dataTable = DbHelper.GetDataTable(sql, parameter);
+            // DataTable dataTable = DbHelper.GetDataTable(sql, parameter);
+
+            // DataTable dataTable = ADF.DataAccess.SimpleFactory.DbFactory.CreateDbHelper().ExecuteDataTable(sql);
+
+            // DataTable dataTable = ADF.DataAccess.AbstractFactory.DbHelper.ExecuteDataTable(sql);
+
+            DataTable dataTable = ADF.DataAccess.MixFactory.DbHelperFactory.GetDbHelperRlection().ExecuteDataTable(sql);
+
             return dataTable.ToList<T>();
         }
 

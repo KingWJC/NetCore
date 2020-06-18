@@ -26,5 +26,22 @@ namespace ADF.Utility
 
             return resObj;
         }
+
+        /// <summary>
+        /// 判断是否为Null或者空
+        /// </summary>
+        /// <param name="obj">对象</param>
+        /// <returns></returns>
+        public static bool IsNullOrEmpty(this object obj)
+        {
+            if (obj == null)
+            {
+                return true;
+            }
+            else
+            {
+                return string.IsNullOrEmpty(obj.ToString());
+            }
+        }
     }
 }

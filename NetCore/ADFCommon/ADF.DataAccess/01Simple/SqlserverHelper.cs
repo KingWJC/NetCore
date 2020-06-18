@@ -1,30 +1,30 @@
-using System;
+﻿using System;
 using System.Data;
-using System.Data.OracleClient;
+using System.Data.SqlClient;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using ADF.Utility;
 
 namespace ADF.DataAccess.Simple
 {
-    public class OracleHelper
+    public class SqlserverHelper
     {
         private string _connectionStr;
+        private int _bulkCount = 50000;
 
-        private OracleConnection _connection;
+        private SqlConnection _connection;
         /*
-         * @description: 数据库连接
+         * @description: 获取数据库链接
          * @param {type} 
          * @return: 
          */
-        public OracleConnection Connection
+        public SqlConnection Connection
         {
             get
             {
                 if (_connection == null)
                 {
-                    _connection = new OracleConnection(_connectionStr);
-                    _connection.Open();
+                    _connection = new SqlConnection(_connectionStr);
                 }
                 else if (_connection.State == ConnectionState.Closed)
                 {
@@ -41,29 +41,25 @@ namespace ADF.DataAccess.Simple
             }
         }
 
-        private OracleHelper() { }
+        private SqlserverHelper() { }
 
-        public OracleHelper(string connStr)
+        public SqlserverHelper(string connStr)
         {
             this._connectionStr = connStr;
         }
 
         #region 私有方法
-        private OracleParameter[] GetOracleParamArr(CusDbParameter[] commParamArr)
+        private SqlParameter[] GetSqlParamArr(CusDbParameter[] commParamArr)
         {
-            OracleParameter[] paramArr = new OracleParameter[commParamArr.Length];
+            SqlParameter[] paramArr = new SqlParameter[commParamArr.Length];
             int nRow = 0;
             foreach (CusDbParameter commParam in commParamArr)
             {
-                OracleParameter param = new OracleParameter();
-                string paramName = commParam.ParameterName;
-                if (commParam.ParameterName.Contains("@"))
-                {
-                    paramName = commParam.ParameterName.Replace("@", ":");
-                }
-                param.ParameterName = paramName;
+                SqlParameter param = new SqlParameter();
+                param.ParameterName = commParam.ParameterName;
                 param.Value = commParam.Value;
-                if (!commParam.DbType.Equals(DbType.AnsiString))
+                // 修改nvarchar到varchar编码问题，底层在进行默认NVarchar  造成没法设置varchar
+                if (!commParam.DbType.Equals(DbType.AnsiString) || commParam.Value is string)
                     param.DbType = commParam.DbType;
                 if (commParam.Size > 0)
                     param.Size = commParam.Size;
@@ -73,20 +69,15 @@ namespace ADF.DataAccess.Simple
             return paramArr;
         }
 
-        /*
-         * @description: 构建Command对象
-         * @param {type} 
-         * @return: 
-         */
-        private OracleCommand CreateCommand(OracleConnection connect, string strSQL, CusDbParameter[] parameters = null, CommandType commandType = CommandType.Text, OracleTransaction transaction = null, int timeOut = 600)
+        private SqlCommand CreateCommand(SqlConnection connect, string strSQL, CusDbParameter[] parameters = null, CommandType commandType = CommandType.Text, SqlTransaction transaction = null, int timeOut = 600)
         {
-            OracleCommand sqlCommand = connect.CreateCommand();
+            SqlCommand sqlCommand = connect.CreateCommand();
             sqlCommand.CommandText = strSQL;
             sqlCommand.CommandType = commandType;
             sqlCommand.CommandTimeout = timeOut;
             if (parameters?.Length > 0)
             {
-                sqlCommand.Parameters.AddRange(GetOracleParamArr(parameters));
+                sqlCommand.Parameters.AddRange(GetSqlParamArr(parameters));
             }
             if (transaction != null)
             {
@@ -104,17 +95,17 @@ namespace ADF.DataAccess.Simple
          */
         public int ExecuteNonQuery(string strSQL, CusDbParameter[] parameters = null, CommandType commandType = CommandType.Text)
         {
-            using (OracleConnection connect = Connection)
-            using (OracleCommand sqlCommand = CreateCommand(connect, strSQL, parameters, commandType))
+            using (SqlConnection connect = Connection)
+            using (SqlCommand sqlCommand = CreateCommand(connect, strSQL, parameters, commandType))
             {
                 return sqlCommand.ExecuteNonQuery();
             }
         }
         public int ExecuteNonQuery(Dictionary<string, CusDbParameter[]> sqlDict)
         {
-            using (OracleConnection connect = Connection)
+            using (SqlConnection connect = Connection)
             {
-                using (OracleCommand sqlCommand = CreateCommand(connect, string.Empty))
+                using (SqlCommand sqlCommand = CreateCommand(connect, string.Empty))
                 {
                     int result = 0;
                     foreach (var item in sqlDict)
@@ -122,7 +113,7 @@ namespace ADF.DataAccess.Simple
                         sqlCommand.Parameters.Clear();
                         sqlCommand.CommandText = item.Key;
                         if (item.Value != null && item.Value.Length > 0)
-                            sqlCommand.Parameters.AddRange(GetOracleParamArr(item.Value));
+                            sqlCommand.Parameters.AddRange(GetSqlParamArr(item.Value));
                         result += sqlCommand.ExecuteNonQuery();
                     }
                     return result;
@@ -136,10 +127,10 @@ namespace ADF.DataAccess.Simple
          */
         public int ExecuteNonQueryUseTrans(string strSQL, CusDbParameter[] parameters = null, CommandType commandType = CommandType.Text)
         {
-            using (OracleConnection connect = Connection)
+            using (SqlConnection connect = Connection)
             {
-                OracleTransaction sqlTransaction = connect.BeginTransaction();
-                using (OracleCommand sqlCommand = CreateCommand(connect, string.Empty, parameters, commandType))
+                SqlTransaction sqlTransaction = connect.BeginTransaction();
+                using (SqlCommand sqlCommand = CreateCommand(connect, string.Empty, parameters, commandType,sqlTransaction))
                 {
                     int result = 0;
                     try
@@ -157,17 +148,17 @@ namespace ADF.DataAccess.Simple
             }
         }
         /*
-         * @description: 使用事务执行多条SQL语句，并返回影响的行数
+         * @description: 使用事务获取影响的行数-多条语句
          * @param {type} 
          * @return: 
          */
         public int ExecuteNonQueryUseTrans(Dictionary<string, CusDbParameter[]> sqlDict)
         {
-            using (OracleConnection connect = Connection)
+            using (SqlConnection connect = Connection)
             {
-                OracleTransaction sqlTransaction = connect.BeginTransaction();
+                SqlTransaction sqlTransaction = connect.BeginTransaction();
 
-                using (OracleCommand sqlCommand = CreateCommand(connect, string.Empty, null, CommandType.Text, sqlTransaction))
+                using (SqlCommand sqlCommand = CreateCommand(connect, string.Empty, null, CommandType.Text, sqlTransaction))
                 {
                     int result = 0;
                     try
@@ -177,7 +168,7 @@ namespace ADF.DataAccess.Simple
                             sqlCommand.Parameters.Clear();
                             sqlCommand.CommandText = item.Key;
                             if (item.Value != null && item.Value.Length > 0)
-                                sqlCommand.Parameters.AddRange(GetOracleParamArr(item.Value));
+                                sqlCommand.Parameters.AddRange(GetSqlParamArr(item.Value));
                             result += sqlCommand.ExecuteNonQuery();
                         }
 
@@ -192,6 +183,68 @@ namespace ADF.DataAccess.Simple
                 }
             }
         }
+
+        /// <summary>
+        /// 批量插入
+        /// </summary>
+        /// <param name="destTableName">服务器上目标表的名称</param>
+        /// <param name="copyData">DataTable</param>
+        /// <param name="timeOut">属性的整数值。默认值为 300 秒。值 0 指示没有限制；批量复制将无限期等待。</param>
+        public void ExecuteBulkCopy(string destTableName, DataTable copyData, int timeOut = 5 * 60)
+        {
+            using (SqlBulkCopy BulkCopy = new SqlBulkCopy(_connectionStr))
+            {
+                BulkCopy.BulkCopyTimeout = timeOut;
+                BulkCopy.DestinationTableName = destTableName;
+                for (int i = 0; i < copyData.Columns.Count; i++)
+                {
+                    BulkCopy.ColumnMappings.Add(copyData.Columns[i].ColumnName, copyData.Columns[i].ColumnName);
+                }
+                BulkCopy.WriteToServer(copyData);
+            }
+        }
+
+        /// <summary>
+        /// 批量插入(事务，自定义列，不触发约束和触发器)
+        /// </summary>
+        /// <param name="destTableName">服务器上目标表的名称</param>
+        /// <param name="copyData">DataTable</param>
+        /// <param name="columns">列的对映关系</param>       
+        /// <param name="timeOut">属性的整数值。默认值为 300 秒。值 0 指示没有限制；批量复制将无限期等待。</param>
+        public void ExecuteBulkCopy(string destTableName, DataTable copyData, string[][] columns, int timeOut = 5 * 60)
+        {
+            using (SqlConnection connect = Connection)
+            {
+                SqlTransaction transaction = connect.BeginTransaction();
+                //不执行触发器和约束 
+                using (SqlBulkCopy bulkCopy = new SqlBulkCopy(connect, SqlBulkCopyOptions.CheckConstraints | SqlBulkCopyOptions.FireTriggers, transaction))
+                {
+                    bulkCopy.DestinationTableName = destTableName;
+                    bulkCopy.BulkCopyTimeout = timeOut;
+                    bulkCopy.BatchSize = copyData.Rows.Count > _bulkCount ? _bulkCount : copyData.Rows.Count;
+
+                    try
+                    {
+                        if (columns != null && columns.Length > 1)
+                        {
+                            for (int i = 0; i < columns[0].Length; i++)
+                            {
+                                SqlBulkCopyColumnMapping scc = new SqlBulkCopyColumnMapping(columns[0][i].Trim(), columns[1][i].Trim());
+                                bulkCopy.ColumnMappings.Add(scc);
+                            }
+                        }
+                        bulkCopy.WriteToServer(copyData);
+                        transaction.Commit();
+                    }
+                    catch (Exception ex)
+                    {
+                        transaction.Rollback();
+                        throw (ex);
+                    }
+
+                }
+            }
+        }
         #endregion
 
         #region 数据获取
@@ -202,23 +255,16 @@ namespace ADF.DataAccess.Simple
          */
         public int ExecuteCount(string strSQL, CusDbParameter[] parameters = null, CommandType commandType = CommandType.Text)
         {
-            using (OracleConnection connect = Connection)
-            using (OracleCommand command = CreateCommand(connect, strSQL, parameters, commandType))
+            using (SqlConnection connect = Connection)
+            using (SqlCommand command = CreateCommand(connect, strSQL, parameters, commandType))
             {
                 int result = 0;
-                try
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
                 {
-                    OracleDataReader reader = command.ExecuteReader();
-                    while (reader.Read())
-                    {
-                        result = reader.GetInt32(0);
-                    }
-                    reader.Close();
+                    result = reader.GetInt32(0);
                 }
-                catch (Exception ex)
-                {
-                    throw (ex);
-                }
+                reader.Close();
                 return result;
             }
         }
@@ -229,8 +275,8 @@ namespace ADF.DataAccess.Simple
          */
         public object ExecuteScalar(string strSQL, CusDbParameter[] parameters = null, CommandType commandType = CommandType.Text)
         {
-            using (OracleConnection connect = Connection)
-            using (OracleCommand command = CreateCommand(connect, strSQL, parameters, commandType))
+            using (SqlConnection connect = Connection)
+            using (SqlCommand command = CreateCommand(connect, strSQL, parameters, commandType))
             {
                 object result = command.ExecuteScalar();
                 if (object.Equals(null, result) || object.Equals(DBNull.Value, result))
@@ -250,15 +296,14 @@ namespace ADF.DataAccess.Simple
          */
         public DataSet ExecuteDataSet(string strSQL, CusDbParameter[] parameters = null, CommandType commandType = CommandType.Text)
         {
-            using (OracleConnection connect = Connection)
-            using (OracleCommand command = CreateCommand(connect, strSQL, parameters, commandType))
+            using (SqlConnection connect = Connection)
+            using (SqlCommand command = CreateCommand(connect, strSQL, parameters, commandType))
             {
-                OracleDataAdapter sqlDataAdapter = new OracleDataAdapter(command);
+                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(command);
                 DataSet dataSet = new DataSet();
                 sqlDataAdapter.Fill(dataSet);
                 return dataSet;
             }
-
         }
         /*
          * @description: 获取数据表
@@ -267,34 +312,17 @@ namespace ADF.DataAccess.Simple
          */
         public DataTable ExecuteDataTable(string strSQL, CusDbParameter[] parameters = null, CommandType commandType = CommandType.Text)
         {
-            using (OracleConnection connect = Connection)
-
-            using (OracleCommand command = CreateCommand(connect, strSQL, parameters))
+            using (SqlConnection connect = Connection)
+            using (SqlCommand command = CreateCommand(connect, strSQL, parameters))
             {
-                OracleDataAdapter sqlDataAdapter = new OracleDataAdapter(command);
+                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(command);
                 DataTable dataTable = new DataTable();
                 sqlDataAdapter.Fill(dataTable);
                 return dataTable;
             }
         }
         /*
-         * @description: 获取数据表-分页
-         * @param {type} 
-         * @return: 
-         */
-        public DataTable ExecuteDataTable(string strSQL, int CurrentPage, int PageSize, CusDbParameter[] parameters = null, CommandType commandType = CommandType.Text)
-        {
-            using (OracleConnection connect = Connection)
-            using (OracleCommand Command = CreateCommand(connect, strSQL, parameters, commandType))
-            {
-                DataTable DataTable = new DataTable();
-                OracleDataAdapter Adapter = new OracleDataAdapter(Command);
-                Adapter.Fill((CurrentPage - 1) * PageSize, PageSize, DataTable);
-                return DataTable;
-            }
-        }
-        /*
-         * @description: 获取数据表-并行
+         * @description: 获取数据表-并行-In条件
          * @param {type} 
          * @return: 
          */
@@ -308,7 +336,7 @@ namespace ADF.DataAccess.Simple
 
             if (100 > wheres.Count)
             {
-                string bodySql = string.Format("", strSQL, "('" + string.Join("','", wheres) + "')");
+                string bodySql = string.Format("{0} {1}", strSQL, wheres.TryToWhere());
                 return ExecuteDataTable(bodySql);
             }
             else
@@ -322,6 +350,24 @@ namespace ADF.DataAccess.Simple
                 });
             }
             return tables;
+        }
+        /*
+         * @description: 获取数据表-分页
+         * @param {type} 
+         * @return: 
+         */
+        public DataTable ExecuteDataTable(string strSQL, int CurrentPage, int PageSize, CusDbParameter[] parameters = null, CommandType commandType = CommandType.Text)
+        {
+            using (SqlConnection connect = Connection)
+            {
+                using (SqlCommand Command = CreateCommand(connect, strSQL, parameters, commandType))
+                {
+                    DataTable DataTable = new DataTable();
+                    SqlDataAdapter Adapter = new SqlDataAdapter(Command);
+                    Adapter.Fill((CurrentPage - 1) * PageSize, PageSize, DataTable);
+                    return DataTable;
+                }
+            }
         }
 
         /// <summary>
@@ -338,17 +384,18 @@ namespace ADF.DataAccess.Simple
         {
             DataTable dt = new DataTable();
             totalCount = 0;
-            using (OracleConnection connect = Connection)
+            using (SqlConnection connect = Connection)
             {
-                OracleParameter[] parameters = new OracleParameter[] {
-                    new OracleParameter("@QueryStr", strSQL),
-                    new OracleParameter("@PageSize", pageSize),
-                    new OracleParameter("@PageCurrent", pageCurrent),
-                    new OracleParameter("@FdShow", fdShow),
-                    new OracleParameter("@FdOrder", fdOrder),
-                    new OracleParameter("@Rows", OracleType.Int32, 20) };
+                SqlParameter[] parameters = new SqlParameter[] {
+                    new SqlParameter("@QueryStr", strSQL),
+                    new SqlParameter("@PageSize", pageSize),
+                    new SqlParameter("@PageCurrent", pageCurrent),
+                    new SqlParameter("@FdShow", fdShow),
+                    new SqlParameter("@FdOrder", fdOrder),
+                    new SqlParameter("@Rows", SqlDbType.Int, 20) };
                 parameters[5].Direction = ParameterDirection.Output;
-                using (OracleCommand sqlCommand = connect.CreateCommand())
+
+                using (SqlCommand sqlCommand = connect.CreateCommand())
                 {
                     sqlCommand.CommandText = "[dbo].[PagerShow]";
                     sqlCommand.CommandType = CommandType.StoredProcedure;
@@ -357,7 +404,7 @@ namespace ADF.DataAccess.Simple
                     {
                         sqlCommand.Parameters.AddRange(parameters);
                     }
-                    using (OracleDataAdapter sda = new OracleDataAdapter(sqlCommand))
+                    using (SqlDataAdapter sda = new SqlDataAdapter(sqlCommand))
                     {
                         int result = sda.Fill(dt);
                         object val = sqlCommand.Parameters["@Rows"].Value;

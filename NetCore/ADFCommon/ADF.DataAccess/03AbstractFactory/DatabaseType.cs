@@ -1,4 +1,4 @@
-namespace ADF.DataAccess
+namespace ADF.DataAccess.AbstractFactory
 {
     public enum DatabaseTypeEnum
     {
