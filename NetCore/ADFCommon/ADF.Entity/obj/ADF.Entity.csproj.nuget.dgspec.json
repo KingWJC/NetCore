@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "E:\\github\\NetCore\\ADFCommon\\ADF.Entity\\ADF.Entity.csproj": {}
+    "e:\\github\\NetCore\\ADFCommon\\ADF.Entity\\ADF.Entity.csproj": {}
   },
   "projects": {
-    "E:\\github\\NetCore\\ADFCommon\\ADF.Entity\\ADF.Entity.csproj": {
+    "e:\\github\\NetCore\\ADFCommon\\ADF.Entity\\ADF.Entity.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\github\\NetCore\\ADFCommon\\ADF.Entity\\ADF.Entity.csproj",
+        "projectUniqueName": "e:\\github\\NetCore\\ADFCommon\\ADF.Entity\\ADF.Entity.csproj",
         "projectName": "ADF.Entity",
-        "projectPath": "E:\\github\\NetCore\\ADFCommon\\ADF.Entity\\ADF.Entity.csproj",
+        "projectPath": "e:\\github\\NetCore\\ADFCommon\\ADF.Entity\\ADF.Entity.csproj",
         "packagesPath": "C:\\Users\\wangjicheng\\.nuget\\packages\\",
-        "outputPath": "E:\\github\\NetCore\\ADFCommon\\ADF.Entity\\obj\\",
+        "outputPath": "e:\\github\\NetCore\\ADFCommon\\ADF.Entity\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\wangjicheng\\AppData\\Roaming\\NuGet\\NuGet.Config",

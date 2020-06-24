@@ -42,7 +42,7 @@ namespace ADF.DataAccess.MixFactory
             this.connectionStr = conStr;
         }
 
-        public DbCommand CreateCommand(DbConnection connect, string strSQL, List<DbParameter> parameters = null, CommandType commandType = CommandType.Text, DbTransaction transaction = null, int timeOut = 600)
+        public DbCommand CreateCommand(DbConnection connect, string strSQL, List<CusDbParameter> parameters = null, CommandType commandType = CommandType.Text, DbTransaction transaction = null, int timeOut = 600)
         {
             DbCommand dbCommand = connect.CreateCommand();
             dbCommand.CommandText = strSQL;
@@ -52,7 +52,7 @@ namespace ADF.DataAccess.MixFactory
             {
                 foreach (var item in parameters)
                 {
-                    dbCommand.Parameters.Add(item);
+                    dbCommand.Parameters.Add(CreateDbParameter(item));
                 }
             }
             if (transaction != null)
@@ -62,14 +62,14 @@ namespace ADF.DataAccess.MixFactory
             return dbCommand;
         }
 
-
+        public abstract DbParameter CreateDbParameter(CusDbParameter parameter);
         #region 数据更新
         /*
          * @description: 获取影响的行数
          * @param {type} 
          * @return: 
          */
-        public int ExecuteNonQuery(string strSQL, List<DbParameter> parameters = null, CommandType commandType = CommandType.Text)
+        public int ExecuteNonQuery(string strSQL, List<CusDbParameter> parameters = null, CommandType commandType = CommandType.Text)
         {
 
             using (DbConnection connect = Connection)
@@ -79,7 +79,7 @@ namespace ADF.DataAccess.MixFactory
             }
         }
 
-        public int ExecuteNonQuery(Dictionary<string, List<DbParameter>> sqlDict)
+        public int ExecuteNonQuery(Dictionary<string, List<CusDbParameter>> sqlDict)
         {
 
             using (DbConnection connect = Connection)
@@ -95,7 +95,7 @@ namespace ADF.DataAccess.MixFactory
                         {
                             foreach (var param in item.Value)
                             {
-                                command.Parameters.Add(param);
+                                command.Parameters.Add(CreateDbParameter(param));
                             }
                         }
                         result += command.ExecuteNonQuery();
@@ -109,7 +109,7 @@ namespace ADF.DataAccess.MixFactory
          * @param {type} 
          * @return: 
          */
-        public int ExecuteNonQueryUseTrans(string strSQL, List<DbParameter> parameters = null, CommandType commandType = CommandType.Text)
+        public int ExecuteNonQueryUseTrans(string strSQL, List<CusDbParameter> parameters = null, CommandType commandType = CommandType.Text)
         {
 
             using (DbConnection connect = Connection)
@@ -137,7 +137,7 @@ namespace ADF.DataAccess.MixFactory
          * @param {type} 
          * @return: 
          */
-        public int ExecuteNonQueryUseTrans(Dictionary<string, List<DbParameter>> sqlDict)
+        public int ExecuteNonQueryUseTrans(Dictionary<string, List<CusDbParameter>> sqlDict)
         {
             using (DbConnection connect = Connection)
             {
@@ -155,7 +155,7 @@ namespace ADF.DataAccess.MixFactory
                             {
                                 foreach (var param in item.Value)
                                 {
-                                    command.Parameters.Add(item);
+                                    command.Parameters.Add(CreateDbParameter(param));
                                 }
                             }
 
@@ -198,7 +198,7 @@ namespace ADF.DataAccess.MixFactory
          * @param {type} 
          * @return: 
          */
-        public int ExecuteCount(string strSQL, List<DbParameter> parameters = null, CommandType commandType = CommandType.Text)
+        public int ExecuteCount(string strSQL, List<CusDbParameter> parameters = null, CommandType commandType = CommandType.Text)
         {
 
             using (DbConnection connect = Connection)
@@ -222,7 +222,7 @@ namespace ADF.DataAccess.MixFactory
          * @param {type} 
          * @return: 
          */
-        public object ExecuteScalar(string strSQL, List<DbParameter> parameters = null, CommandType commandType = CommandType.Text)
+        public object ExecuteScalar(string strSQL, List<CusDbParameter> parameters = null, CommandType commandType = CommandType.Text)
         {
 
             using (DbConnection connect = Connection)
@@ -244,9 +244,8 @@ namespace ADF.DataAccess.MixFactory
          * @param {type} 
          * @return: 
          */
-        public DataSet ExecuteDataSet(string strSQL, List<DbParameter> parameters = null, CommandType commandType = CommandType.Text)
+        public DataSet ExecuteDataSet(string strSQL, List<CusDbParameter> parameters = null, CommandType commandType = CommandType.Text)
         {
-
             using (DbConnection connect = Connection)
             using (DbCommand command = CreateCommand(connect, strSQL, parameters, commandType))
             {
@@ -262,13 +261,31 @@ namespace ADF.DataAccess.MixFactory
          * @param {type} 
          * @return: 
          */
-        public DataTable ExecuteDataTable(string strSQL, List<DbParameter> parameters = null, CommandType commandType = CommandType.Text)
+        public DataTable ExecuteDataTable(string strSQL, List<CusDbParameter> parameters = null, CommandType commandType = CommandType.Text)
         {
             DataSet dataSet = ExecuteDataSet(strSQL, parameters, commandType);
             if (dataSet == null || dataSet.Tables.Count == 0)
                 return null;
             else
                 return dataSet.Tables[0];
+        }
+
+        public DataRow ExecuteDataRow(string strSQL, List<CusDbParameter> parameters = null, CommandType commandType = CommandType.Text)
+        {
+            using (DbConnection conn = Connection)
+            using (DbCommand command = CreateCommand(conn, strSQL, parameters, commandType))
+            {
+                DbDataReader reader = command.ExecuteReader();
+                if (reader.HasRows && reader.Read())
+                {
+                    DataTable dataTable = new DataTable();
+                    object[] values = new object[reader.FieldCount];
+                    int fieldCount = reader.GetValues(values);
+                    dataTable.LoadDataRow(values, false);
+                    return dataTable.Rows[0];
+                }
+                return null;
+            }
         }
 
         /*

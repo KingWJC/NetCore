@@ -61,5 +61,6 @@ namespace ADF.DataAccess.MixFactory
                 default: throw new Exception("请输入合法的数据库类型！");
             }
         }
+
     }
 }

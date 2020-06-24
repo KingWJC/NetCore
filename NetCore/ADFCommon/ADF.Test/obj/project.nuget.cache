@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "SaFoUxjz62LcYKaIwgBv/C5niou0bBtfG0J3D1rgViu/dNI9WL8X4OzqDHj5V385HDX31YuRlpC+z3CsDtilHw==",
+  "dgSpecHash": "bJXUzeI6MkhfsvGteEOvmrmPe/pZkxRp2bd1ioV23AFqbTDMpHZmzaJ+yDTEfPYePgclXve9N3u7oECkGjRn6g==",
   "success": true,
-  "projectFilePath": "E:\\github\\NetCore\\ADFCommon\\adf.test\\ADF.Test.csproj",
+  "projectFilePath": "e:\\github\\NetCore\\ADFCommon\\ADF.Test\\ADF.Test.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\wangjicheng\\.nuget\\packages\\coverlet.collector\\1.2.0\\coverlet.collector.1.2.0.nupkg.sha512",
     "C:\\Users\\wangjicheng\\.nuget\\packages\\microsoft.codecoverage\\16.5.0\\microsoft.codecoverage.16.5.0.nupkg.sha512",

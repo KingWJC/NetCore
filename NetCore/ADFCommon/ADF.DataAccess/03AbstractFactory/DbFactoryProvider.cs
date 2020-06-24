@@ -3,14 +3,14 @@ using ADF.Utility;
 
 namespace ADF.DataAccess.AbstractFactory
 {
-    public class DbFactory
+    public class DbFactoryProvider
     {
-        private static DbFactory dbFactory = null;
+        private static DbFactoryProvider dbFactory = null;
         private static object sysObj = new object();
 
-        private DbFactory() { }
+        private DbFactoryProvider() { }
 
-        public static DbFactory GetInstance()
+        public static DbFactoryProvider GetInstance()
         {
             if (dbFactory == null)
             {
@@ -18,7 +18,7 @@ namespace ADF.DataAccess.AbstractFactory
                 {
                     if (dbFactory == null)
                     {
-                        dbFactory = new DbFactory();
+                        dbFactory = new DbFactoryProvider();
                     }
                 }
             }

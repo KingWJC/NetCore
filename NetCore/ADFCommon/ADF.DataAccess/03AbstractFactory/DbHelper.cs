@@ -18,7 +18,7 @@ namespace ADF.DataAccess.AbstractFactory
          */
         public static int ExecuteNonQuery(string strSQL, CusDbParameter[] parameters = null, CommandType commandType = CommandType.Text)
         {
-            DbAbstractFactory factory = DbFactory.GetInstance().GetFactory();
+            DbAbstractFactory factory = DbFactoryProvider.GetInstance().GetFactory();
             using (IDbConnection connect = factory.CreateConnection())
             using (IDbCommand command = factory.CreateCommand(connect, strSQL, parameters, commandType))
             {
@@ -28,7 +28,7 @@ namespace ADF.DataAccess.AbstractFactory
 
         public static int ExecuteNonQuery(Dictionary<string, CusDbParameter[]> sqlDict)
         {
-            DbAbstractFactory factory = DbFactory.GetInstance().GetFactory();
+            DbAbstractFactory factory = DbFactoryProvider.GetInstance().GetFactory();
             using (IDbConnection connect = factory.CreateConnection())
             {
                 using (IDbCommand command = factory.CreateCommand(connect, string.Empty))
@@ -58,7 +58,7 @@ namespace ADF.DataAccess.AbstractFactory
          */
         public static int ExecuteNonQueryUseTrans(string strSQL, CusDbParameter[] parameters = null, CommandType commandType = CommandType.Text)
         {
-            DbAbstractFactory factory = DbFactory.GetInstance().GetFactory();
+            DbAbstractFactory factory = DbFactoryProvider.GetInstance().GetFactory();
             using (IDbConnection connect = factory.CreateConnection())
             {
                 IDbTransaction transaction = connect.BeginTransaction();
@@ -86,7 +86,7 @@ namespace ADF.DataAccess.AbstractFactory
          */
         public static int ExecuteNonQueryUseTrans(Dictionary<string, CusDbParameter[]> sqlDict)
         {
-            DbAbstractFactory factory = DbFactory.GetInstance().GetFactory();
+            DbAbstractFactory factory = DbFactoryProvider.GetInstance().GetFactory();
             using (IDbConnection connect = factory.CreateConnection())
             {
                 IDbTransaction transaction = connect.BeginTransaction();
@@ -127,7 +127,7 @@ namespace ADF.DataAccess.AbstractFactory
         /// <param name="timeOut">属性的整数值。默认值为 300 秒。值 0 指示没有限制；批量复制将无限期等待。</param>
         public static void ExecuteSQLBulkCopy(string destTableName, DataTable copyData, int timeOut = 5 * 60)
         {
-            DbAbstractFactory factory = DbFactory.GetInstance().GetFactory();
+            DbAbstractFactory factory = DbFactoryProvider.GetInstance().GetFactory();
             using (SqlBulkCopy BulkCopy = new SqlBulkCopy(factory.CreateConnection() as SqlConnection))
             {
                 BulkCopy.BulkCopyTimeout = timeOut;
@@ -151,7 +151,7 @@ namespace ADF.DataAccess.AbstractFactory
         /// <param name="timeOut">属性的整数值。默认值为 300 秒。值 0 指示没有限制；批量复制将无限期等待。</param>
         public static void ExecuteSQLBulkCopy(string destTableName, DataTable copyData, string[][] columns, int timeOut = 5 * 60)
         {
-            DbAbstractFactory factory = DbFactory.GetInstance().GetFactory();
+            DbAbstractFactory factory = DbFactoryProvider.GetInstance().GetFactory();
             using (SqlConnection connect = factory.CreateConnection() as SqlConnection)
             {
                 SqlTransaction transaction = connect.BeginTransaction();
@@ -194,7 +194,7 @@ namespace ADF.DataAccess.AbstractFactory
          */
         public static int ExecuteCount(string strSQL, CusDbParameter[] parameters = null, CommandType commandType = CommandType.Text)
         {
-            DbAbstractFactory factory = DbFactory.GetInstance().GetFactory();
+            DbAbstractFactory factory = DbFactoryProvider.GetInstance().GetFactory();
             using (IDbConnection connect = factory.CreateConnection())
             using (IDbCommand command = factory.CreateCommand(connect, strSQL, parameters, commandType))
             {
@@ -215,7 +215,7 @@ namespace ADF.DataAccess.AbstractFactory
          */
         public static object ExecuteScalar(string strSQL, CusDbParameter[] parameters = null, CommandType commandType = CommandType.Text)
         {
-            DbAbstractFactory factory = DbFactory.GetInstance().GetFactory();
+            DbAbstractFactory factory = DbFactoryProvider.GetInstance().GetFactory();
             using (IDbConnection connect = factory.CreateConnection())
             using (IDbCommand command = factory.CreateCommand(connect, strSQL, parameters, commandType))
             {
@@ -237,7 +237,7 @@ namespace ADF.DataAccess.AbstractFactory
          */
         public static DataSet ExecuteDataSet(string strSQL, CusDbParameter[] parameters = null, CommandType commandType = CommandType.Text)
         {
-            DbAbstractFactory factory = DbFactory.GetInstance().GetFactory();
+            DbAbstractFactory factory = DbFactoryProvider.GetInstance().GetFactory();
             using (IDbConnection connect = factory.CreateConnection())
             using (IDbCommand command = factory.CreateCommand(connect, strSQL, parameters, commandType))
             {
@@ -305,7 +305,7 @@ namespace ADF.DataAccess.AbstractFactory
         /// <returns>DataTable</returns>
         public static DataTable ExecPageProcSQL(string strSQL, int pageSize, int pageCurrent, string fdShow, string fdOrder, out int totalCount)
         {
-            DbAbstractFactory factory = DbFactory.GetInstance().GetFactory();
+            DbAbstractFactory factory = DbFactoryProvider.GetInstance().GetFactory();
             DataTable dt = new DataTable();
             totalCount = 0;
             using (SqlConnection connect = factory.CreateConnection() as SqlConnection)
@@ -354,7 +354,7 @@ namespace ADF.DataAccess.AbstractFactory
         /// <returns>DataTable</returns>
         public static DataTable ExecPageProcOracle(string strSQL, int pageSize, int pageCurrent, string fdShow, string fdOrder, out int totalCount)
         {
-            DbAbstractFactory factory = DbFactory.GetInstance().GetFactory();
+            DbAbstractFactory factory = DbFactoryProvider.GetInstance().GetFactory();
             DataTable dt = new DataTable();
             totalCount = 0;
             using (OracleConnection connect = factory.CreateConnection() as OracleConnection)

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "xX8zNk7Dqe5VM28Qr5PuTp23w+S6r5JJG1Ow3o+wO/E+pzfqqHBuJLdYca3g0oGjybabTOD1vot0zksDdHoPgQ==",
+  "dgSpecHash": "MZAAoSyeMb0MO+BccqxtU3cNchYfdyG81I77NBLBw+45Bn25PJilEFlYszpSzBT7yuBEy8zalRXC5fbHFJyAHw==",
   "success": true,
-  "projectFilePath": "E:\\github\\NetCore\\ADFCommon\\ADF.Business\\ADF.Business.csproj",
+  "projectFilePath": "e:\\github\\NetCore\\ADFCommon\\ADF.business\\ADF.Business.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\wangjicheng\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.0\\microsoft.bcl.asyncinterfaces.1.1.0.nupkg.sha512",
     "C:\\Users\\wangjicheng\\.nuget\\packages\\microsoft.extensions.configuration\\3.1.4\\microsoft.extensions.configuration.3.1.4.nupkg.sha512",

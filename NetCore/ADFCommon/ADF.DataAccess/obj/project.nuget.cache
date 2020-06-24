@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "9VR33CtX3xCHiP6xPLwMOnmGuuTTcS/E6bmAUvDYzRGqLYaoVqA5srTDLTaRwOR64GroS6uUf0FUWT7YcpLatA==",
+  "dgSpecHash": "EEGcfpSrnIyStPuqlUPhdugHNTYoVaBvjHa3iBW0GEv5PZYEjBa6+lSXJBYmNXrOBlPuQxo2XB2/52Z24o9C9Q==",
   "success": true,
-  "projectFilePath": "E:\\github\\NetCore\\ADFCommon\\ADF.DataAccess\\ADF.DataAccess.csproj",
+  "projectFilePath": "e:\\github\\NetCore\\ADFCommon\\ADF.DataAccess\\ADF.DataAccess.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\wangjicheng\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.0\\microsoft.bcl.asyncinterfaces.1.1.0.nupkg.sha512",
     "C:\\Users\\wangjicheng\\.nuget\\packages\\microsoft.extensions.configuration\\3.1.4\\microsoft.extensions.configuration.3.1.4.nupkg.sha512",
@@ -23,6 +23,7 @@
     "C:\\Users\\wangjicheng\\.nuget\\packages\\runtime.win-x86.runtime.native.system.data.sqlclient.sni\\4.4.0\\runtime.win-x86.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",
     "C:\\Users\\wangjicheng\\.nuget\\packages\\system.buffers\\4.5.1\\system.buffers.4.5.1.nupkg.sha512",
     "C:\\Users\\wangjicheng\\.nuget\\packages\\system.collections\\4.3.0\\system.collections.4.3.0.nupkg.sha512",
+    "C:\\Users\\wangjicheng\\.nuget\\packages\\system.componentmodel.annotations\\4.7.0\\system.componentmodel.annotations.4.7.0.nupkg.sha512",
     "C:\\Users\\wangjicheng\\.nuget\\packages\\system.data.common\\4.3.0\\system.data.common.4.3.0.nupkg.sha512",
     "C:\\Users\\wangjicheng\\.nuget\\packages\\system.data.oracleclient\\1.0.8\\system.data.oracleclient.1.0.8.nupkg.sha512",
     "C:\\Users\\wangjicheng\\.nuget\\packages\\system.data.sqlclient\\4.8.1\\system.data.sqlclient.4.8.1.nupkg.sha512",

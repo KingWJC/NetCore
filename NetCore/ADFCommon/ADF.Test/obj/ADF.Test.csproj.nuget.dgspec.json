@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "E:\\github\\NetCore\\ADFCommon\\adf.test\\ADF.Test.csproj": {}
+    "e:\\github\\NetCore\\ADFCommon\\ADF.Test\\ADF.Test.csproj": {}
   },
   "projects": {
-    "E:\\github\\NetCore\\ADFCommon\\ADF.Business\\ADF.Business.csproj": {
+    "e:\\github\\NetCore\\ADFCommon\\ADF.Business\\ADF.Business.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\github\\NetCore\\ADFCommon\\ADF.Business\\ADF.Business.csproj",
+        "projectUniqueName": "e:\\github\\NetCore\\ADFCommon\\ADF.Business\\ADF.Business.csproj",
         "projectName": "ADF.Business",
-        "projectPath": "E:\\github\\NetCore\\ADFCommon\\ADF.Business\\ADF.Business.csproj",
+        "projectPath": "e:\\github\\NetCore\\ADFCommon\\ADF.Business\\ADF.Business.csproj",
         "packagesPath": "C:\\Users\\wangjicheng\\.nuget\\packages\\",
-        "outputPath": "E:\\github\\NetCore\\ADFCommon\\ADF.Business\\obj\\",
+        "outputPath": "e:\\github\\NetCore\\ADFCommon\\ADF.Business\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\wangjicheng\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -27,8 +27,8 @@
         "frameworks": {
           "netstandard2.0": {
             "projectReferences": {
-              "E:\\github\\NetCore\\ADFCommon\\ADF.DataAccess\\ADF.DataAccess.csproj": {
-                "projectPath": "E:\\github\\NetCore\\ADFCommon\\ADF.DataAccess\\ADF.DataAccess.csproj"
+              "e:\\github\\NetCore\\ADFCommon\\ADF.DataAccess\\ADF.DataAccess.csproj": {
+                "projectPath": "e:\\github\\NetCore\\ADFCommon\\ADF.DataAccess\\ADF.DataAccess.csproj"
               }
             }
           }
@@ -67,14 +67,14 @@
         }
       }
     },
-    "E:\\github\\NetCore\\ADFCommon\\ADF.DataAccess\\ADF.DataAccess.csproj": {
+    "e:\\github\\NetCore\\ADFCommon\\ADF.DataAccess\\ADF.DataAccess.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\github\\NetCore\\ADFCommon\\ADF.DataAccess\\ADF.DataAccess.csproj",
+        "projectUniqueName": "e:\\github\\NetCore\\ADFCommon\\ADF.DataAccess\\ADF.DataAccess.csproj",
         "projectName": "ADF.DataAccess",
-        "projectPath": "E:\\github\\NetCore\\ADFCommon\\ADF.DataAccess\\ADF.DataAccess.csproj",
+        "projectPath": "e:\\github\\NetCore\\ADFCommon\\ADF.DataAccess\\ADF.DataAccess.csproj",
         "packagesPath": "C:\\Users\\wangjicheng\\.nuget\\packages\\",
-        "outputPath": "E:\\github\\NetCore\\ADFCommon\\ADF.DataAccess\\obj\\",
+        "outputPath": "e:\\github\\NetCore\\ADFCommon\\ADF.DataAccess\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\wangjicheng\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -90,8 +90,8 @@
         "frameworks": {
           "netstandard2.0": {
             "projectReferences": {
-              "E:\\github\\NetCore\\ADFCommon\\ADF.Utility\\ADF.Utility.csproj": {
-                "projectPath": "E:\\github\\NetCore\\ADFCommon\\ADF.Utility\\ADF.Utility.csproj"
+              "e:\\github\\NetCore\\ADFCommon\\ADF.Utility\\ADF.Utility.csproj": {
+                "projectPath": "e:\\github\\NetCore\\ADFCommon\\ADF.Utility\\ADF.Utility.csproj"
               }
             }
           }
@@ -110,6 +110,10 @@
               "target": "Package",
               "version": "[2.0.3, )",
               "autoReferenced": true
+            },
+            "System.ComponentModel.Annotations": {
+              "target": "Package",
+              "version": "[4.7.0, )"
             },
             "System.Data.Common": {
               "target": "Package",
@@ -138,14 +142,14 @@
         }
       }
     },
-    "E:\\github\\NetCore\\ADFCommon\\ADF.Entity\\ADF.Entity.csproj": {
+    "e:\\github\\NetCore\\ADFCommon\\ADF.Entity\\ADF.Entity.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\github\\NetCore\\ADFCommon\\ADF.Entity\\ADF.Entity.csproj",
+        "projectUniqueName": "e:\\github\\NetCore\\ADFCommon\\ADF.Entity\\ADF.Entity.csproj",
         "projectName": "ADF.Entity",
-        "projectPath": "E:\\github\\NetCore\\ADFCommon\\ADF.Entity\\ADF.Entity.csproj",
+        "projectPath": "e:\\github\\NetCore\\ADFCommon\\ADF.Entity\\ADF.Entity.csproj",
         "packagesPath": "C:\\Users\\wangjicheng\\.nuget\\packages\\",
-        "outputPath": "E:\\github\\NetCore\\ADFCommon\\ADF.Entity\\obj\\",
+        "outputPath": "e:\\github\\NetCore\\ADFCommon\\ADF.Entity\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\wangjicheng\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -197,14 +201,14 @@
         }
       }
     },
-    "E:\\github\\NetCore\\ADFCommon\\adf.test\\ADF.Test.csproj": {
+    "e:\\github\\NetCore\\ADFCommon\\ADF.Test\\ADF.Test.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\github\\NetCore\\ADFCommon\\adf.test\\ADF.Test.csproj",
+        "projectUniqueName": "e:\\github\\NetCore\\ADFCommon\\ADF.Test\\ADF.Test.csproj",
         "projectName": "ADF.Test",
-        "projectPath": "E:\\github\\NetCore\\ADFCommon\\adf.test\\ADF.Test.csproj",
+        "projectPath": "e:\\github\\NetCore\\ADFCommon\\ADF.Test\\ADF.Test.csproj",
         "packagesPath": "C:\\Users\\wangjicheng\\.nuget\\packages\\",
-        "outputPath": "E:\\github\\NetCore\\ADFCommon\\adf.test\\obj\\",
+        "outputPath": "e:\\github\\NetCore\\ADFCommon\\ADF.Test\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\wangjicheng\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -220,11 +224,11 @@
         "frameworks": {
           "netcoreapp3.1": {
             "projectReferences": {
-              "E:\\github\\NetCore\\ADFCommon\\ADF.Business\\ADF.Business.csproj": {
-                "projectPath": "E:\\github\\NetCore\\ADFCommon\\ADF.Business\\ADF.Business.csproj"
+              "e:\\github\\NetCore\\ADFCommon\\ADF.Business\\ADF.Business.csproj": {
+                "projectPath": "e:\\github\\NetCore\\ADFCommon\\ADF.Business\\ADF.Business.csproj"
               },
-              "E:\\github\\NetCore\\ADFCommon\\ADF.Entity\\ADF.Entity.csproj": {
-                "projectPath": "E:\\github\\NetCore\\ADFCommon\\ADF.Entity\\ADF.Entity.csproj"
+              "e:\\github\\NetCore\\ADFCommon\\ADF.Entity\\ADF.Entity.csproj": {
+                "projectPath": "e:\\github\\NetCore\\ADFCommon\\ADF.Entity\\ADF.Entity.csproj"
               }
             }
           }
@@ -280,14 +284,14 @@
         }
       }
     },
-    "E:\\github\\NetCore\\ADFCommon\\ADF.Utility\\ADF.Utility.csproj": {
+    "e:\\github\\NetCore\\ADFCommon\\ADF.Utility\\ADF.Utility.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\github\\NetCore\\ADFCommon\\ADF.Utility\\ADF.Utility.csproj",
+        "projectUniqueName": "e:\\github\\NetCore\\ADFCommon\\ADF.Utility\\ADF.Utility.csproj",
         "projectName": "ADF.Utility",
-        "projectPath": "E:\\github\\NetCore\\ADFCommon\\ADF.Utility\\ADF.Utility.csproj",
+        "projectPath": "e:\\github\\NetCore\\ADFCommon\\ADF.Utility\\ADF.Utility.csproj",
         "packagesPath": "C:\\Users\\wangjicheng\\.nuget\\packages\\",
-        "outputPath": "E:\\github\\NetCore\\ADFCommon\\ADF.Utility\\obj\\",
+        "outputPath": "e:\\github\\NetCore\\ADFCommon\\ADF.Utility\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\wangjicheng\\AppData\\Roaming\\NuGet\\NuGet.Config",

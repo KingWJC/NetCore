@@ -3,7 +3,7 @@ using System.Data;
 using System.Data.Common;
 using System.Data.OracleClient;
 
-namespace ADF.DataAccess.MixFactory
+namespace ADF.DataAccess.ORM
 {
     public class OracleHelper : DbHelper
     {
@@ -43,18 +43,6 @@ namespace ADF.DataAccess.MixFactory
         }
 
         /// <summary>
-        /// 批量插入(事务，自定义列，不触发约束和触发器)
-        /// </summary>
-        /// <param name="destTableName">服务器上目标表的名称</param>
-        /// <param name="copyData">DataTable</param>
-        /// <param name="columns">列的对映关系</param>       
-        /// <param name="timeOut">属性的整数值。默认值为 300 秒。值 0 指示没有限制；批量复制将无限期等待。</param>
-        public override void ExecuteBulkCopy(string destTableName, DataTable copyData, string[][] columns, int timeOut = 5 * 60)
-        {
-            throw new Exception("目前不支持");
-        }
-
-        /// <summary>
         /// 执行分页存储过程
         /// </summary>
         /// <param name="strSQL">表名、视图名、查询语句</param>
@@ -69,34 +57,29 @@ namespace ADF.DataAccess.MixFactory
 
             DataTable dt = new DataTable();
             totalCount = 0;
-            using (OracleConnection connect = Connection as OracleConnection)
-            {
-                OracleParameter[] parameters = new OracleParameter[] {
+            OracleParameter[] parameters = new OracleParameter[] {
                     new OracleParameter("@QueryStr", strSQL),
                     new OracleParameter("@PageSize", pageSize),
                     new OracleParameter("@PageCurrent", pageCurrent),
                     new OracleParameter("@FdShow", fdShow),
                     new OracleParameter("@FdOrder", fdOrder),
                     new OracleParameter("@Rows", OracleType.Int32, 20) };
-                parameters[5].Direction = ParameterDirection.Output;
-                using (OracleCommand sqlCommand = connect.CreateCommand())
+            parameters[5].Direction = ParameterDirection.Output;
+            OracleCommand sqlCommand = Command as OracleCommand;
+            sqlCommand.CommandText = "[dbo].[PagerShow]";
+            sqlCommand.CommandType = CommandType.StoredProcedure;
+            sqlCommand.CommandTimeout = 5 * 60;
+            if (parameters?.Length > 0)
+            {
+                sqlCommand.Parameters.AddRange(parameters);
+            }
+            using (OracleDataAdapter sda = new OracleDataAdapter(sqlCommand))
+            {
+                int result = sda.Fill(dt);
+                object val = sqlCommand.Parameters["@Rows"].Value;
+                if (val != null)
                 {
-                    sqlCommand.CommandText = "[dbo].[PagerShow]";
-                    sqlCommand.CommandType = CommandType.StoredProcedure;
-                    sqlCommand.CommandTimeout = 5 * 60;
-                    if (parameters?.Length > 0)
-                    {
-                        sqlCommand.Parameters.AddRange(parameters);
-                    }
-                    using (OracleDataAdapter sda = new OracleDataAdapter(sqlCommand))
-                    {
-                        int result = sda.Fill(dt);
-                        object val = sqlCommand.Parameters["@Rows"].Value;
-                        if (val != null)
-                        {
-                            totalCount = Convert.ToInt32(val);
-                        }
-                    }
+                    totalCount = Convert.ToInt32(val);
                 }
             }
             return dt;

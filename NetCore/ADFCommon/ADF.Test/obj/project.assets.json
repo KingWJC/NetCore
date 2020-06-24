@@ -1169,6 +1169,7 @@
         "framework": ".NETStandard,Version=v2.0",
         "dependencies": {
           "ADF.Utility": "1.0.0",
+          "System.ComponentModel.Annotations": "4.7.0",
           "System.Data.Common": "4.3.0",
           "System.Data.OracleClient": "1.0.8",
           "System.Data.SqlClient": "4.8.1"
@@ -4415,11 +4416,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\github\\NetCore\\ADFCommon\\adf.test\\ADF.Test.csproj",
+      "projectUniqueName": "e:\\github\\NetCore\\ADFCommon\\ADF.Test\\ADF.Test.csproj",
       "projectName": "ADF.Test",
-      "projectPath": "E:\\github\\NetCore\\ADFCommon\\adf.test\\ADF.Test.csproj",
+      "projectPath": "e:\\github\\NetCore\\ADFCommon\\ADF.Test\\ADF.Test.csproj",
       "packagesPath": "C:\\Users\\wangjicheng\\.nuget\\packages\\",
-      "outputPath": "E:\\github\\NetCore\\ADFCommon\\adf.test\\obj\\",
+      "outputPath": "e:\\github\\NetCore\\ADFCommon\\ADF.Test\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\wangjicheng\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -4435,11 +4436,11 @@
       "frameworks": {
         "netcoreapp3.1": {
           "projectReferences": {
-            "E:\\github\\NetCore\\ADFCommon\\ADF.Business\\ADF.Business.csproj": {
-              "projectPath": "E:\\github\\NetCore\\ADFCommon\\ADF.Business\\ADF.Business.csproj"
+            "e:\\github\\NetCore\\ADFCommon\\ADF.Business\\ADF.Business.csproj": {
+              "projectPath": "e:\\github\\NetCore\\ADFCommon\\ADF.Business\\ADF.Business.csproj"
             },
-            "E:\\github\\NetCore\\ADFCommon\\ADF.Entity\\ADF.Entity.csproj": {
-              "projectPath": "E:\\github\\NetCore\\ADFCommon\\ADF.Entity\\ADF.Entity.csproj"
+            "e:\\github\\NetCore\\ADFCommon\\ADF.Entity\\ADF.Entity.csproj": {
+              "projectPath": "e:\\github\\NetCore\\ADFCommon\\ADF.Entity\\ADF.Entity.csproj"
             }
           }
         }

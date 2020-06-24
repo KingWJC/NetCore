@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "rYdoIzCKEI4LF8uZtM9xxqYfCFX5nVm2aD8kuSSWFl5Dfcto5sloHYQgrM5sJ6UUkLzlIj5ShYjafixBsjHQYA==",
+  "dgSpecHash": "t+7aXnblQp6/NzBn7dUI6IJc3+JFf4qIbaAwbbdFjdIhxZ/5lvnfYiMMV/ExhpqwMSbEZSiufh/NooYEcWWsMQ==",
   "success": true,
-  "projectFilePath": "E:\\github\\NetCore\\ADFCommon\\ADF.Web\\ADF.Web.csproj",
+  "projectFilePath": "e:\\github\\NetCore\\ADFCommon\\ADF.Web\\ADF.Web.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\wangjicheng\\.nuget\\packages\\microsoft.extensions.configuration\\3.1.4\\microsoft.extensions.configuration.3.1.4.nupkg.sha512",
     "C:\\Users\\wangjicheng\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\3.1.4\\microsoft.extensions.configuration.abstractions.3.1.4.nupkg.sha512",

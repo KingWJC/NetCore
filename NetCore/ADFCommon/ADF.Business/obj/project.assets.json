@@ -570,6 +570,7 @@
         "framework": ".NETStandard,Version=v2.0",
         "dependencies": {
           "ADF.Utility": "1.0.0",
+          "System.ComponentModel.Annotations": "4.7.0",
           "System.Data.Common": "4.3.0",
           "System.Data.OracleClient": "1.0.8",
           "System.Data.SqlClient": "4.8.1"
@@ -2535,11 +2536,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\github\\NetCore\\ADFCommon\\ADF.business\\ADF.Business.csproj",
+      "projectUniqueName": "e:\\github\\NetCore\\ADFCommon\\ADF.Business\\ADF.Business.csproj",
       "projectName": "ADF.Business",
-      "projectPath": "E:\\github\\NetCore\\ADFCommon\\ADF.business\\ADF.Business.csproj",
+      "projectPath": "e:\\github\\NetCore\\ADFCommon\\ADF.Business\\ADF.Business.csproj",
       "packagesPath": "C:\\Users\\wangjicheng\\.nuget\\packages\\",
-      "outputPath": "E:\\github\\NetCore\\ADFCommon\\ADF.business\\obj\\",
+      "outputPath": "e:\\github\\NetCore\\ADFCommon\\ADF.Business\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\wangjicheng\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -2555,8 +2556,8 @@
       "frameworks": {
         "netstandard2.0": {
           "projectReferences": {
-            "E:\\github\\NetCore\\ADFCommon\\ADF.DataAccess\\ADF.DataAccess.csproj": {
-              "projectPath": "E:\\github\\NetCore\\ADFCommon\\ADF.DataAccess\\ADF.DataAccess.csproj"
+            "e:\\github\\NetCore\\ADFCommon\\ADF.DataAccess\\ADF.DataAccess.csproj": {
+              "projectPath": "e:\\github\\NetCore\\ADFCommon\\ADF.DataAccess\\ADF.DataAccess.csproj"
             }
           }
         }

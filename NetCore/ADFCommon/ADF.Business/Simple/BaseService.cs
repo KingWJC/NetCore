@@ -235,7 +235,6 @@ namespace ADF.Business.Simple
             {
                 if (item.Name == "CREATE_DATE")
                     continue;
-
                 ////拼装SQL
                 if (item.Name == keyName)
                 {
