@@ -1,0 +1,43 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": ".NET Core Launch (web)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/ADF.Web/bin/Debug/netcoreapp3.1/ADF.Web.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/ADF.Web",
+            "stopAtEntry": false,
+            "serverReadyAction": {
+                "action": "openExternally",
+                "pattern": "^\\s*Now listening on:\\s+(https?://\\S+)"
+            },
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development",
+                //这个环境变量告诉.Net RunTime 忽略已经提前编译的源码.Net框架程序集，用JIT编译器编译的程序集代替。
+                "COMPlus_ZapDisable": "1"
+            },
+            "sourceFileMap": {
+                "/Views": "${workspaceFolder}/Views"
+            }, //关闭 “仅我的代码” 项，这样
+            "justMyCode": false,
+            "symbolOptions": {
+                //从Microsoft Symbol Server(https://msdl.microsoft.com/download/symbols)上查找并下载symbol文件
+                "searchMicrosoftSymbolServer": true
+            },
+            //取消jit编译器的优化（默认是false）
+            "suppressJITOptimizations": true,
+        },
+        {
+            "name": ".NET Core Attach",
+            "type": "coreclr",
+            "request": "attach",
+            "processId": "${command:pickProcess}"
+        }
+    ]
+}
