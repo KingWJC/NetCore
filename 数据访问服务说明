@@ -29,3 +29,9 @@
 
 异常：An open Connection object is required to continue.
 原因：建立连接后，未打开。
+
+nvarchar到varchar编码问题，底层在进行默认NVarchar  造成没法设置varchar
+if (!commParam.DbType.Equals(DbType.AnsiString) || commParam.Value is string)
+   param.DbType = commParam.DbType;
+   
+接口的方法和属性都是公共的,(在 C# 7.3 中，修饰符 "public" 对此项无效).
