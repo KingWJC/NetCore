@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "qAjjnkWRNOBzMMdWDmsD+Es+tN7uTAFW3p+4y5odunxrmMqtipmv16tkC6EESGcgBl782JLHAwILRR4zd1i6gg==",
+  "success": true,
+  "projectFilePath": "E:\\github\\NetCore\\ADFCommon\\02.ADF.Entity\\ADF.Entity.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\wangjicheng\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Users\\wangjicheng\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512",
+    "C:\\Users\\wangjicheng\\.nuget\\packages\\system.componentmodel.annotations\\4.7.0\\system.componentmodel.annotations.4.7.0.nupkg.sha512"
+  ],
+  "logs": []
+}

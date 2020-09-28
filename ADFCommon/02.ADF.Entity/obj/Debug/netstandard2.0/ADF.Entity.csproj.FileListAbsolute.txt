@@ -1,0 +1,17 @@
+E:\github\NetCore\ADFCommon\ADF.Entity\bin\Debug\netstandard2.0\ADF.Entity.deps.json
+E:\github\NetCore\ADFCommon\ADF.Entity\bin\Debug\netstandard2.0\ADF.Entity.dll
+E:\github\NetCore\ADFCommon\ADF.Entity\bin\Debug\netstandard2.0\ADF.Entity.pdb
+E:\github\NetCore\ADFCommon\ADF.Entity\obj\Debug\netstandard2.0\ADF.Entity.AssemblyInfoInputs.cache
+E:\github\NetCore\ADFCommon\ADF.Entity\obj\Debug\netstandard2.0\ADF.Entity.AssemblyInfo.cs
+E:\github\NetCore\ADFCommon\ADF.Entity\obj\Debug\netstandard2.0\ADF.Entity.csproj.CoreCompileInputs.cache
+E:\github\NetCore\ADFCommon\ADF.Entity\obj\Debug\netstandard2.0\ADF.Entity.dll
+E:\github\NetCore\ADFCommon\ADF.Entity\obj\Debug\netstandard2.0\ADF.Entity.pdb
+E:\github\NetCore\ADFCommon\02.ADF.Entity\bin\Debug\netstandard2.0\ADF.Entity.deps.json
+E:\github\NetCore\ADFCommon\02.ADF.Entity\bin\Debug\netstandard2.0\ADF.Entity.dll
+E:\github\NetCore\ADFCommon\02.ADF.Entity\bin\Debug\netstandard2.0\ADF.Entity.pdb
+E:\github\NetCore\ADFCommon\02.ADF.Entity\obj\Debug\netstandard2.0\ADF.Entity.csprojAssemblyReference.cache
+E:\github\NetCore\ADFCommon\02.ADF.Entity\obj\Debug\netstandard2.0\ADF.Entity.AssemblyInfoInputs.cache
+E:\github\NetCore\ADFCommon\02.ADF.Entity\obj\Debug\netstandard2.0\ADF.Entity.AssemblyInfo.cs
+E:\github\NetCore\ADFCommon\02.ADF.Entity\obj\Debug\netstandard2.0\ADF.Entity.csproj.CoreCompileInputs.cache
+E:\github\NetCore\ADFCommon\02.ADF.Entity\obj\Debug\netstandard2.0\ADF.Entity.dll
+E:\github\NetCore\ADFCommon\02.ADF.Entity\obj\Debug\netstandard2.0\ADF.Entity.pdb

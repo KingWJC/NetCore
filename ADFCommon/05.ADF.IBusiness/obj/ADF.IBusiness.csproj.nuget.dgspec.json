@@ -1,0 +1,209 @@
+{
+  "format": 1,
+  "restore": {
+    "E:\\github\\NetCore\\ADFCommon\\05.ADF.IBusiness\\ADF.IBusiness.csproj": {}
+  },
+  "projects": {
+    "E:\\github\\NetCore\\ADFCommon\\01.ADF.Utility\\ADF.Utility.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "E:\\github\\NetCore\\ADFCommon\\01.ADF.Utility\\ADF.Utility.csproj",
+        "projectName": "ADF.Utility",
+        "projectPath": "E:\\github\\NetCore\\ADFCommon\\01.ADF.Utility\\ADF.Utility.csproj",
+        "packagesPath": "C:\\Users\\wangjicheng\\.nuget\\packages\\",
+        "outputPath": "E:\\github\\NetCore\\ADFCommon\\01.ADF.Utility\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\wangjicheng\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.0": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.0": {
+          "dependencies": {
+            "Microsoft.Extensions.Configuration": {
+              "target": "Package",
+              "version": "[3.1.4, )"
+            },
+            "Microsoft.Extensions.Configuration.FileExtensions": {
+              "target": "Package",
+              "version": "[3.1.4, )"
+            },
+            "Microsoft.Extensions.Configuration.Json": {
+              "target": "Package",
+              "version": "[3.1.4, )"
+            },
+            "NETStandard.Library": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.0.3, )",
+              "autoReferenced": true
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.300\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "E:\\github\\NetCore\\ADFCommon\\03.ADF.DataAccess\\ADF.DataAccess.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "E:\\github\\NetCore\\ADFCommon\\03.ADF.DataAccess\\ADF.DataAccess.csproj",
+        "projectName": "ADF.DataAccess",
+        "projectPath": "E:\\github\\NetCore\\ADFCommon\\03.ADF.DataAccess\\ADF.DataAccess.csproj",
+        "packagesPath": "C:\\Users\\wangjicheng\\.nuget\\packages\\",
+        "outputPath": "E:\\github\\NetCore\\ADFCommon\\03.ADF.DataAccess\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\wangjicheng\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.0": {
+            "projectReferences": {
+              "E:\\github\\NetCore\\ADFCommon\\01.ADF.Utility\\ADF.Utility.csproj": {
+                "projectPath": "E:\\github\\NetCore\\ADFCommon\\01.ADF.Utility\\ADF.Utility.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.0": {
+          "dependencies": {
+            "NETStandard.Library": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.0.3, )",
+              "autoReferenced": true
+            },
+            "System.ComponentModel.Annotations": {
+              "target": "Package",
+              "version": "[4.7.0, )"
+            },
+            "System.Data.Common": {
+              "target": "Package",
+              "version": "[4.3.0, )"
+            },
+            "System.Data.OracleClient": {
+              "target": "Package",
+              "version": "[1.0.8, )"
+            },
+            "System.Data.SqlClient": {
+              "target": "Package",
+              "version": "[4.8.1, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.300\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "E:\\github\\NetCore\\ADFCommon\\05.ADF.IBusiness\\ADF.IBusiness.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "E:\\github\\NetCore\\ADFCommon\\05.ADF.IBusiness\\ADF.IBusiness.csproj",
+        "projectName": "ADF.IBusiness",
+        "projectPath": "E:\\github\\NetCore\\ADFCommon\\05.ADF.IBusiness\\ADF.IBusiness.csproj",
+        "packagesPath": "C:\\Users\\wangjicheng\\.nuget\\packages\\",
+        "outputPath": "E:\\github\\NetCore\\ADFCommon\\05.ADF.IBusiness\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\wangjicheng\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.0": {
+            "projectReferences": {
+              "E:\\github\\NetCore\\ADFCommon\\03.ADF.DataAccess\\ADF.DataAccess.csproj": {
+                "projectPath": "E:\\github\\NetCore\\ADFCommon\\03.ADF.DataAccess\\ADF.DataAccess.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.0": {
+          "dependencies": {
+            "NETStandard.Library": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.0.3, )",
+              "autoReferenced": true
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.300\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

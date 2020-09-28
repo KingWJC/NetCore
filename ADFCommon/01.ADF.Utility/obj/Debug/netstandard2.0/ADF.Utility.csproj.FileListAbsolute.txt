@@ -1,0 +1,17 @@
+E:\github\NetCore\ADFCommon\ADF.Utility\bin\Debug\netstandard2.0\ADF.Utility.deps.json
+E:\github\NetCore\ADFCommon\ADF.Utility\bin\Debug\netstandard2.0\ADF.Utility.dll
+E:\github\NetCore\ADFCommon\ADF.Utility\bin\Debug\netstandard2.0\ADF.Utility.pdb
+E:\github\NetCore\ADFCommon\ADF.Utility\obj\Debug\netstandard2.0\ADF.Utility.AssemblyInfoInputs.cache
+E:\github\NetCore\ADFCommon\ADF.Utility\obj\Debug\netstandard2.0\ADF.Utility.AssemblyInfo.cs
+E:\github\NetCore\ADFCommon\ADF.Utility\obj\Debug\netstandard2.0\ADF.Utility.csproj.CoreCompileInputs.cache
+E:\github\NetCore\ADFCommon\ADF.Utility\obj\Debug\netstandard2.0\ADF.Utility.dll
+E:\github\NetCore\ADFCommon\ADF.Utility\obj\Debug\netstandard2.0\ADF.Utility.pdb
+E:\github\NetCore\ADFCommon\01.ADF.Utility\bin\Debug\netstandard2.0\ADF.Utility.deps.json
+E:\github\NetCore\ADFCommon\01.ADF.Utility\bin\Debug\netstandard2.0\ADF.Utility.dll
+E:\github\NetCore\ADFCommon\01.ADF.Utility\bin\Debug\netstandard2.0\ADF.Utility.pdb
+E:\github\NetCore\ADFCommon\01.ADF.Utility\obj\Debug\netstandard2.0\ADF.Utility.csprojAssemblyReference.cache
+E:\github\NetCore\ADFCommon\01.ADF.Utility\obj\Debug\netstandard2.0\ADF.Utility.AssemblyInfoInputs.cache
+E:\github\NetCore\ADFCommon\01.ADF.Utility\obj\Debug\netstandard2.0\ADF.Utility.AssemblyInfo.cs
+E:\github\NetCore\ADFCommon\01.ADF.Utility\obj\Debug\netstandard2.0\ADF.Utility.csproj.CoreCompileInputs.cache
+E:\github\NetCore\ADFCommon\01.ADF.Utility\obj\Debug\netstandard2.0\ADF.Utility.dll
+E:\github\NetCore\ADFCommon\01.ADF.Utility\obj\Debug\netstandard2.0\ADF.Utility.pdb

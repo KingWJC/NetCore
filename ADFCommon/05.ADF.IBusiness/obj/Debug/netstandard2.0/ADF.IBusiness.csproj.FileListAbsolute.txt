@@ -1,0 +1,14 @@
+E:\github\NetCore\ADFCommon\05.ADF.IBusiness\bin\Debug\netstandard2.0\ADF.IBusiness.deps.json
+E:\github\NetCore\ADFCommon\05.ADF.IBusiness\bin\Debug\netstandard2.0\ADF.IBusiness.dll
+E:\github\NetCore\ADFCommon\05.ADF.IBusiness\bin\Debug\netstandard2.0\ADF.IBusiness.pdb
+E:\github\NetCore\ADFCommon\05.ADF.IBusiness\obj\Debug\netstandard2.0\ADF.IBusiness.AssemblyInfoInputs.cache
+E:\github\NetCore\ADFCommon\05.ADF.IBusiness\obj\Debug\netstandard2.0\ADF.IBusiness.AssemblyInfo.cs
+E:\github\NetCore\ADFCommon\05.ADF.IBusiness\obj\Debug\netstandard2.0\ADF.IBusiness.csproj.CoreCompileInputs.cache
+E:\github\NetCore\ADFCommon\05.ADF.IBusiness\obj\Debug\netstandard2.0\ADF.IBusiness.dll
+E:\github\NetCore\ADFCommon\05.ADF.IBusiness\obj\Debug\netstandard2.0\ADF.IBusiness.pdb
+E:\github\NetCore\ADFCommon\05.ADF.IBusiness\obj\Debug\netstandard2.0\ADF.IBusiness.csprojAssemblyReference.cache
+E:\github\NetCore\ADFCommon\05.ADF.IBusiness\bin\Debug\netstandard2.0\ADF.DataAccess.dll
+E:\github\NetCore\ADFCommon\05.ADF.IBusiness\bin\Debug\netstandard2.0\ADF.Utility.dll
+E:\github\NetCore\ADFCommon\05.ADF.IBusiness\bin\Debug\netstandard2.0\ADF.DataAccess.pdb
+E:\github\NetCore\ADFCommon\05.ADF.IBusiness\bin\Debug\netstandard2.0\ADF.Utility.pdb
+E:\github\NetCore\ADFCommon\05.ADF.IBusiness\obj\Debug\netstandard2.0\ADF.IBusiness.csproj.CopyComplete
