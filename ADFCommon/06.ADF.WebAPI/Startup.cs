@@ -28,12 +28,15 @@ namespace ADF.WebAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            
+
             //注册Swagger生成器，定义一个和多个Swagger 文档
             services.AddSwaggerGen(s =>
             {
-                s.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
-                s.SwaggerDoc("v2", new OpenApiInfo { Title = "My API", Version = "v2" });
+                s.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1", Description = "API Description Doc" });
+
+                var xmlFile = $"{System.Reflection.Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = System.IO.Path.Combine(AppContext.BaseDirectory, xmlFile);
+                s.IncludeXmlComments(xmlPath);
             });
         }
 
@@ -51,7 +54,8 @@ namespace ADF.WebAPI
             app.UseSwaggerUI(s =>
             {
                 s.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
-            });            
+                // s.RoutePrefix = string.Empty;
+            });
 
             app.UseHttpsRedirection();
 

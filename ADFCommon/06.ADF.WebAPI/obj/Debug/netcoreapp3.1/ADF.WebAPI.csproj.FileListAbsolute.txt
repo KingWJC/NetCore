@@ -24,3 +24,5 @@ E:\github\NetCore\ADFCommon\06.ADF.WebAPI\bin\Debug\netcoreapp3.1\Swashbuckle.As
 E:\github\NetCore\ADFCommon\06.ADF.WebAPI\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.SwaggerGen.dll
 E:\github\NetCore\ADFCommon\06.ADF.WebAPI\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.SwaggerUI.dll
 E:\github\NetCore\ADFCommon\06.ADF.WebAPI\obj\Debug\netcoreapp3.1\ADF.WebAPI.csproj.CopyComplete
+E:\github\NetCore\ADFCommon\06.ADF.WebAPI\bin\Debug\netcoreapp3.1\ADF.WebAPI.xml
+E:\github\NetCore\ADFCommon\06.ADF.WebAPI\obj\Debug\netcoreapp3.1\ADF.WebAPI.xml

@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ADF.WebAPI</name>
+    </assembly>
+    <members>
+        <member name="M:ADF.WebAPI.Controllers.WeatherForecastController.Get(System.String)">
+            <summary>
+            Deletes a specific TodoItem.
+            </summary>
+            <param name="id"></param>  
+        </member>
+    </members>
+</doc>
