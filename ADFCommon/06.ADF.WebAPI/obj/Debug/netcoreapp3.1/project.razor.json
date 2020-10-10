@@ -1,5 +1,5 @@
 {
-  "FilePath": "e:\\github\\NetCore\\ADFCommon\\07.ADF.Web\\ADF.Web.csproj",
+  "FilePath": "e:\\github\\NetCore\\ADFCommon\\06.ADF.WebAPI\\ADF.WebAPI.csproj",
   "Configuration": {
     "ConfigurationName": "MVC-3.0",
     "LanguageVersion": "3.0",
@@ -14389,7 +14389,7 @@
     ],
     "CSharpLanguageVersion": 900
   },
-  "RootNamespace": "ADF.Web",
+  "RootNamespace": "ADF.WebAPI",
   "Documents": [],
   "SerializationFormat": "0.2"
 }
