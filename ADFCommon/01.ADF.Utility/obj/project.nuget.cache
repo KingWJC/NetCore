@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "krrS9oyvJybPJDNOlFWSSWeUm+/SCtn081zuyOeK44XIiwAGLzApW477QcRN39GUvsRhrxeT5ACN/ou62PFIKw==",
+  "dgSpecHash": "5RaozVdVnC5EVzrWjIJyYMUcPZEuDaRGwYtl3aYkkMwt7JFmH7XHpiVH+XO9lB8a77gliUYRL8WN9msTwZtI2A==",
   "success": true,
   "projectFilePath": "E:\\github\\NetCore\\ADFCommon\\01.ADF.Utility\\ADF.Utility.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\wangjicheng\\.nuget\\packages\\aspose.cells\\20.9.0\\aspose.cells.20.9.0.nupkg.sha512",
     "C:\\Users\\wangjicheng\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.0\\microsoft.bcl.asyncinterfaces.1.1.0.nupkg.sha512",
     "C:\\Users\\wangjicheng\\.nuget\\packages\\microsoft.extensions.configuration\\3.1.4\\microsoft.extensions.configuration.3.1.4.nupkg.sha512",
     "C:\\Users\\wangjicheng\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\3.1.4\\microsoft.extensions.configuration.abstractions.3.1.4.nupkg.sha512",
@@ -16,9 +17,11 @@
     "C:\\Users\\wangjicheng\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
     "C:\\Users\\wangjicheng\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512",
     "C:\\Users\\wangjicheng\\.nuget\\packages\\system.buffers\\4.5.1\\system.buffers.4.5.1.nupkg.sha512",
+    "C:\\Users\\wangjicheng\\.nuget\\packages\\system.drawing.common\\4.7.0\\system.drawing.common.4.7.0.nupkg.sha512",
     "C:\\Users\\wangjicheng\\.nuget\\packages\\system.memory\\4.5.4\\system.memory.4.5.4.nupkg.sha512",
     "C:\\Users\\wangjicheng\\.nuget\\packages\\system.numerics.vectors\\4.5.0\\system.numerics.vectors.4.5.0.nupkg.sha512",
     "C:\\Users\\wangjicheng\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\4.7.1\\system.runtime.compilerservices.unsafe.4.7.1.nupkg.sha512",
+    "C:\\Users\\wangjicheng\\.nuget\\packages\\system.text.encoding.codepages\\4.7.0\\system.text.encoding.codepages.4.7.0.nupkg.sha512",
     "C:\\Users\\wangjicheng\\.nuget\\packages\\system.text.encodings.web\\4.7.1\\system.text.encodings.web.4.7.1.nupkg.sha512",
     "C:\\Users\\wangjicheng\\.nuget\\packages\\system.text.json\\4.7.2\\system.text.json.4.7.2.nupkg.sha512",
     "C:\\Users\\wangjicheng\\.nuget\\packages\\system.threading.tasks.extensions\\4.5.4\\system.threading.tasks.extensions.4.5.4.nupkg.sha512"

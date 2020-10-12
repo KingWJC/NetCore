@@ -1,0 +1,15 @@
+﻿@page
+@model ADF.Web.Pages.ExcelXmlTransform.IndexModel
+
+@{
+    ViewData["Title"]="Index";
+}
+
+<h1>病情观察的导入和导出</h1>
+<hr/>
+<a asp-action="Export">导出Excel</a>
+<hr/>
+<form enctype="multipart/form-data" method="post" asp-action="Import">
+    <input type="file" name="excelfile"/>
+    <input type="submit" value="导入Excel"/>
+</form>

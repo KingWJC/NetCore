@@ -1,4 +1,4 @@
-namespace 07. ADF.Web.Models {
+namespace ADF.WebAPI.Models {
     public class Profession {
         public int PROFESSION_ID { get; set; }
         public string PROFESSION_NAME { get; set; }

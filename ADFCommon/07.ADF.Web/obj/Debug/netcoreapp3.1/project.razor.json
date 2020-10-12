@@ -14390,6 +14390,32 @@
     "CSharpLanguageVersion": 900
   },
   "RootNamespace": "ADF.Web",
-  "Documents": [],
+  "Documents": [
+    {
+      "FilePath": "e:\\github\\NetCore\\ADFCommon\\07.ADF.Web\\Pages\\_ViewStart.cshtml",
+      "TargetPath": "Pages\\_ViewStart.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "e:\\github\\NetCore\\ADFCommon\\07.ADF.Web\\Pages\\_ViewImports.cshtml",
+      "TargetPath": "Pages\\_ViewImports.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "e:\\github\\NetCore\\ADFCommon\\07.ADF.Web\\Pages\\ExcelXmlTransform\\Index.cshtml",
+      "TargetPath": "Pages\\ExcelXmlTransform\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "e:\\github\\NetCore\\ADFCommon\\07.ADF.Web\\Pages\\Index.cshtml",
+      "TargetPath": "Pages\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "e:\\github\\NetCore\\ADFCommon\\07.ADF.Web\\Pages\\Shared\\_Layout.cshtml",
+      "TargetPath": "Pages\\Shared\\_Layout.cshtml",
+      "FileKind": "mvc"
+    }
+  ],
   "SerializationFormat": "0.2"
 }

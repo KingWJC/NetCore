@@ -65,3 +65,17 @@ E:\github\NetCore\ADFCommon\07.ADF.Web\obj\Debug\netcoreapp3.1\ADF.Web.csproj.Co
 E:\github\NetCore\ADFCommon\07.ADF.Web\obj\Debug\netcoreapp3.1\staticwebassets\ADF.Web.StaticWebAssets.Manifest.cache
 E:\github\NetCore\ADFCommon\07.ADF.Web\obj\Debug\netcoreapp3.1\staticwebassets\ADF.Web.StaticWebAssets.xml
 E:\github\NetCore\ADFCommon\07.ADF.Web\obj\Debug\netcoreapp3.1\ADF.Web.genruntimeconfig.cache
+E:\github\NetCore\ADFCommon\07.ADF.Web\obj\Debug\netcoreapp3.1\ADF.Web.RazorAssemblyInfo.cache
+E:\github\NetCore\ADFCommon\07.ADF.Web\obj\Debug\netcoreapp3.1\ADF.Web.RazorAssemblyInfo.cs
+E:\github\NetCore\ADFCommon\07.ADF.Web\obj\Debug\netcoreapp3.1\ADF.Web.TagHelpers.input.cache
+E:\github\NetCore\ADFCommon\07.ADF.Web\obj\Debug\netcoreapp3.1\ADF.Web.TagHelpers.output.cache
+E:\github\NetCore\ADFCommon\07.ADF.Web\obj\Debug\netcoreapp3.1\ADF.Web.RazorCoreGenerate.cache
+E:\github\NetCore\ADFCommon\07.ADF.Web\obj\Debug\netcoreapp3.1\ADF.Web.RazorTargetAssemblyInfo.cs
+E:\github\NetCore\ADFCommon\07.ADF.Web\bin\Debug\netcoreapp3.1\ADF.Web.Views.dll
+E:\github\NetCore\ADFCommon\07.ADF.Web\bin\Debug\netcoreapp3.1\ADF.Web.Views.pdb
+E:\github\NetCore\ADFCommon\07.ADF.Web\obj\Debug\netcoreapp3.1\ADF.Web.Views.pdb
+E:\github\NetCore\ADFCommon\07.ADF.Web\obj\Debug\netcoreapp3.1\Razor\Pages\ExcelXmlTransform\Index.cshtml.g.cs
+E:\github\NetCore\ADFCommon\07.ADF.Web\obj\Debug\netcoreapp3.1\Razor\Pages\_ViewImports.cshtml.g.cs
+E:\github\NetCore\ADFCommon\07.ADF.Web\obj\Debug\netcoreapp3.1\Razor\Pages\_ViewStart.cshtml.g.cs
+E:\github\NetCore\ADFCommon\07.ADF.Web\obj\Debug\netcoreapp3.1\Razor\Pages\Shared\_Layout.cshtml.g.cs
+E:\github\NetCore\ADFCommon\07.ADF.Web\obj\Debug\netcoreapp3.1\Razor\Pages\Index.cshtml.g.cs
