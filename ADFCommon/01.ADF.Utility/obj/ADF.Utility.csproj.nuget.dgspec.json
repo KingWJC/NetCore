@@ -40,7 +40,7 @@
           "dependencies": {
             "Aspose.Cells": {
               "target": "Package",
-              "version": "[*, )"
+              "version": "[20.9.0, )"
             },
             "Microsoft.Extensions.Configuration": {
               "target": "Package",
@@ -59,6 +59,10 @@
               "target": "Package",
               "version": "[2.0.3, )",
               "autoReferenced": true
+            },
+            "NodaTime": {
+              "target": "Package",
+              "version": "[3.0.1, )"
             }
           },
           "imports": [

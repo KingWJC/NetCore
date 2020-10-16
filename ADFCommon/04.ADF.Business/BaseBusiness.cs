@@ -11,9 +11,9 @@ using ADF.DataAccess.ORM;
 
 namespace ADF.Business
 {
-    public class BaseBusiness<T> : IBaseBusiness<T> where T : class, new()
+    public abstract class BaseBusiness<T> where T : class, new()
     {
-        private DbContext Service;
+        public DbContext Service { get; set; }
 
         public BaseBusiness()
         {

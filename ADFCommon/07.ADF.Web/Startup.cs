@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using ADF.Entity;
 
 namespace ADF.Web
 {
@@ -32,7 +31,7 @@ namespace ADF.Web
             app.UseStaticFiles();
 
             app.UseRouting();
-            app.UseAuthorization();
+            // app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

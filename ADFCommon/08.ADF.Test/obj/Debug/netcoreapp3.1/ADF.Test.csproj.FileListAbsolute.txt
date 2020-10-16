@@ -236,3 +236,11 @@ E:\github\NetCore\ADFCommon\08.ADF.Test\bin\Debug\netcoreapp3.1\ADF.DataAccess.p
 E:\github\NetCore\ADFCommon\08.ADF.Test\bin\Debug\netcoreapp3.1\ADF.Utility.pdb
 E:\github\NetCore\ADFCommon\08.ADF.Test\obj\Debug\netcoreapp3.1\ADF.Test.csproj.CopyComplete
 E:\github\NetCore\ADFCommon\08.ADF.Test\obj\Debug\netcoreapp3.1\ADF.Test.genruntimeconfig.cache
+E:\github\NetCore\ADFCommon\08.ADF.Test\bin\Debug\netcoreapp3.1\Aspose.Cells.dll
+E:\github\NetCore\ADFCommon\08.ADF.Test\bin\Debug\netcoreapp3.1\Microsoft.Win32.SystemEvents.dll
+E:\github\NetCore\ADFCommon\08.ADF.Test\bin\Debug\netcoreapp3.1\NodaTime.dll
+E:\github\NetCore\ADFCommon\08.ADF.Test\bin\Debug\netcoreapp3.1\System.Drawing.Common.dll
+E:\github\NetCore\ADFCommon\08.ADF.Test\bin\Debug\netcoreapp3.1\System.Runtime.CompilerServices.Unsafe.dll
+E:\github\NetCore\ADFCommon\08.ADF.Test\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp3.0\Microsoft.Win32.SystemEvents.dll
+E:\github\NetCore\ADFCommon\08.ADF.Test\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp3.0\System.Drawing.Common.dll
+E:\github\NetCore\ADFCommon\08.ADF.Test\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll

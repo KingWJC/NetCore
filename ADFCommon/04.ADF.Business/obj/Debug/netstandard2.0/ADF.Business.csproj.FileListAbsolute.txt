@@ -28,3 +28,5 @@ E:\github\NetCore\ADFCommon\04.ADF.Business\bin\Debug\netstandard2.0\ADF.Utility
 E:\github\NetCore\ADFCommon\04.ADF.Business\obj\Debug\netstandard2.0\ADF.Business.csproj.CopyComplete
 E:\github\NetCore\ADFCommon\04.ADF.Business\bin\Debug\netstandard2.0\ADF.IBusiness.dll
 E:\github\NetCore\ADFCommon\04.ADF.Business\bin\Debug\netstandard2.0\ADF.IBusiness.pdb
+E:\github\NetCore\ADFCommon\04.ADF.Business\bin\Debug\netstandard2.0\ADF.Entity.dll
+E:\github\NetCore\ADFCommon\04.ADF.Business\bin\Debug\netstandard2.0\ADF.Entity.pdb

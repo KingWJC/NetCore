@@ -1,16 +1,14 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
-  <ItemGroup>
-    <ProjectReference Include="..\03.ADF.DataAccess\ADF.DataAccess.csproj" />
-    <ProjectReference Include="..\05.ADF.IBusiness\ADF.IBusiness.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="System.ComponentModel.Annotations" Version="4.7.0" />
-  </ItemGroup>
-
-  <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-  </PropertyGroup>
-
+	<ItemGroup>
+		<ProjectReference Include="..\01.ADF.Utility\ADF.Utility.csproj" />
+		<ProjectReference Include="..\02.ADF.Entity\ADF.Entity.csproj" />
+		<ProjectReference Include="..\03.ADF.DataAccess\ADF.DataAccess.csproj" />
+		<ProjectReference Include="..\05.ADF.IBusiness\ADF.IBusiness.csproj" />
+	</ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="System.ComponentModel.Annotations" Version="4.7.0" />
+	</ItemGroup>
+	<PropertyGroup>
+		<TargetFramework>netstandard2.0</TargetFramework>
+	</PropertyGroup>
 </Project>

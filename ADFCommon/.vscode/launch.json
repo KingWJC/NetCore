@@ -9,9 +9,9 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "${workspaceFolder}/ADF.Web/bin/Debug/netcoreapp3.1/ADF.Web.dll",
+            "program": "${workspaceFolder}/07.ADF.Web/bin/Debug/netcoreapp3.1/ADF.Web.dll",
             "args": [],
-            "cwd": "${workspaceFolder}/ADF.Web",
+            "cwd": "${workspaceFolder}/07.ADF.Web",
             "stopAtEntry": false,
             "serverReadyAction": {
                 "action": "openExternally",

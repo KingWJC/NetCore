@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "5RaozVdVnC5EVzrWjIJyYMUcPZEuDaRGwYtl3aYkkMwt7JFmH7XHpiVH+XO9lB8a77gliUYRL8WN9msTwZtI2A==",
+  "dgSpecHash": "+uzFi5+F5CbyyFMgyjn8pktUGrSdZneftxQyFUmzLguJRbWI8St8rwB1ma8QeXvIOg4CmVY/i6BhnW+PFltGCw==",
   "success": true,
   "projectFilePath": "E:\\github\\NetCore\\ADFCommon\\01.ADF.Utility\\ADF.Utility.csproj",
   "expectedPackageFiles": [
@@ -16,6 +16,7 @@
     "C:\\Users\\wangjicheng\\.nuget\\packages\\microsoft.extensions.primitives\\3.1.4\\microsoft.extensions.primitives.3.1.4.nupkg.sha512",
     "C:\\Users\\wangjicheng\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
     "C:\\Users\\wangjicheng\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512",
+    "C:\\Users\\wangjicheng\\.nuget\\packages\\nodatime\\3.0.1\\nodatime.3.0.1.nupkg.sha512",
     "C:\\Users\\wangjicheng\\.nuget\\packages\\system.buffers\\4.5.1\\system.buffers.4.5.1.nupkg.sha512",
     "C:\\Users\\wangjicheng\\.nuget\\packages\\system.drawing.common\\4.7.0\\system.drawing.common.4.7.0.nupkg.sha512",
     "C:\\Users\\wangjicheng\\.nuget\\packages\\system.memory\\4.5.4\\system.memory.4.5.4.nupkg.sha512",

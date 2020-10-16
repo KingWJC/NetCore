@@ -9,7 +9,7 @@
 <hr/>
 <a asp-action="Export">导出Excel</a>
 <hr/>
-<form enctype="multipart/form-data" method="post" asp-action="Import">
+<form enctype="multipart/form-data" method="post" asp-page-handler="Import">
     <input type="file" name="excelfile"/>
     <input type="submit" value="导入Excel"/>
 </form>
