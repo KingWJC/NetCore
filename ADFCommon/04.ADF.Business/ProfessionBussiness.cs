@@ -23,7 +23,7 @@ namespace ADF.Business
             {
                 //导入病情观察的类别
                 var dictList = dataSet.Tables[0].ToList<DictType>();
-                Service.Update<DictType>(dictList);
+                // Service.Insert<DictType>(dictList);
 
                 var proList = dataSet.Tables[1].ToList<Profession>();
                 var proOptions = dataSet.Tables[2].ToList<ProfessionOption>();
@@ -33,10 +33,10 @@ namespace ADF.Business
                 var nursingTemplate = new List<ProXmlNode>();
 
                 //更新病情观察的每个数据项的配置
-                ConfigInfo config = Service.GetEntity<ConfigInfo>("");
-                using (Stream xmlStream = new MemoryStream(config.Data))
+                ConfigInfo config = Service.GetEntity<ConfigInfo>("5");
+                using (Stream xmlStream = new MemoryStream(config.CONFIG_CONTEXT))
                 {
-                    XmlHelper xmlDoc = new XmlHelper(xmlStream);
+                    XmlHelper xmlDoc = new XmlHelper(null);
                     if (xmlDoc.IsEmpty)
                     {
                         xmlDoc.AppendDeclaration();
@@ -69,14 +69,14 @@ namespace ADF.Business
                         new SelectOption { name = "Source", value = "Local" },
                         new SelectOption { name = "Target", value = "["+option.OPTION_NAME+"]" },
                         new SelectOption { name = "Value", value = "" }};
-                            xmlDoc.AppendNode($"NursingRecord[Code='{option.PROFESSION_ID.ToString()}']", "RecordProp", "", itemOptions);
+                            xmlDoc.AppendNode($"NursingRecords/NursingRecord[@Code='{option.PROFESSION_ID.ToString()}']", "RecordProp", "", itemOptions);
 
                             if (!option.OPTION_VALUE.IsNullOrEmpty())
                             {
                                 string[] splitList = option.OPTION_VALUE.Split(new char[] { '/' });
                                 splitList.ForEach(p1 =>
                                 {
-                                    xmlDoc.AppendNode($@"NursingRecord[Code='{option.PROFESSION_ID.ToString()}']\RecordProp[Code='{option.OPTION_NAME}']", "Item", p1);
+                                    xmlDoc.AppendNode($"NursingRecords/NursingRecord[@Code='{option.PROFESSION_ID.ToString()}']/RecordProp[@Code='{option.OPTION_NAME}']", "Item", p1);
                                 });
                             }
                         });
@@ -84,9 +84,10 @@ namespace ADF.Business
                         p.PROFESSION_CONTEXT = string.Empty;
                     });
 
+                    FileHelper.WriteTxt(xmlDoc.Document.OuterXml, @"E:\data.xml");
+
                     //导入病情观察的数据项
                     Update(proList);
-
                 }
 
 

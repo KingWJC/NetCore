@@ -9,6 +9,9 @@ namespace ADF.Entity
     {
         [Key, Column(Order = 1)]
         public Int32 ID { get; set; }
-        public Byte[] Data { get; set; }
+        public string CONFIG_NAME { get; set; }
+        public string CONFIG_DESC { get; set; }
+        public int STATE { get; set; }
+        public Byte[] CONFIG_CONTEXT { get; set; }
     }
 }

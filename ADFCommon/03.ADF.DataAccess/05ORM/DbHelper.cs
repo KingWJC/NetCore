@@ -94,8 +94,15 @@ namespace ADF.DataAccess.ORM
          */
         public int ExecuteNonQuery(string strSQL, List<CusDbParameter> parameters = null, CommandType commandType = CommandType.Text)
         {
-            SetCommand(strSQL, parameters, commandType);
-            return Command.ExecuteNonQuery();
+            try
+            {
+                SetCommand(strSQL, parameters, commandType);
+                return Command.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("InsertData", ex);
+            }
         }
 
         /// <summary>
@@ -176,25 +183,10 @@ namespace ADF.DataAccess.ORM
                 return dataSet.Tables[0];
         }
 
-        public DataRow ExecuteDataRow(string strSQL, List<CusDbParameter> parameters = null, CommandType commandType = CommandType.Text)
-        {
-            SetCommand(strSQL, parameters, commandType);
-            DbDataReader reader = Command.ExecuteReader();
-            if (reader.HasRows && reader.Read())
-            {
-                DataTable dataTable = new DataTable();
-                object[] values = new object[reader.FieldCount];
-                int fieldCount = reader.GetValues(values);
-                dataTable.LoadDataRow(values, false);
-                return dataTable.Rows[0];
-            }
-            return null;
-        }
-
         /*
          * @description: 获取数据表-并行-In条件
          * @param {type} 
-         * @return: 
+         * @return: s
          */
         public DataTable ExecuteDataTableParallel<T>(string strSQL, List<T> wheres)
         {

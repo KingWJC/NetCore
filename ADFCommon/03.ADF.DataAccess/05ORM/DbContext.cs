@@ -6,6 +6,7 @@ using System.Data.Common;
 using System.Reflection;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using ADF.Utility;
 
 namespace ADF.DataAccess.ORM
@@ -65,17 +66,20 @@ namespace ADF.DataAccess.ORM
             {
                 return (null, null);
             }
+
+            Type type = typeof(T);
             //拼装Insert语句
             StringBuilder sqlColumns = new StringBuilder(), sqlVallues = new StringBuilder();
             List<CusDbParameter> parameters = new List<CusDbParameter>();
-            var properties = typeof(T).GetProperties();
+            var properties = type.GetProperties();
             foreach (PropertyInfo item in properties)
             {
                 if (item.Name == "CREATE_DATE")
                     continue;
 
                 CusDbParameter cusDbParameter = null;
-                if (item.Name == keyName)
+                object obj = item.GetValue(t, null);
+                if (item.Name == keyName && obj.IsNullOrEmpty())
                 {
                     string id = GetNextId("SEQ_STATUS");
                     item.SetValue(t, id, null);
@@ -83,8 +87,7 @@ namespace ADF.DataAccess.ORM
                 }
                 else
                 {
-                    object obj = item.GetValue(t, null);
-                    cusDbParameter = new CusDbParameter($"@{item.Name}", obj ?? DBNull.Value);
+                    cusDbParameter = new CusDbParameter($"@{item.Name}", obj ?? DBNull.Value, GetParameterType(item.PropertyType.FullName));
                 }
 
                 parameters.Add(cusDbParameter);
@@ -92,10 +95,37 @@ namespace ADF.DataAccess.ORM
                 sqlVallues.Append($"@{item.Name},");
             }
 
-            string insertSQL = string.Format("INSERT INTO {0}({1}) VALUES({2})", typeof(T).Name, sqlColumns.ToString().TrimEnd(','), sqlVallues.ToString().TrimEnd(','));
+            string insertSQL = string.Format("INSERT INTO {0}({1}) VALUES({2})", GetTableName(type), sqlColumns.ToString().TrimEnd(','), sqlVallues.ToString().TrimEnd(','));
 
             return (insertSQL, parameters);
         }
+
+        private string GetTableName(Type type)
+        {
+            string tableName = string.Empty;
+            var tableAttribute = type.GetCustomAttribute<TableAttribute>();
+            if (tableAttribute != null)
+                tableName = tableAttribute.Name;
+            else
+                tableName = type.Name;
+            return tableName;
+        }
+
+        private DbType GetParameterType(string typeName)
+        {
+            switch (typeName)
+            {
+                case "System.String":
+                    return DbType.String;
+                case "Stytem.Int64":
+                    return DbType.Int64;
+                case "Stytem.Int32":
+                    return DbType.Int32;
+                default:
+                    return DbType.String;
+            }
+        }
+
 
         /// <summary>
         /// 获取更新SQL
@@ -104,7 +134,7 @@ namespace ADF.DataAccess.ORM
         /// <returns></returns>
         protected (string, List<CusDbParameter>) GenerateUpdateSQL<T>(T t, string keyName, Func<PropertyInfo, bool> where = null)
         {
-            StringBuilder updateSql = new StringBuilder($"Update {t.GetType().Name} SET ");
+            StringBuilder updateSql = new StringBuilder($"Update {GetTableName(t.GetType())} SET ");
             List<CusDbParameter> parameters = new List<CusDbParameter>();
             var properties = typeof(T).GetProperties();
             foreach (PropertyInfo subItem in properties)
@@ -133,10 +163,10 @@ namespace ADF.DataAccess.ORM
             string sql = string.Empty;
             if (property != null)
             {
-                sql = $"DELETE FROM {type.Name} WHERE {property.Name} IN {keys.TryToWhere()}";
+                sql = $"DELETE FROM {GetTableName(type)} WHERE {property.Name} IN {keys.TryToWhere()}";
                 if (isLogic)
                 {
-                    sql = $"UPDATE {type.Name} SET DeleteFlag= 1 WHERE {property.Name} IN {keys.TryToWhere()}";
+                    sql = $"UPDATE {GetTableName(type)} SET DeleteFlag= 1 WHERE {property.Name} IN {keys.TryToWhere()}";
                 }
             }
             return sql;
@@ -382,9 +412,9 @@ namespace ADF.DataAccess.ORM
         {
             Type type = typeof(T);
             string keyName = GetKeyProperty(type)?.Name;
-            string columnNameStr = string.Join(",", type.GetProperties().Select(p => $"[{p.Name}]"));
-            string selectSQL = $"Select {columnNameStr} From {type.Name} Where {keyName} IN {keyValue.TryToWhere()}";
-            List<T> list = Db.ExecuteDataRow(selectSQL).Table.ToList<T>();
+            string columnNameStr = string.Join(",", type.GetProperties().Select(p => $"{p.Name}"));
+            string selectSQL = $"Select {columnNameStr} From {GetTableName(type)} Where {keyName} IN {keyValue.TryToWhere()}";
+            List<T> list = Db.ExecuteDataTable(selectSQL).ToList<T>();
             if (list.Count > 0)
                 return list[0];
             else
@@ -399,8 +429,8 @@ namespace ADF.DataAccess.ORM
         public List<T> GetList<T>()
         {
             Type type = typeof(T);
-            string columnNameStr = string.Join(",", type.GetProperties().Select(p => $"[{p.Name}]"));
-            string selectSQL = $"Select {columnNameStr} From {type.Name}";
+            string columnNameStr = string.Join(",", type.GetProperties().Select(p => $"{p.Name}"));
+            string selectSQL = $"Select {columnNameStr} From {GetTableName(type)}";
             DataTable dataTable = Db.ExecuteDataTable(selectSQL);
             return dataTable.ToList<T>();
         }

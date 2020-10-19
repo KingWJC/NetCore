@@ -9,6 +9,8 @@ namespace ADF.Utility
         private XmlDocument doc;
         private XmlElement root;
 
+        public XmlDocument Document => doc;
+
         public bool IsEmpty => doc.HasChildNodes || root == null;
 
         public XmlHelper(Stream stream)
@@ -41,17 +43,20 @@ namespace ADF.Utility
 
         public XmlElement AppendRootNode(string nodeName)
         {
-            XmlElement element = doc.CreateElement(nodeName);
-            doc.AppendChild(element);
-            return element;
+            root = doc.CreateElement(nodeName);
+            doc.AppendChild(root);
+            return root;
         }
 
         public void AppendNode(string xPath, string nodeName, string text = "", List<SelectOption> properties = null)
         {
-            XmlNode currentNode = root.SelectSingleNode(xPath);
+            XmlNode currentNode = root.Name == xPath ? root : root.SelectSingleNode(xPath);
             XmlElement element = doc.CreateElement(nodeName);
             element.InnerText = text;
-            properties.ForEach(p => element.SetAttribute(p.name, p.value));
+            if (properties != null)
+            {
+                properties.ForEach(p => element.SetAttribute(p.name, p.value));
+            }
             currentNode.AppendChild(element);
         }
     }
