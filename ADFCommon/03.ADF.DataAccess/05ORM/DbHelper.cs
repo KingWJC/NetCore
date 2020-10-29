@@ -13,6 +13,7 @@ namespace ADF.DataAccess.ORM
         private string connectionStr;
         private DbConnection connection;
         private DbCommand command;
+        public abstract string ParaPrefix { get; }
 
         protected bool Disposed { get; set; }
 
@@ -77,14 +78,12 @@ namespace ADF.DataAccess.ORM
             Command.Parameters.Clear();
             if (parameters?.Count > 0)
             {
-                foreach (var item in parameters)
-                {
-                    Command.Parameters.Add(CreateDbParameter(item));
-                }
+                IDataParameter[] ipars = ToIDbDataParameter(parameters.ToArray());
+                command.Parameters.AddRange(ipars);
             }
         }
 
-        public abstract DbParameter CreateDbParameter(CusDbParameter parameter);
+        public abstract IDataParameter[] ToIDbDataParameter(CusDbParameter[] parameter);
 
         #region 数据更新
         /*

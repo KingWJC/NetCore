@@ -13,6 +13,7 @@ namespace ADF.DataAccess.ORM
         public object Value
         {
             get { return _value; }
+            set { _value = Value; }
         }
         private DbType _dbType;
         public DbType DbType
@@ -23,6 +24,12 @@ namespace ADF.DataAccess.ORM
         public int Size
         {
             get { return _size; }
+        }
+        private ParameterDirection _direction;
+        public ParameterDirection Direction
+        {
+            get { return _direction; }
+            set { _direction = value; }
         }
         public CusDbParameter(string parameterName, object value)
         {

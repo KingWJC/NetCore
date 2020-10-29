@@ -2,33 +2,70 @@ using System;
 using System.Data;
 using System.Data.Common;
 using System.Data.OracleClient;
+using ADF.Utility;
 
 namespace ADF.DataAccess.ORM
 {
     public class OracleHelper : DbHelper
     {
+        public override string ParaPrefix => ":";
+
         public OracleHelper(string connectionStr)
         : base(DatabaseType.Oracle, connectionStr)
         {
 
         }
 
-        public override DbParameter CreateDbParameter(CusDbParameter commParam)
+        public override IDataParameter[] ToIDbDataParameter(CusDbParameter[] parameters)
         {
-            OracleParameter param = new OracleParameter();
-            string paramName = commParam.ParameterName;
-            if (commParam.ParameterName.Contains("@"))
+            if (parameters == null || parameters.Length == 0) return null;
+            OracleParameter[] result = new OracleParameter[parameters.Length];
+            int index = 0;
+            foreach (var parameter in parameters)
             {
-                paramName = commParam.ParameterName.Replace("@", ":");
+                if (parameter.Value == null) parameter.Value = DBNull.Value;
+                var sqlParameter = new OracleParameter();
+                sqlParameter.Size = parameter.Size == -1 ? 0 : parameter.Size;
+                sqlParameter.ParameterName = parameter.ParameterName;
+                if (sqlParameter.ParameterName[0] == '@')
+                {
+                    sqlParameter.ParameterName = ':' + sqlParameter.ParameterName.Substring(1, sqlParameter.ParameterName.Length - 1);
+                }
+                if (this.Command.CommandType == CommandType.StoredProcedure)
+                {
+                    sqlParameter.ParameterName = sqlParameter.ParameterName.TrimStart(':');
+                }
+                if (sqlParameter.DbType == System.Data.DbType.Guid)
+                {
+                    sqlParameter.DbType = System.Data.DbType.String;
+                    sqlParameter.Value = sqlParameter.Value.ToStringOrEmpty();
+                }
+                else if (parameter.DbType == System.Data.DbType.Boolean)
+                {
+                    sqlParameter.DbType = System.Data.DbType.Int16;
+                    if (parameter.Value == DBNull.Value)
+                    {
+                        parameter.Value = 0;
+                    }
+                    else
+                    {
+                        sqlParameter.Value = (bool)parameter.Value ? 1 : 0;
+                    }
+                }
+                else
+                {
+                    if (parameter.Value != null && parameter.Value.GetType() == Constants.GuidType)
+                    {
+                        parameter.Value = parameter.Value.ToString();
+                    }
+                    sqlParameter.Value = parameter.Value;
+                }
+                if (parameter.Direction != 0)
+                    sqlParameter.Direction = parameter.Direction;
+                result[index] = sqlParameter;
+                ++index;
             }
-            param.ParameterName = paramName;
-            param.Value = commParam.Value;
-            if (!commParam.DbType.Equals(DbType.AnsiString))
-                param.DbType = commParam.DbType;
-            if (commParam.Size > 0)
-                param.Size = commParam.Size;
-
-            return param;
+            return result;
         }
 
         /// <summary>

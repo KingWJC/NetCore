@@ -2200,8 +2200,8 @@
     },
     "ADF.Business/1.0.0": {
       "type": "project",
-      "path": "../04.ADF.Business/ADF.Business.csproj",
-      "msbuildProject": "../04.ADF.Business/ADF.Business.csproj"
+      "path": "../04.Adf.Business/ADF.Business.csproj",
+      "msbuildProject": "../04.Adf.Business/ADF.Business.csproj"
     },
     "ADF.DataAccess/1.0.0": {
       "type": "project",
@@ -2215,8 +2215,8 @@
     },
     "ADF.IBusiness/1.0.0": {
       "type": "project",
-      "path": "../05.ADF.IBusiness/ADF.IBusiness.csproj",
-      "msbuildProject": "../05.ADF.IBusiness/ADF.IBusiness.csproj"
+      "path": "../05.Adf.IBusiness/ADF.IBusiness.csproj",
+      "msbuildProject": "../05.Adf.IBusiness/ADF.IBusiness.csproj"
     },
     "ADF.Utility/1.0.0": {
       "type": "project",
@@ -2256,11 +2256,11 @@
       "frameworks": {
         "netcoreapp3.1": {
           "projectReferences": {
-            "E:\\github\\NetCore\\ADFCommon\\04.ADF.Business\\ADF.Business.csproj": {
-              "projectPath": "E:\\github\\NetCore\\ADFCommon\\04.ADF.Business\\ADF.Business.csproj"
+            "E:\\github\\NetCore\\ADFCommon\\04.Adf.Business\\ADF.Business.csproj": {
+              "projectPath": "E:\\github\\NetCore\\ADFCommon\\04.Adf.Business\\ADF.Business.csproj"
             },
-            "E:\\github\\NetCore\\ADFCommon\\05.ADF.IBusiness\\ADF.IBusiness.csproj": {
-              "projectPath": "E:\\github\\NetCore\\ADFCommon\\05.ADF.IBusiness\\ADF.IBusiness.csproj"
+            "E:\\github\\NetCore\\ADFCommon\\05.Adf.IBusiness\\ADF.IBusiness.csproj": {
+              "projectPath": "E:\\github\\NetCore\\ADFCommon\\05.Adf.IBusiness\\ADF.IBusiness.csproj"
             }
           }
         }

@@ -7,23 +7,30 @@ namespace ADF.DataAccess.ORM
 {
     public class SqlserverHelper : DbHelper
     {
+        public override string ParaPrefix => "@";
         public SqlserverHelper(string connectionStr)
         : base(DatabaseType.SqlServer, connectionStr)
         {
 
         }
 
-        public override DbParameter CreateDbParameter(CusDbParameter commParam)
+        public override IDataParameter[] ToIDbDataParameter(CusDbParameter[] parameters)
         {
-            SqlParameter param = new SqlParameter();
-            param.ParameterName = commParam.ParameterName;
-            param.Value = commParam.Value;
-            // 修改nvarchar到varchar编码问题，底层在进行默认NVarchar  造成没法设置varchar
-            if (!commParam.DbType.Equals(DbType.AnsiString) || commParam.Value is string)
-                param.DbType = commParam.DbType;
-            if (commParam.Size > 0)
-                param.Size = commParam.Size;
-            return param;
+            if (parameters == null || parameters.Length == 0) return null;
+            SqlParameter[] result = new SqlParameter[parameters.Length];
+            int index = 0;
+            foreach (var parameter in parameters)
+            {
+                if (parameter.Value == null) parameter.Value = DBNull.Value;
+                var sqlParameter = new SqlParameter();
+                sqlParameter.ParameterName = parameter.ParameterName;
+                sqlParameter.Size = parameter.Size;
+                sqlParameter.Value = parameter.Value;
+                sqlParameter.DbType = parameter.DbType;
+                sqlParameter.Direction = parameter.Direction;
+                ++index;
+            }
+            return result;
         }
 
         /// <summary>

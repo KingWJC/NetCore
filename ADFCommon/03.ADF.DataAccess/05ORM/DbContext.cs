@@ -19,6 +19,11 @@ namespace ADF.DataAccess.ORM
         private DbHelper _db;
         private Action transactionHandler;
 
+        public DbContext(bool disposed, bool openTransaction)
+        {
+            this.Disposed = disposed;
+            this.OpenTransaction = openTransaction;
+        }
         protected bool Disposed { get; set; }
         protected bool OpenTransaction { get; set; }
         public DbHelper Db
@@ -83,16 +88,16 @@ namespace ADF.DataAccess.ORM
                 {
                     string id = GetNextId("SEQ_STATUS");
                     item.SetValue(t, id, null);
-                    cusDbParameter = new CusDbParameter($"@{item.Name}", id, DbType.Int32);
+                    cusDbParameter = new CusDbParameter($"{Db.ParaPrefix + item.Name}", id, DbType.Int32);
                 }
                 else
                 {
-                    cusDbParameter = new CusDbParameter($"@{item.Name}", obj ?? DBNull.Value, GetParameterType(item.PropertyType.FullName));
+                    cusDbParameter = new CusDbParameter($"{Db.ParaPrefix + item.Name}", obj ?? DBNull.Value, GetDataType(item.PropertyType));
                 }
 
                 parameters.Add(cusDbParameter);
-                sqlColumns.Append($"[{item.Name}],");
-                sqlVallues.Append($"@{item.Name},");
+                sqlColumns.Append($"\"{item.Name}\",");
+                sqlVallues.Append($"{Db.ParaPrefix + item.Name},");
             }
 
             string insertSQL = string.Format("INSERT INTO {0}({1}) VALUES({2})", GetTableName(type), sqlColumns.ToString().TrimEnd(','), sqlVallues.ToString().TrimEnd(','));
@@ -111,21 +116,66 @@ namespace ADF.DataAccess.ORM
             return tableName;
         }
 
-        private DbType GetParameterType(string typeName)
+        private DbType GetDataType(Type type)
         {
-            switch (typeName)
+            if (type == Constants.ByteArrayType)
             {
-                case "System.String":
-                    return DbType.String;
-                case "Stytem.Int64":
-                    return DbType.Int64;
-                case "Stytem.Int32":
-                    return DbType.Int32;
-                default:
-                    return DbType.String;
+                return System.Data.DbType.Binary;
             }
-        }
+            else if (type == Constants.GuidType)
+            {
+                return System.Data.DbType.Guid;
+            }
+            else if (type == Constants.IntType)
+            {
+                return System.Data.DbType.Int32;
+            }
+            else if (type == Constants.ShortType)
+            {
+                return System.Data.DbType.Int16;
+            }
+            else if (type == Constants.LongType)
+            {
+                return System.Data.DbType.Int64;
+            }
+            else if (type == Constants.DateType)
+            {
+                return System.Data.DbType.DateTime;
+            }
+            else if (type == Constants.DobType)
+            {
+                return System.Data.DbType.Double;
+            }
+            else if (type == Constants.DecType)
+            {
+                return System.Data.DbType.Decimal;
+            }
+            else if (type == Constants.ByteType)
+            {
+                return System.Data.DbType.Byte;
+            }
+            else if (type == Constants.FloatType)
+            {
+                return System.Data.DbType.Single;
+            }
+            else if (type == Constants.BoolType)
+            {
+                return System.Data.DbType.Boolean;
+            }
+            else if (type == Constants.StringType)
+            {
+                return System.Data.DbType.String;
+            }
+            else if (type == Constants.DateTimeOffsetType)
+            {
+                return System.Data.DbType.DateTimeOffset;
+            }
+            else
+            {
+                return System.Data.DbType.String;
+            }
 
+        }
 
         /// <summary>
         /// 获取更新SQL
@@ -144,8 +194,8 @@ namespace ADF.DataAccess.ORM
                     continue;
 
                 var subValue = subItem.GetValue(t, null);
-                parameters.Add(new CusDbParameter($"@{subItem.Name}", subValue ?? DBNull.Value));
-                updateSql.Append($"[{subItem.Name}] = @{subItem.Name},");
+                parameters.Add(new CusDbParameter($"{Db.ParaPrefix + subItem.Name}", subValue ?? DBNull.Value, GetDataType(subItem.PropertyType)));
+                updateSql.Append($"\"{subItem.Name}\" = {Db.ParaPrefix + subItem.Name},");
             }
 
             return (updateSql.ToString().TrimEnd(','), parameters);
@@ -353,7 +403,7 @@ namespace ADF.DataAccess.ORM
                 entities.ForEach(p =>
                 {
                     object value = keyInfo?.GetValue(p, null);
-                    if (value != null && value.ToString() != "0")
+                    if (!value.IsNullOrEmpty() && value.ToString() != "0")
                     {
                         var (UpdateSQL, Parameters) = GenerateUpdateSQL(p, keyInfo?.Name);
                         Db.ExecuteNonQuery(UpdateSQL, Parameters);
@@ -385,19 +435,14 @@ namespace ADF.DataAccess.ORM
         public void UpdateAny<T>(List<T> entities, List<string> properties)
         {
             PropertyInfo keyInfo = GetKeyProperty(typeof(T));
-            Func<PropertyInfo, bool> condition = (p =>
-               {
-                   return properties.Contains(p.Name);
-               });
             PackWork(() =>
             {
                 entities.ForEach(entity =>
                 {
-                    var (UpdateSQL, Parameters) = GenerateUpdateSQL(entity, keyInfo?.Name, condition);
+                    var (UpdateSQL, Parameters) = GenerateUpdateSQL(entity, keyInfo?.Name, p => properties.Contains(p.Name));
                     Db.ExecuteNonQuery(UpdateSQL, Parameters);
                 });
             });
-
         }
         #endregion
 
@@ -429,7 +474,7 @@ namespace ADF.DataAccess.ORM
         public List<T> GetList<T>()
         {
             Type type = typeof(T);
-            string columnNameStr = string.Join(",", type.GetProperties().Select(p => $"{p.Name}"));
+            string columnNameStr = string.Join(",", type.GetProperties().Select(p => $"\"{p.Name}\""));
             string selectSQL = $"Select {columnNameStr} From {GetTableName(type)}";
             DataTable dataTable = Db.ExecuteDataTable(selectSQL);
             return dataTable.ToList<T>();
