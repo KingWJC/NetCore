@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "vE8QpPMqzRcufIq4gUrRrwAGRsMfK1lnZ1mz2SExWUmym6bjK+u9WeUWxAuO/KhD+PH9KaEQ1SSa/0NOr4kVeg==",
+  "dgSpecHash": "SVpwCn4+5sbPJ9/yXDd8fnwujQbmcDE2MQwKrrCEoznBsH1HMMZL6gBtJPuIhvLghQ1eLqbGGzgdfHLt0miDjg==",
   "success": true,
   "projectFilePath": "E:\\github\\NetCore\\ADFCommon\\03.ADF.DataAccess\\ADF.DataAccess.csproj",
   "expectedPackageFiles": [
@@ -18,6 +18,7 @@
     "C:\\Users\\wangjicheng\\.nuget\\packages\\microsoft.netcore.targets\\1.1.0\\microsoft.netcore.targets.1.1.0.nupkg.sha512",
     "C:\\Users\\wangjicheng\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",
     "C:\\Users\\wangjicheng\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512",
+    "C:\\Users\\wangjicheng\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512",
     "C:\\Users\\wangjicheng\\.nuget\\packages\\nodatime\\3.0.1\\nodatime.3.0.1.nupkg.sha512",
     "C:\\Users\\wangjicheng\\.nuget\\packages\\runtime.native.system.data.sqlclient.sni\\4.7.0\\runtime.native.system.data.sqlclient.sni.4.7.0.nupkg.sha512",
     "C:\\Users\\wangjicheng\\.nuget\\packages\\runtime.win-arm64.runtime.native.system.data.sqlclient.sni\\4.4.0\\runtime.win-arm64.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",

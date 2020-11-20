@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Text;
+using System.Data;
 using System.Collections.Generic;
 
 namespace ADF.Utility
@@ -79,6 +80,11 @@ namespace ADF.Utility
         public static Boolean IsEmpty<T>(this IEnumerable<T> list)
         {
             return list == null || list.Count() == 0;
+        }
+
+        public static DataTable ToDataTable<T>(this IEnumerable<T> list)
+        {
+            return list.ToJson().ToDataTable();
         }
     }
 }

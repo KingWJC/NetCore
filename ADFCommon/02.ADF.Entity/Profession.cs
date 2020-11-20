@@ -17,6 +17,6 @@ namespace ADF.Entity
         public Int16 STATE { get; set; }
         public String DEPT_CODE { get; set; }
         public String PROFESSION_CONTEXT { get; set; }
-
+        public Int16 TEMPLATE_ID{get;set;}
     }
 }

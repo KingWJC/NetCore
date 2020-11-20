@@ -105,3 +105,4 @@ E:\github\NetCore\ADFCommon\07.ADF.Web\bin\Debug\netcoreapp3.1\ADF.Business.dll
 E:\github\NetCore\ADFCommon\07.ADF.Web\bin\Debug\netcoreapp3.1\ADF.Entity.dll
 E:\github\NetCore\ADFCommon\07.ADF.Web\bin\Debug\netcoreapp3.1\ADF.Business.pdb
 E:\github\NetCore\ADFCommon\07.ADF.Web\bin\Debug\netcoreapp3.1\ADF.Entity.pdb
+E:\github\NetCore\ADFCommon\07.ADF.Web\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll

@@ -11,7 +11,7 @@ namespace ADF.Utility
 
         public XmlDocument Document => doc;
 
-        public bool IsEmpty => doc.HasChildNodes || root == null;
+        public bool IsEmpty => root == null;
 
         public XmlHelper(Stream stream)
         {
@@ -33,6 +33,16 @@ namespace ADF.Utility
         {
             //返回XPath节点
             return root.SelectSingleNode(xPath);
+        }
+
+        public bool RemoveNode(string xPath)
+        {
+            XmlNode node = GetNode(xPath);
+            if (node != null && node.ParentNode != null)
+            {
+                node.ParentNode.RemoveChild(node);
+            }
+            return false;
         }
 
         public void AppendDeclaration()

@@ -70,11 +70,10 @@ namespace ADF.Web.Pages.ExcelXmlTransform
 
         public IActionResult OnGetExport()
         {
-            return Content("OK");
-
-            // string fileName = "";
-
-            // return File(fileName, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+            IProfessionBussiness profession = new ProfessionBussiness();
+            var stream = profession.ExportProfession();
+            stream.Position = 0;
+            return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         }
     }
 }

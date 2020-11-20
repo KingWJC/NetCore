@@ -1,7 +1,7 @@
 {
   "format": 1,
   "restore": {
-    "E:\\github\\NetCore\\ADFCommon\\07.ADF.Web\\ADF.Web.csproj": {}
+    "E:\\github\\NetCore\\ADFCommon\\07.ADF.web\\ADF.Web.csproj": {}
   },
   "projects": {
     "E:\\github\\NetCore\\ADFCommon\\01.ADF.Utility\\ADF.Utility.csproj": {
@@ -59,6 +59,10 @@
               "target": "Package",
               "version": "[2.0.3, )",
               "autoReferenced": true
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[12.0.3, )"
             },
             "NodaTime": {
               "target": "Package",
@@ -344,14 +348,14 @@
         }
       }
     },
-    "E:\\github\\NetCore\\ADFCommon\\07.ADF.Web\\ADF.Web.csproj": {
+    "E:\\github\\NetCore\\ADFCommon\\07.ADF.web\\ADF.Web.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\github\\NetCore\\ADFCommon\\07.ADF.Web\\ADF.Web.csproj",
+        "projectUniqueName": "E:\\github\\NetCore\\ADFCommon\\07.ADF.web\\ADF.Web.csproj",
         "projectName": "ADF.Web",
-        "projectPath": "E:\\github\\NetCore\\ADFCommon\\07.ADF.Web\\ADF.Web.csproj",
+        "projectPath": "E:\\github\\NetCore\\ADFCommon\\07.ADF.web\\ADF.Web.csproj",
         "packagesPath": "C:\\Users\\wangjicheng\\.nuget\\packages\\",
-        "outputPath": "E:\\github\\NetCore\\ADFCommon\\07.ADF.Web\\obj\\",
+        "outputPath": "E:\\github\\NetCore\\ADFCommon\\07.ADF.web\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\wangjicheng\\AppData\\Roaming\\NuGet\\NuGet.Config",

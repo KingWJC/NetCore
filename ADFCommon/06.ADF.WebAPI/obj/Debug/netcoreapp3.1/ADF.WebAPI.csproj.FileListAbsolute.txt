@@ -50,3 +50,4 @@ E:\github\NetCore\ADFCommon\06.ADF.WebAPI\bin\Debug\netcoreapp3.1\ADF.Utility.dl
 E:\github\NetCore\ADFCommon\06.ADF.WebAPI\bin\Debug\netcoreapp3.1\ADF.IBusiness.pdb
 E:\github\NetCore\ADFCommon\06.ADF.WebAPI\bin\Debug\netcoreapp3.1\ADF.DataAccess.pdb
 E:\github\NetCore\ADFCommon\06.ADF.WebAPI\bin\Debug\netcoreapp3.1\ADF.Utility.pdb
+E:\github\NetCore\ADFCommon\06.ADF.WebAPI\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll

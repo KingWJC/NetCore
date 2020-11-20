@@ -10,14 +10,33 @@ namespace ADF.Utility
     public class ExcelHelper
     {
         #region 生成Excel(Aspose.Cells)
+        public static void WriteAsposeFile(DataSet dataSet, string saveFileName)
+        {
+            Workbook workbook = WriteAspose(dataSet);
+            workbook.Save(saveFileName);
+        }
+
+        public static Stream WriteAsposeStream(DataSet dataSet)
+        {
+            Workbook workbook = WriteAspose(dataSet);
+            return workbook.SaveToStream();
+        }
+
         /// <summary>
-        /// 生成Excel
+        /// 生成Excel的Workbook
         /// </summary>
         /// <param name="ds"></param>
         /// <param name="saveFileName"></param>
-        public static void WriteAspose(DataSet ds, string saveFileName)
+        public static Workbook WriteAspose(DataSet ds)
         {
             Aspose.Cells.Workbook wb = new Aspose.Cells.Workbook();
+            wb.Worksheets.Clear();
+
+            Style stHeadCenter = CreateHeaderStyle(wb);
+            //内容样式
+            Style stContentLeft = wb.CreateStyle();
+            stContentLeft.HorizontalAlignment = TextAlignmentType.Left;
+            stContentLeft.Font.Size = 10;
 
             try
             {
@@ -27,49 +46,19 @@ namespace ADF.Utility
                     {
                         DataTable dtSource = ds.Tables[p];
                         Aspose.Cells.Worksheet ws = wb.Worksheets.Add(dtSource.TableName);
-
-                        //表头样式
-                        Style stHeadLeft = wb.CreateStyle();
-                        stHeadLeft.HorizontalAlignment = TextAlignmentType.Left;       //文字居中
-                        stHeadLeft.Font.Name = "宋体";
-                        stHeadLeft.Font.IsBold = true;                                 //设置粗体
-                        stHeadLeft.Font.Size = 14;                                     //设置字体大小
-                        //设置背景颜色
-                        stHeadLeft.ForegroundColor = System.Drawing.Color.FromArgb(153, 204, 0);
-                        stHeadLeft.Pattern = Aspose.Cells.BackgroundType.Solid;
-                        Style stHeadCenter = wb.CreateStyle(); ;
-                        stHeadCenter.HorizontalAlignment = TextAlignmentType.Center;       //文字居中
-                        stHeadCenter.Font.Name = "宋体";
-                        stHeadCenter.Font.IsBold = true;                                  //设置粗体
-                        stHeadCenter.Font.Size = 14;                                      //设置字体大小
-                        //设置背景颜色
-                        stHeadCenter.ForegroundColor = System.Drawing.Color.FromArgb(153, 204, 0);
-                        stHeadCenter.Pattern = Aspose.Cells.BackgroundType.Solid;
-
-                        //内容样式
-                        Style stContentLeft = wb.CreateStyle();
-                        stContentLeft.HorizontalAlignment = TextAlignmentType.Left;
-                        stContentLeft.Font.Size = 10;
-
-                        WriteAspose(dtSource, ws, stHeadLeft, stHeadCenter, stContentLeft);
-
-                        for (int k = 0; k < dtSource.Columns.Count; k++)
-                        {
-                            ws.AutoFitColumn(k, 0, 150);
-                        }
-
-                        ws.FreezePanes(1, 0, 1, dtSource.Columns.Count);
+                        WriteAspose(dtSource, ws, stHeadCenter, stContentLeft);
                     }
                 }
-                wb.Save(saveFileName);
             }
             catch (Exception e)
             {
                 throw e;
             }
+
+            return wb;
         }
 
-        private static void WriteAspose(DataTable dtList, Worksheet ws, Style stHeadLeft, Style stHeadCenter, Style stContentLeft)
+        private static void WriteAspose(DataTable dtList, Worksheet ws, Style stHeadCenter, Style stContentLeft)
         {
             Cells cell = ws.Cells;
             //设置行高
@@ -78,21 +67,10 @@ namespace ADF.Utility
             //赋值给Excel内容
             for (int col = 0; col < dtList.Columns.Count; col++)
             {
-                Style stHead = null;
-                Style stContent = null;
                 //设置表头
-                string columnType = dtList.Columns[col].DataType.ToString();
-                switch (columnType.ToLower())
-                {
-                    //如果类型是string，则靠左对齐(对齐方式看项目需求修改)
-                    case "system.string":
-                        stHead = stHeadLeft;
-                        break;
-                    default:
-                        stHead = stHeadCenter;
-                        break;
-                }
-                stContent = stContentLeft;
+                Style stHead = stHeadCenter;
+                Style stContent = stContentLeft;
+
                 putValue(cell, dtList.Columns[col].ColumnName, 0, col, stHead);
 
                 for (int row = 0; row < dtList.Rows.Count; row++)
@@ -101,7 +79,24 @@ namespace ADF.Utility
                 }
 
                 cell.SetColumnWidth(col, 10);
+                ws.AutoFitColumn(col, 0, 150);
             }
+
+            ws.FreezePanes(1, 0, 1, dtList.Columns.Count);
+        }
+
+        private static Style CreateHeaderStyle(Workbook wb)
+        {
+            //表头样式
+            Style stHeadCenter = wb.CreateStyle(); ;
+            stHeadCenter.HorizontalAlignment = TextAlignmentType.Center;       //文字居中
+            stHeadCenter.Font.Name = "宋体";
+            stHeadCenter.Font.IsBold = true;                                  //设置粗体
+            stHeadCenter.Font.Size = 14;                                      //设置字体大小
+                                                                              //设置背景颜色
+            stHeadCenter.ForegroundColor = System.Drawing.Color.FromArgb(153, 204, 0);
+            stHeadCenter.Pattern = Aspose.Cells.BackgroundType.Solid;
+            return stHeadCenter;
         }
 
         private static void putValue(Cells cell, object value, int row, int column, Style st)
@@ -125,15 +120,7 @@ namespace ADF.Utility
                 Worksheet ws = (Worksheet)wb.Worksheets[0];
 
                 //表头样式
-                Style stHeadCenter = wb.CreateStyle();
-                stHeadCenter.HorizontalAlignment = TextAlignmentType.Center;       //文字居中
-                stHeadCenter.Font.Name = "宋体";
-                stHeadCenter.Font.IsBold = true;                                  //设置粗体
-                stHeadCenter.Font.Size = 14;                                      //设置字体大小
-                //设置背景颜色
-                stHeadCenter.ForegroundColor = System.Drawing.Color.FromArgb(153, 204, 0);
-                stHeadCenter.Pattern = Aspose.Cells.BackgroundType.Solid;
-
+                Style stHeadCenter = CreateHeaderStyle(wb);
                 //内容样式
                 Style stContentLeft = wb.CreateStyle();
                 stContentLeft.HorizontalAlignment = TextAlignmentType.Left;

@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel;
+using Newtonsoft.Json;
 
 namespace ADF.Utility
 {
@@ -70,6 +71,11 @@ namespace ADF.Utility
             {
                 return string.IsNullOrEmpty(obj.ToString());
             }
+        }
+
+        public static string ToJson(this object obj)
+        {
+            return JsonConvert.SerializeObject(obj);
         }
 
          #region 数值转换

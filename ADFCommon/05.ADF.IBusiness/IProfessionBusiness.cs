@@ -1,4 +1,3 @@
-using System.Data;
 using System.IO;
 using System.Collections.Generic;
 using ADF.Utility;
@@ -7,7 +6,7 @@ namespace ADF.IBusiness
 {
     public interface IProfessionBussiness
     {
-        DataSet GetXMLData();
+        Stream ExportProfession();
 
         void UpdateProfession(Stream stream);
     }
