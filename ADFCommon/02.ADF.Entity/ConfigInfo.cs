@@ -12,6 +12,6 @@ namespace ADF.Entity
         public string CONFIG_NAME { get; set; }
         public string CONFIG_DESC { get; set; }
         public int STATE { get; set; }
-        public Byte[] CONFIG_CONTEXT { get; set; }
+        public string CONFIG_CONTEXT { get; set; }
     }
 }

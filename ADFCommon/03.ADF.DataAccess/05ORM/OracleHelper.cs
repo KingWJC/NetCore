@@ -35,14 +35,15 @@ namespace ADF.DataAccess.ORM
                 {
                     sqlParameter.ParameterName = sqlParameter.ParameterName.TrimStart(':');
                 }
-                if (sqlParameter.DbType == System.Data.DbType.Guid)
+
+                if (parameter.DbType == System.Data.DbType.Guid)
                 {
-                    sqlParameter.DbType = System.Data.DbType.String;
+                    sqlParameter.OracleType = OracleType.VarChar;
                     sqlParameter.Value = sqlParameter.Value.ToStringOrEmpty();
                 }
                 else if (parameter.DbType == System.Data.DbType.Boolean)
                 {
-                    sqlParameter.DbType = System.Data.DbType.Int16;
+                    sqlParameter.OracleType = OracleType.Int16;
                     if (parameter.Value == DBNull.Value)
                     {
                         parameter.Value = 0;
@@ -57,6 +58,15 @@ namespace ADF.DataAccess.ORM
                     if (parameter.Value != null && parameter.Value.GetType() == Constants.GuidType)
                     {
                         parameter.Value = parameter.Value.ToString();
+                    }
+
+                    if (parameter.DbType == System.Data.DbType.Binary)
+                    {
+                        sqlParameter.OracleType = OracleType.Blob;
+                    }
+                    else if(parameter.DbType==System.Data.DbType.String && parameter.ParameterName.Contains("CONTEXT"))
+                    {
+                        sqlParameter.OracleType = OracleType.Clob;
                     }
                     sqlParameter.Value = parameter.Value;
                 }

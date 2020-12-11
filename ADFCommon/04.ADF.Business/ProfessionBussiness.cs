@@ -29,7 +29,7 @@ namespace ADF.Business
 
                 //更新病情观察的每个数据项的配置
                 ConfigInfo config = Service.GetEntity<ConfigInfo>("6");
-                using (Stream xmlStream = new MemoryStream(config.CONFIG_CONTEXT))
+                using (Stream xmlStream = new MemoryStream((byte[])config.CONFIG_CONTEXT.ChangeType_ByConvert(typeof(byte[]))))
                 {
                     XmlHelper xmlDoc = new XmlHelper(xmlStream);
                     if (xmlDoc.IsEmpty)
@@ -50,8 +50,8 @@ namespace ADF.Business
                     if (dataSet.Tables.Contains("ProfessionContext"))
                         UpdateProfessionContext(dataSet.Tables["ProfessionContext"], xmlDoc);
 
-                    config.CONFIG_CONTEXT = (byte[])xmlDoc.Document.OuterXml.ChangeType_ByConvert(typeof(byte[]));
-                    // Service.UpdateAny<ConfigInfo>(config, new List<string> { "CONFIG_CONTEXT" });
+                    config.CONFIG_CONTEXT = xmlDoc.Document.OuterXml;
+                    Service.UpdateAny<ConfigInfo>(config, new List<string> { "CONFIG_CONTEXT" });
 
                     FileHelper.WriteTxt(xmlDoc.Document.OuterXml, @"E:\data.xml");
                 }
@@ -142,7 +142,7 @@ namespace ADF.Business
             DataTable dtContext = new DataTable("ProfessionContent");
             dtContext.Columns.AddRange(new DataColumn[] { new DataColumn("PROFESSION_NAME"), new DataColumn("PROFESSION_CONTEXT") });
             ConfigInfo config = Service.GetEntity<ConfigInfo>("6");
-            using (Stream stream = new MemoryStream(config.CONFIG_CONTEXT))
+            using (Stream stream = new MemoryStream((byte[])config.CONFIG_CONTEXT.ChangeType_ByConvert(typeof(byte[]))))
             {
                 XmlHelper xmldoc = new XmlHelper(stream);
 

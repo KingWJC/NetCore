@@ -2241,8 +2241,8 @@
     },
     "ADF.Business/1.0.0": {
       "type": "project",
-      "path": "../04.Adf.Business/ADF.Business.csproj",
-      "msbuildProject": "../04.Adf.Business/ADF.Business.csproj"
+      "path": "../04.ADF.Business/ADF.Business.csproj",
+      "msbuildProject": "../04.ADF.Business/ADF.Business.csproj"
     },
     "ADF.DataAccess/1.0.0": {
       "type": "project",
@@ -2256,8 +2256,8 @@
     },
     "ADF.IBusiness/1.0.0": {
       "type": "project",
-      "path": "../05.Adf.IBusiness/ADF.IBusiness.csproj",
-      "msbuildProject": "../05.Adf.IBusiness/ADF.IBusiness.csproj"
+      "path": "../05.ADF.IBusiness/ADF.IBusiness.csproj",
+      "msbuildProject": "../05.ADF.IBusiness/ADF.IBusiness.csproj"
     },
     "ADF.Utility/1.0.0": {
       "type": "project",
@@ -2277,11 +2277,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\github\\NetCore\\ADFCommon\\07.ADF.web\\ADF.Web.csproj",
+      "projectUniqueName": "E:\\github\\NetCore\\ADFCommon\\07.ADF.Web\\ADF.Web.csproj",
       "projectName": "ADF.Web",
-      "projectPath": "E:\\github\\NetCore\\ADFCommon\\07.ADF.web\\ADF.Web.csproj",
+      "projectPath": "E:\\github\\NetCore\\ADFCommon\\07.ADF.Web\\ADF.Web.csproj",
       "packagesPath": "C:\\Users\\wangjicheng\\.nuget\\packages\\",
-      "outputPath": "E:\\github\\NetCore\\ADFCommon\\07.ADF.web\\obj\\",
+      "outputPath": "E:\\github\\NetCore\\ADFCommon\\07.ADF.Web\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\wangjicheng\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -2297,11 +2297,11 @@
       "frameworks": {
         "netcoreapp3.1": {
           "projectReferences": {
-            "E:\\github\\NetCore\\ADFCommon\\04.Adf.Business\\ADF.Business.csproj": {
-              "projectPath": "E:\\github\\NetCore\\ADFCommon\\04.Adf.Business\\ADF.Business.csproj"
+            "E:\\github\\NetCore\\ADFCommon\\04.ADF.Business\\ADF.Business.csproj": {
+              "projectPath": "E:\\github\\NetCore\\ADFCommon\\04.ADF.Business\\ADF.Business.csproj"
             },
-            "E:\\github\\NetCore\\ADFCommon\\05.Adf.IBusiness\\ADF.IBusiness.csproj": {
-              "projectPath": "E:\\github\\NetCore\\ADFCommon\\05.Adf.IBusiness\\ADF.IBusiness.csproj"
+            "E:\\github\\NetCore\\ADFCommon\\05.ADF.IBusiness\\ADF.IBusiness.csproj": {
+              "projectPath": "E:\\github\\NetCore\\ADFCommon\\05.ADF.IBusiness\\ADF.IBusiness.csproj"
             }
           }
         }

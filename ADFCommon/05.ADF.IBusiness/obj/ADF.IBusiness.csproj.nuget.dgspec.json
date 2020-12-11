@@ -1,7 +1,7 @@
 {
   "format": 1,
   "restore": {
-    "E:\\github\\NetCore\\ADFCommon\\05.Adf.IBusiness\\ADF.IBusiness.csproj": {}
+    "E:\\github\\NetCore\\ADFCommon\\05.ADF.IBusiness\\ADF.IBusiness.csproj": {}
   },
   "projects": {
     "E:\\github\\NetCore\\ADFCommon\\01.ADF.Utility\\ADF.Utility.csproj": {
@@ -158,14 +158,14 @@
         }
       }
     },
-    "E:\\github\\NetCore\\ADFCommon\\05.Adf.IBusiness\\ADF.IBusiness.csproj": {
+    "E:\\github\\NetCore\\ADFCommon\\05.ADF.IBusiness\\ADF.IBusiness.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\github\\NetCore\\ADFCommon\\05.Adf.IBusiness\\ADF.IBusiness.csproj",
+        "projectUniqueName": "E:\\github\\NetCore\\ADFCommon\\05.ADF.IBusiness\\ADF.IBusiness.csproj",
         "projectName": "ADF.IBusiness",
-        "projectPath": "E:\\github\\NetCore\\ADFCommon\\05.Adf.IBusiness\\ADF.IBusiness.csproj",
+        "projectPath": "E:\\github\\NetCore\\ADFCommon\\05.ADF.IBusiness\\ADF.IBusiness.csproj",
         "packagesPath": "C:\\Users\\wangjicheng\\.nuget\\packages\\",
-        "outputPath": "E:\\github\\NetCore\\ADFCommon\\05.Adf.IBusiness\\obj\\",
+        "outputPath": "E:\\github\\NetCore\\ADFCommon\\05.ADF.IBusiness\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\wangjicheng\\AppData\\Roaming\\NuGet\\NuGet.Config",
