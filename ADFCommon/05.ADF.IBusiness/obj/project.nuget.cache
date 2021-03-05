@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "EANmpJPWn+h3hH47ug588Y3KSlXPaEmWUl+dms3lSMR45XFNmvdOM8/wQRu9sBgDlS3pYFrvhjmRPqq0NBdKUQ==",
+  "dgSpecHash": "ycWJxOiaPn0lexNuj/xjTxaL8ZlbL0uAr/Vmuga59FrWT0XZ19dMY0/pR6p3hLCue3CD6cU2vFcksogKJ/5tGw==",
   "success": true,
-  "projectFilePath": "E:\\github\\NetCore\\ADFCommon\\05.ADF.IBusiness\\ADF.IBusiness.csproj",
+  "projectFilePath": "E:\\github\\NetCore\\ADFCommon\\05.Adf.IBusiness\\ADF.IBusiness.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\wangjicheng\\.nuget\\packages\\aspose.cells\\20.9.0\\aspose.cells.20.9.0.nupkg.sha512",
     "C:\\Users\\wangjicheng\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.0\\microsoft.bcl.asyncinterfaces.1.1.0.nupkg.sha512",

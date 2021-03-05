@@ -18,14 +18,8 @@ namespace ADF.DataAccess.ORM
         private string connectionStr;
         private DbHelper _db;
         private Action transactionHandler;
-
-        public DbContext(bool disposed, bool openTransaction)
-        {
-            this.Disposed = disposed;
-            this.OpenTransaction = openTransaction;
-        }
-        protected bool Disposed { get; set; }
-        protected bool OpenTransaction { get; set; }
+        protected bool Disposed = false;
+        protected bool OpenTransaction = false;
         public DbHelper Db
         {
             get

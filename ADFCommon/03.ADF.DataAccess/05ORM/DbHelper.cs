@@ -102,6 +102,13 @@ namespace ADF.DataAccess.ORM
             {
                 throw new Exception("InsertData", ex);
             }
+            finally
+            {
+                if (this.Connection != null && this.Connection.State != ConnectionState.Closed)
+                {
+                    this.Connection.Close();
+                }
+            }
         }
 
         /// <summary>
@@ -121,19 +128,33 @@ namespace ADF.DataAccess.ORM
          */
         public int ExecuteCount(string strSQL, List<CusDbParameter> parameters = null, CommandType commandType = CommandType.Text)
         {
-            SetCommand(strSQL, parameters, commandType);
-            int result = 0;
-            DbDataReader reader = Command.ExecuteReader();
-            if (reader.HasRows)
+            try
             {
-                while (reader.Read())
+                SetCommand(strSQL, parameters, commandType);
+                int result = 0;
+                using (DbDataReader reader = Command.ExecuteReader())
                 {
-                    result = reader.GetInt32(0);
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            result = reader.GetInt32(0);
+                        }
+                    }
+                    return result;
                 }
             }
-            reader.Close();
-            return result;
-
+            catch (Exception ex)
+            {
+                throw new Exception("GetCount", ex);
+            }
+            finally
+            {
+                if (this.Connection != null && this.Connection.State != ConnectionState.Closed)
+                {
+                    this.Connection.Close();
+                }
+            }
         }
         /*
          * @description: 获取首行首列
@@ -142,15 +163,29 @@ namespace ADF.DataAccess.ORM
          */
         public object ExecuteScalar(string strSQL, List<CusDbParameter> parameters = null, CommandType commandType = CommandType.Text)
         {
-            SetCommand(strSQL, parameters, commandType);
-            object result = Command.ExecuteScalar();
-            if (object.Equals(null, result) || object.Equals(DBNull.Value, result))
+            try
             {
-                return null;
+                SetCommand(strSQL, parameters, commandType);
+                object result = Command.ExecuteScalar();
+                if (object.Equals(null, result) || object.Equals(DBNull.Value, result))
+                {
+                    return null;
+                }
+                else
+                {
+                    return result;
+                }
             }
-            else
+            catch (Exception ex)
             {
-                return result;
+                throw new Exception("GetCount", ex);
+            }
+            finally
+            {
+                if (this.Connection != null && this.Connection.State != ConnectionState.Closed)
+                {
+                    this.Connection.Close();
+                }
             }
 
         }
@@ -161,12 +196,26 @@ namespace ADF.DataAccess.ORM
          */
         public DataSet ExecuteDataSet(string strSQL, List<CusDbParameter> parameters = null, CommandType commandType = CommandType.Text)
         {
-            SetCommand(strSQL, parameters, commandType);
-            DbDataAdapter dataAdapter = factory.CreateDataAdapter();
-            dataAdapter.SelectCommand = Command;
-            DataSet dataSet = new DataSet();
-            dataAdapter.Fill(dataSet);
-            return dataSet;
+            try
+            {
+                SetCommand(strSQL, parameters, commandType);
+                DbDataAdapter dataAdapter = factory.CreateDataAdapter();
+                dataAdapter.SelectCommand = Command;
+                DataSet dataSet = new DataSet();
+                dataAdapter.Fill(dataSet);
+                return dataSet;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("GetDataSet", ex);
+            }
+            finally
+            {
+                if (this.Connection != null && this.Connection.State != ConnectionState.Closed)
+                {
+                    this.Connection.Close();
+                }
+            }
         }
         /*
          * @description: 获取数据表
@@ -229,20 +278,24 @@ namespace ADF.DataAccess.ORM
         #region  Dispose
         protected virtual void Dispose(bool disposing)
         {
+            // 当对象已经被析构时，不在执行
             if (Disposed)
                 return;
 
             if (disposing)
             {
+                // 在这里释放托管资源
+                // 只在用户调用Dispose方法时执行
                 factory = null;
             }
 
+            // 在这里释放非托管资源
             connection?.Dispose();
             command?.Dispose();
 
+            // 标记对象已被释放
             Disposed = true;
         }
-
         ~DbHelper()
         {
             Dispose(false);

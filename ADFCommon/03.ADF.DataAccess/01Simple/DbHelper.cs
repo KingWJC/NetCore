@@ -87,6 +87,11 @@ namespace ADF.DataAccess.Simple
             return dt;
         }
 
+        /// <summary>
+        /// 获取第一行第一列
+        /// </summary>
+        /// <param name="strSQL">SQL语句</param>
+        /// <returns></returns>
         public static object GetSingle(string strSQL)
         {
             try
@@ -107,6 +112,11 @@ namespace ADF.DataAccess.Simple
             return null;
         }
 
+        /// <summary>
+        /// 获取总行数
+        /// </summary>
+        /// <param name="strSQL">SQL语句</param>
+        /// <returns></returns>
         public static int GetCount(string strSQL)
         {
             try
@@ -127,6 +137,11 @@ namespace ADF.DataAccess.Simple
             return 0;
         }
 
+        /// <summary>
+        /// 获取数据表
+        /// </summary>
+        /// <param name="strSQL">SQL语句</param>
+        /// <returns></returns>
         public static DataTable GetDataTable(string strSQL,CusDbParameter[] parameters)
         {
             try
@@ -147,6 +162,11 @@ namespace ADF.DataAccess.Simple
             return null;
         }
 
+        /// <summary>
+        /// 获取数据表
+        /// </summary>
+        /// <param name="strSQL">SQL语句</param>
+        /// <returns></returns>
         public static DataSet GetDataSet(string strSQL)
         {
             try
@@ -167,6 +187,11 @@ namespace ADF.DataAccess.Simple
             return null;
         }
 
+        /// <summary>
+        /// 获取数据表分页
+        /// </summary>
+        /// <param name="strSQL">SQL语句</param>
+        /// <returns></returns>
         public static DataTable GetDataTablePage(string sqlSQL, int currentPage, int pageSize)
         {
             try
@@ -187,6 +212,11 @@ namespace ADF.DataAccess.Simple
             return null;
         }
 
+        /// <summary>
+        /// 获取数据表分页
+        /// </summary>
+        /// <param name="strSQL">SQL语句</param>
+        /// <returns></returns>
         public static DataTable GetDataTablePage(string strSQL, int pageSize, int pageCurrent, string fdShow, string fdOrder, out int totalCount)
         {
             try
@@ -208,6 +238,11 @@ namespace ADF.DataAccess.Simple
             return null;
         }
 
+        /// <summary>
+        /// 获取数据表，多条件，in的情况
+        /// </summary>
+        /// <param name="strSQL">SQL语句</param>
+        /// <returns></returns>
         public static DataTable GetDataParal(string strSQL, List<string> wheres)
         {
             try
@@ -228,6 +263,11 @@ namespace ADF.DataAccess.Simple
             return null;
         }
 
+        /// <summary>
+        /// 数据更新
+        /// </summary>
+        /// <param name="strSQL">SQL语句</param>
+        /// <returns></returns>
         public static int Modify(string strSQL)
         {
             try
@@ -247,6 +287,12 @@ namespace ADF.DataAccess.Simple
 
             return 0;
         }
+
+        /// <summary>
+        /// 数据更新
+        /// </summary>
+        /// <param name="strSQL">SQL语句</param>
+        /// <returns></returns>
         public static int Modify(List<string> strSQL)
         {
             Dictionary<string, CusDbParameter[]> dicts = new Dictionary<string, CusDbParameter[]>();
@@ -254,6 +300,11 @@ namespace ADF.DataAccess.Simple
             return Modify(dicts);
         }
 
+        /// <summary>
+        /// 数据更新
+        /// </summary>
+        /// <param name="strSQL">SQL语句</param>
+        /// <returns></returns>
         public static int Modify(Dictionary<string, CusDbParameter[]> dicts)
         {
             try
@@ -274,6 +325,11 @@ namespace ADF.DataAccess.Simple
             return 0;
         }
 
+        /// <summary>
+        /// 数据更新
+        /// </summary>
+        /// <param name="strSQL">SQL语句</param>
+        /// <returns></returns>
         public static int ModifyByTrans(string strSQL)
         {
             try
@@ -294,6 +350,11 @@ namespace ADF.DataAccess.Simple
             return 0;
         }
 
+        /// <summary>
+        /// 数据更新（事务)
+        /// </summary>
+        /// <param name="strSQL">SQL语句</param>
+        /// <returns></returns>
         public static int ModifyByTrans(List<string> strSQL)
         {
             Dictionary<string, CusDbParameter[]> dicts = new Dictionary<string, CusDbParameter[]>();
@@ -301,6 +362,11 @@ namespace ADF.DataAccess.Simple
             return ModifyByTrans(dicts);
         }
 
+        /// <summary>
+        /// 数据更新(事务）)
+        /// </summary>
+        /// <param name="strSQL">SQL语句</param>
+        /// <returns></returns>
         public static int ModifyByTrans(Dictionary<string, CusDbParameter[]> dicts)
         {
             try
@@ -322,6 +388,11 @@ namespace ADF.DataAccess.Simple
             return 0;
         }
 
+        /// <summary>
+        /// 数据更新（批量）
+        /// </summary>
+        /// <param name="strSQL">SQL语句</param>
+        /// <returns></returns>
         public static void BulkCopyData(string tableName, DataTable dtCopy)
         {
             try
